@@ -79,7 +79,7 @@ class Users_Controller extends Admin_Controller
                         ));
 
         $users = ORM::factory('user')
-                    ->orderby('name', 'asc')
+                    ->orderby('last_login', 'desc')
                     ->find_all((int) Kohana::config('settings.items_per_page_admin'), 
                         $pagination->sql_offset);
 

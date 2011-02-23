@@ -87,6 +87,7 @@
 	'header_manage_users' => 'Manage Users',
 	'header_role' => 'Role',
 	'header_user' => 'User',
+	'header_last_seen' => 'Last Seen',
 	'help' => 'help',
 	'hourly' => 'Hourly',
 	'incident_feed' => 'Incident feed for',

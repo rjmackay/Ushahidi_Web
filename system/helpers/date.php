@@ -381,7 +381,7 @@ class date_Core {
 				}
 
 				// Add the amount to the span
-				$span[] = ($name === $last ? ' and ' : ', ').$amount.' '.($amount === 1 ? inflector::singular($name) : $name);
+				$span[] = ((count($span)>0 and $name === $last) ? ' and ' : ', ').$amount.' '.($amount === 1 ? inflector::singular($name) : $name);
 			}
 
 			// Replace difference by making the span into a string

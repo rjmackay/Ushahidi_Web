@@ -33,17 +33,20 @@
 										<th class="col-2">
 											<?php echo Kohana::lang('ui_admin.header_user'); ?>
 										</th>
-										<th class="col-2">
+										<th class="col-3">
 											<?php echo Kohana::lang('ui_admin.header_role');?>
 										</th>
 										<th class="col-4">
-											<?php echo Kohana::lang('ui_admin.header_actions')?>
+											<?php echo Kohana::lang('ui_admin.header_last_seen');?>
+										</th>
+										<th class="col-5">
+											<?php echo Kohana::lang('ui_admin.header_actions');?>
 										</th>
 									</tr>
 								</thead>
 								<tfoot>
 									<tr class="foot">
-										<td colspan="4">
+										<td colspan="5">
 											<?php echo $pagination; ?>
 										</td>
 									</tr>
@@ -54,7 +57,7 @@
 									{
 									?>
 										<tr>
-											<td colspan="4" class="col">
+											<td colspan="5" class="col">
 												<h3>
 													<?php echo Kohana::lang('ui_admin.no_result_display_msg');?>
 												</h3>
@@ -69,7 +72,7 @@
 										$password = $user->password;
 										$name = $user->name;
 										$email = $user->email;
-										
+										$last_seen = date::timespan_string(intval($user->last_login), NULL, 'hours,minutes') or '-';
 										foreach ($user->roles as $user_role) {
 											$role = $user_role->name;
 										}
@@ -91,6 +94,9 @@
 												<?php echo strtoupper($role); ?>
 											</td>
 											<td class="col-4">
+												<?php echo $last_seen; ?>
+											</td>
+											<td class="col-5">
 												<ul>
 													<li class="none-separator"><a href="<?php echo url::site() . 'admin/users/edit/' . $user_id; ?>">
 														<?php echo Kohana::lang('ui_admin.edit_action');?>
