@@ -109,6 +109,10 @@ class S_Twitter_Controller extends Controller {
 	   	if (!$service) {
  			return;
 		}
+
+		// HACK: Make twitter IDs be strings so 32bit php doesn't choke on them - Nigel McNie
+		$data = preg_replace('/"id":(\d+)/', '"id":"$1"', $data);
+
 		$tweets = json_decode($data, false);
 		if (!$tweets) {
 			return;
