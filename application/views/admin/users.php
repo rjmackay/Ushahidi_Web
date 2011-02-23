@@ -72,7 +72,7 @@
 										$password = $user->password;
 										$name = $user->name;
 										$email = $user->email;
-										$last_seen = date::timespan_string(intval($user->last_login), NULL, 'hours,minutes') or '-';
+										$last_seen = date::timespan_string(intval($user->last_login), NULL, 'days,hours,minutes') or '-';
 										foreach ($user->roles as $user_role) {
 											$role = $user_role->name;
 										}
