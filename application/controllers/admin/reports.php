@@ -930,12 +930,20 @@ class Reports_Controller extends Admin_Controller
 
 
 				// SAVE AND CLOSE?
-				if ($post->save == 1)		// Save but don't close
-				{
+				switch($post->save) {
+				// Save but don't close
+				case 1:
+				case 'dontclose':
 					url::redirect('admin/reports/edit/'. $incident->id .'/saved');
-				}
-				else						// Save and close
-				{
+					break;
+				
+				// Save and add new
+				case 'addnew':
+					url::redirect('admin/reports/edit/0/saved');
+					break;
+				
+				// Save and close
+				default:
 					url::redirect('admin/reports/');
 				}
 			}
