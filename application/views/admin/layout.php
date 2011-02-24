@@ -198,6 +198,10 @@
 					<?php } ?>
 				</ul>
 			</div>
+
+			<div style="border: 10px #EEE solid; margin-bottom: 10px; padding: 0 10px">
+				<?php echo $announcement_content ?>
+			</div>
 		</div>
 		<!-- content -->
 		<div id="content">

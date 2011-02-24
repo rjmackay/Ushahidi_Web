@@ -105,6 +105,13 @@ class Admin_Controller extends Template_Controller
 		// Generate sub navigation list (in default layout, sits on right side).
         $this->template->main_right_tabs = admin::main_right_tabs($this->user);
 
+		$page = ORM::factory('page')->where('page_tab', 'Admin Announcement')->find();
+		if($page->id) {
+			$this->template->announcement_content = html_entity_decode($page->page_description);
+		} else {
+			$this->template->announcement_content = "<p>To put a message here, create a page with the tab name 'Admin Announcement'</p>";
+		}
+
 		$this->template->this_page = "";
 
 		// Load profiler
