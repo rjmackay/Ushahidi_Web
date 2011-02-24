@@ -225,7 +225,7 @@
 						$incident_id = $incident->id;
 						$incident_title = text::limit_chars($incident->incident_title, 40, '...', True);
 						$incident_date = $incident->incident_date;
-						$incident_date = date('M j Y', strtotime($incident->incident_date));
+						$incident_date = date('H:i M d, Y', strtotime($incident->incident_date));
 						$incident_location = $incident->location->location_name;
 					?>
 					<tr>
@@ -263,7 +263,7 @@
                                                     $feed_id = $feed->id;
                                                     $feed_title = text::limit_chars($feed->item_title, 40, '...', True);
                                                     $feed_link = $feed->item_link;
-                                                    $feed_date = date('M j Y', strtotime($feed->item_date));
+                                                    $feed_date = date('H:i M d, Y', strtotime($feed->item_date));
                                                     $feed_source = text::limit_chars($feed->feed->feed_name, 15, "...");
                                             ?>
                                             <tr>
