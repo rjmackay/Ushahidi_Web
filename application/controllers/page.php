@@ -36,6 +36,15 @@ class Page_Controller extends Main_Controller {
 			
 			$page_title = $page->page_title;
 			$page_description = $page->page_description;
+
+			// Special "REDIRECT:" behavior
+			$testDesc = trim(strip_tags(htmlspecialchars_decode($page_description)));
+			if(preg_match('/redirect:\s*(.*)/i', $testDesc, $matches)) {
+				url::redirect($matches[1]);
+				return;
+			}
+
+
 			// Filter::page_title - Modify Page Title
 			Event::run('ushahidi_filter.page_title', $page_title);
 			// Filter::page_description - Modify Page Description
