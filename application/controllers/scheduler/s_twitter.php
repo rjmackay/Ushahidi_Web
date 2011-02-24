@@ -253,6 +253,7 @@ class S_Twitter_Controller extends Controller {
 	private function tweet_hash($text)
 	{
 		$text = preg_replace('/RT @[^: ]+:?/i','', $text);
+		$text = preg_replace('/#[^ #]+/', ' ', $text);
 		$text = preg_replace('/ +/', ' ', $text);
 		$text = strtolower(trim($text));
 		return md5($text);
