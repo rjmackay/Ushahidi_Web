@@ -47,10 +47,16 @@ class Distance_Core
 				sin($latitude) * sin($latitude2)
 				+ cos($latitude) * cos($latitude2)
 				* cos($longitude2 - $longitude);
-
-			$dist = 
-				$EARTH_RADIUS_MILES
-				* (-1 * atan($dist / (sqrt(1 - $dist * $dist) || 1)) + M_PI / 2);
+			// Special case to prevent division by zero
+			if($dist == 1 || $dist == -1) {
+				// lim $dist -> 1 or -1 atan($dist / sqrt(1 - $dist*$dist)) == M_PI / 2
+				// This means that the equation below will evaluate to zero
+				$dist = 0;
+			} else {
+				$dist = 
+					$EARTH_RADIUS_MILES
+					* (-1 * atan($dist / sqrt(1 - $dist * $dist)) + M_PI / 2);
+			}
 		}
 		
 		if ($in_kms)
