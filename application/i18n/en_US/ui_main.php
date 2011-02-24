@@ -279,7 +279,7 @@
 	'outgoing' => 'Outgoing',
 	'page' => 'Page',
 	'pages' => 'Pages',
-	'page_description' => 'Page Description (Put "REDIRECT:(url)" to redirect to an external site)',
+	'page_description' => 'Page Description.  For redirectors, enter "REDIRECT:url"',
 	'page_has_been' => 'The Page Has Been',
 	'page_tab_name' => 'Page Tab Name',
 	'page_title' => 'Page Title',
