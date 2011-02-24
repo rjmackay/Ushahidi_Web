@@ -125,6 +125,10 @@ class S_Twitter_Controller extends Controller {
 		$tweet_results = $tweets->{'results'};
 
 		foreach($tweet_results as $tweet) {
+			// Skip over duplicate tweets
+			$tweet_hash = $this->tweet_hash($tweet->text);
+			if($this->is_tweet_registered($tweet_hash)) continue;
+
 			$reporter = ORM::factory('reporter')
 				->where('service_id', $service->id)
 				->where('service_account', $tweet->{'from_user'})
@@ -167,6 +171,9 @@ class S_Twitter_Controller extends Controller {
 				$message->message_date = $tweet_date;
 				$message->service_messageid = $tweet->{'id'};
 				$message->save();
+
+				// Mark this tweet as received for the duplicate checker
+				$this->register_tweet($message->id, $tweet_hash);
 				
 				// Action::message_twitter_add - Twitter Message Received!
                 Event::run('ushahidi_action.message_twitter_add', $message);
@@ -210,5 +217,44 @@ class S_Twitter_Controller extends Controller {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Returns true if the given tweet has been been received
+	 */
+	private function is_tweet_registered($hash)
+	{
+		$hash_a = substr($hash,0,16);
+		$hash_b = substr($hash,16);
+
+		return count(ORM::factory('message_hash')
+			->where('hash_a', "X'$hash_a'", false)
+			->where('hash_b', "X'$hash_b'", false)
+			->find_all()) > 0;
+	}
+
+	/**
+	 * Register this tweet as having been received
+	 */
+	private function register_tweet($message_id, $hash)
+	{
+		$hash_a = substr($hash,0,16);
+		$hash_b = substr($hash,16);
+
+		// Raw query used so we can save directly as hex.
+		$message_id = (int)$message_id;
+		Database::instance()->query("INSERT INTO `message_hash` SET message_id = $message_id,
+			hash_a = X'$hash_a', hash_b = X'$hash_b'");
+	}
+
+	/**
+	 * Generate a hash of the given tweet text, for checking if it's a duplicate
+	 */
+	private function tweet_hash($text)
+	{
+		$text = preg_replace('/RT @[^: ]+:?/i','', $text);
+		$text = preg_replace('/ +/', ' ', $text);
+		$text = strtolower(trim($text));
+		return md5($text);
 	}
 }
