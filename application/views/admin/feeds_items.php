@@ -92,7 +92,7 @@
 									$item_title = $item->item_title;
 									$item_description = $item->item_description;
 									$item_link = $item->item_link;
-									$item_date = date('Y-m-d', strtotime($item->item_date));
+									$item_date = date('H:i M d', strtotime($item->item_date));
 									
 									$feed_name = $item->feed->feed_name;
 									

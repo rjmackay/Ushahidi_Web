@@ -93,7 +93,7 @@
 									$checkin_from = $checkin->user->email;
 									$incident_id = 0; // TODO: Change this so we can make reports out of checkins
 									$checkin_description = text::auto_link($checkin->checkin_description);
-									$checkin_date = date("Y-m-d H:i:s", strtotime($checkin->checkin_date));
+									$checkin_date = date('H:i M d', strtotime($checkin->checkin_date));
 									?>
 									<tr>
 										<td class="col-1"><input name="checkin_id[]" id="checkin" value="<?php echo $checkin_id; ?>" type="checkbox" class="check-box"/></td>

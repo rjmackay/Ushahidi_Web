@@ -62,7 +62,7 @@
 							$incident_title = $incident->incident_title;
 							$incident_description = text::limit_chars($incident->incident_description, 150, '...');
 							$incident_date = $incident->incident_date;
-							$incident_date = date('g:i A', strtotime($incident->incident_date));
+							$incident_date = date('H:i M d', strtotime($incident->incident_date));
 							$incident_mode = $incident->incident_mode;	// Mode of submission... WEB/SMS/EMAIL?
 							
 							if ($incident_mode == 1)
@@ -172,7 +172,7 @@
 							$feed_title = $feed->item_title;
 							$feed_description = text::limit_chars(strip_tags($feed->item_description), 150, '...', True);
 							$feed_link = $feed->item_link;
-							$feed_date = date('M j Y', strtotime($feed->item_date));
+							$feed_date = date('H:i M d', strtotime($feed->item_date));
 							$feed_source = "NEWS";
 							?>
 							<div class="post">

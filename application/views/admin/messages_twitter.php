@@ -91,7 +91,7 @@
 									$incident_id = $tweet->incident_id;
 									$tweet_link = $tweet->tweet_link;
 									$tweet_description = $tweet->tweet;
-									$tweet_date = date('Y-m-d', strtotime($tweet->tweet_date));
+									$tweet_date = date('H:i M d', strtotime($tweet->tweet_date));
 									?>
 									<tr>
 										<td class="col-1"><input name="message_id[]" id="message_id" value="<?php echo $tweet_id; ?>" type="checkbox" class="check-box"/></td>

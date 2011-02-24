@@ -110,7 +110,7 @@
 									$comment_active = $comment->comment_active;
 									$comment_spam = $comment->comment_spam;
 									$comment_rating = $comment->comment_rating;
-									$comment_date = date('Y-m-d h:i', strtotime($comment->comment_date));
+									$comment_date = date('H:i M d', strtotime($comment->comment_date));
 									
 									$incident_id = $comment->incident->id;
 									$incident_title = $comment->incident->incident_title;

@@ -916,6 +916,9 @@ table.table-list thead th.source{
 table.table-list thead th.date{
     width: 15%;
 }
+table.table-list tbody td.date{
+	white-space: nowrap;
+}
 
 table.table-list tbody tr td{
     padding: 5px;

@@ -90,7 +90,7 @@
 						$incident_id = $laconica_mesg->incident_id;
 						$laconica_mesg_link = $laconica_mesg->laconica_mesg_link;
 						$laconica_mesg_description = $laconica_mesg->laconica_mesg;
-						$laconica_mesg_date = date('Y-m-d', 
+						$laconica_mesg_date = date('H:i M d', 
 						    strtotime($laconica_mesg->laconica_mesg_date));
 						?>
 						<tr>
