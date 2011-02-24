@@ -143,7 +143,7 @@
 		'tagline' => 'Site Tagline',
 		'title' => 'Site Settings',
 		'twitter_configuration' => 'Twitter Search Terms',
-		'twitter_hashtags' => 'Hashtags - Separate with commas ',
+		'twitter_hashtags' => 'Twitter search query - use any Twitter search features',
 	),
 	'site_email' => array(
 		'email' => 'The site email field does not appear to contain a valid email address?',

@@ -74,26 +74,22 @@ class S_Twitter_Controller extends Controller {
 		}
 
 		//Perform Hashtag Search
-		$hashtags = explode(',',$settings->twitter_hashtags);
-		foreach($hashtags as $hashtag){
-			if (!empty($hashtag))
-			{
-				$page = 1;
-				$have_results = TRUE; //just starting us off as true, although there may be no results
-				while($have_results == TRUE AND $page <= 2)
-				{ //This loop is for pagination of rss results
-					$hashtag = trim(str_replace('#','',$hashtag));
-					$ignore_user = 'eqnz_live';
-					$twitter_url = 'http://search.twitter.com/search.json?q=%23'.$hashtag.'%20-from:'.$ignore_user.'&rpp=100&page='.$page.$last_tweet_id;
-					$curl_handle = curl_init();
-					curl_setopt($curl_handle,CURLOPT_URL,$twitter_url);
-					curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,4); //Since Twitter is down a lot, set timeout to 4 secs
-					curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1); //Set curl to store data in variable instead of print
-					$buffer = curl_exec($curl_handle);
-					curl_close($curl_handle);
-					$have_results = $this->add_hash_tweets($buffer); //if FALSE, we will drop out of the loop
-					$page++;
-				}
+		// twitter_hashtags is now used verbatim as a twitter search query
+		$search_query = trim($settings->twitter_hashtags);
+		if($search_query) {
+			$page = 1;
+			$have_results = TRUE; //just starting us off as true, although there may be no results
+			while($have_results == TRUE AND $page <= 2)
+			{ //This loop is for pagination of rss results
+				$twitter_url = 'http://search.twitter.com/search.json?q='.urlencode($search_query).'&rpp=100&page='.$page.$last_tweet_id;
+				$curl_handle = curl_init();
+				curl_setopt($curl_handle,CURLOPT_URL,$twitter_url);
+				curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,4); //Since Twitter is down a lot, set timeout to 4 secs
+				curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1); //Set curl to store data in variable instead of print
+				$buffer = curl_exec($curl_handle);
+				curl_close($curl_handle);
+				$have_results = $this->add_hash_tweets($buffer); //if FALSE, we will drop out of the loop
+				$page++;
 			}
 		}
 	}
