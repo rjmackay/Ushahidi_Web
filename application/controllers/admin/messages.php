@@ -117,10 +117,8 @@ class Messages_Controller extends Admin_Controller
             {   
                 if( $post->action == 'd' )              // Delete Action
                 {
-                    error_log('DELETION (' . $this->user->id . '):');
                     foreach($post->message_id as $item)
                     {
-                        error_log(' * deleting ' . $item);
                         // Delete Message
                         $message = ORM::factory('message')->find($item);
                         $message->message_type = 3; // Tag As Deleted/Trash
