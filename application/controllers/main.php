@@ -286,7 +286,7 @@ class Main_Controller extends Template_Controller {
 		// We're only interested in positive hashtag searches (not exclusions or user restrictions)
 		$twitter_search_items = preg_split('/ +/', trim(Kohana::config('settings.twitter_hashtags')));
 		foreach($twitter_search_items as $item) {
-			if($item[0] == '#') $filtered_items[] = $item;
+			if($item && $item[0] == '#') $filtered_items[] = $item;
 		}
 		$this->template->content->twitter_hashtag_array = $filtered_items;
 
