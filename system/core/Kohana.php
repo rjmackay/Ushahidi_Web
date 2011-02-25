@@ -867,7 +867,7 @@ final class Kohana {
 			if ( ! headers_sent())
 			{
 				// Send the 500 header
-				header('HTTP/1.1 500 Internal Server Error');
+				header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
 			}
 		}
 		else
@@ -1659,7 +1659,7 @@ class Kohana_Exception extends Exception {
 	public function sendHeaders()
 	{
 		// Send the 500 header
-		header('HTTP/1.1 500 Internal Server Error');
+		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
 	}
 
 } // End Kohana Exception
@@ -1724,7 +1724,7 @@ class Kohana_404_Exception extends Kohana_Exception {
 	public function sendHeaders()
 	{
 		// Send the 404 header
-		header('HTTP/1.1 404 File Not Found');
+		header($_SERVER['SERVER_PROTOCOL'] . ' 404 File Not Found');
 	}
 
 } // End Kohana 404 Exception
