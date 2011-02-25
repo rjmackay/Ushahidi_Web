@@ -282,8 +282,13 @@ class Main_Controller extends Template_Controller {
 		$this->template->content->default_map_all = Kohana::config('settings.default_map_all');
 
 		// Get Twitter Hashtags
-		$this->template->content->twitter_hashtag_array = array_filter(array_map('trim',
-			explode(',', Kohana::config('settings.twitter_hashtags'))));
+		$filtered_items = array();
+		// We're only interested in positive hashtag searches (not exclusions or user restrictions)
+		$twitter_search_items = preg_split('/ +/', trim(Kohana::config('settings.twitter_hashtags')));
+		foreach($twitter_search_items as $item) {
+			if($item[0] == '#') $filtered_items[] = $item;
+		}
+		$this->template->content->twitter_hashtag_array = $filtered_items;
 
 		// Get Report-To-Email
 		$this->template->content->report_email = Kohana::config('settings.site_email');
