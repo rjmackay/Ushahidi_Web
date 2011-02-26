@@ -157,6 +157,9 @@
 					Event::run('ushahidi_action.report_form_optional');
 					?>
 				</div>
+				<div class="report_row">
+					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
+				</div>
 			</div>
 			<div class="report_right">
 				<?php if (!$multi_country)
@@ -298,9 +301,6 @@
 
 				</div>
 									
-				<div class="report_row">
-					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
-				</div>
 			</div>
 		</div>
 		<?php print form::close(); ?>
