@@ -221,7 +221,7 @@
                         $incident_id = $incident->id;
                         $incident_title = text::limit_chars($incident->incident_title, 40, '...', True);
                         $incident_date = $incident->incident_date;
-                        $incident_date = date('H:i M ', strtotime($incident->incident_date));
+                        $incident_date = date('H:i M d', strtotime($incident->incident_date));
                         $incident_location = $incident->location->location_name;
                     ?>
                     <tr>
