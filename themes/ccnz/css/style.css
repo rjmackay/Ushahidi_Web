@@ -1317,7 +1317,7 @@ label.error {
     font-size:14px;
     cursor:pointer;
     border: 0;
-		font-family: 'Droid Sans',Helvetica,Arial,sans-serif; /* DS: else default font */
+		font-family: 'Droid Sans',Helvetica,Arial,sans-serif; /* else default font */
 }
 .btn_submit:hover {
     background-color:#245e00;
@@ -2307,12 +2307,4 @@ div.graph-holder, div.slider-holder {
 
 #threesteps form a:hover {
     background-color:#555;
-}
-
-/* IE hacks */
-
-.ie7 div.submit-incident a {
-/* shrink wrap button to text */
-	float: none;
-	display: block;
 }
