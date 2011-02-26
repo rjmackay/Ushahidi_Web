@@ -2309,3 +2309,11 @@ div.graph-holder, div.slider-holder {
 #threesteps form a:hover {
     background-color:#555;
 }
+
+/* IE hacks */
+
+.ie7 div.submit-incident a {
+/* shrink wrap button to text */
+	float: none;
+	display: block;
+}
