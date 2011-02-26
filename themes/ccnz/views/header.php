@@ -42,7 +42,6 @@
 						<li><a class="skip-link" href="#main" title="Skip to content" accesskey="[">Skip to content</a></li>						
 						<li>Useful Links:</li>
 						<?php nav::secondary_tabs($this_page); ?>
-						<li><a href="/page/index/4">Student Volunteer Army</a></li>
 					</ul>
 
 				<!-- searchform -->
