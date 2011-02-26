@@ -1,7 +1,3 @@
-			</div>
-		</div>
-		<!-- / main body -->
-
 	</div>
 	<!-- / wrapper -->
 	
