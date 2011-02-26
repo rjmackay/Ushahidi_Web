@@ -29,9 +29,10 @@ class Geocode_Controller extends Controller
                     ));
             exit;
         }
-
-        $address_url = rawurlencode($address . ',christchurch,new zealand');
+        $address_url = rawurlencode($address);
         $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address_url."&sensor=false";
+        //Adding bounds that make the geocoder prefer results that are in those bounds
+        $url .= "&bounds=-48.123079,164.619141|-39.250405,175.957031";
         if ($json = file_get_contents($url)) {
             $result = json_decode($json);
             if ($result->status != "OK" || !($location = current($result->results))) {
