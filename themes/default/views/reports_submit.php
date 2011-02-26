@@ -31,11 +31,24 @@
 			<div class="report_left">
 				<div class="report_row">
 					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_title'); ?></h4>
-					<?php print form::input('incident_title', $form['incident_title'], ' class="text long"'); ?>
+          <?php
+          if(!empty($errors['incident_title'])) {
+					  print form::input('incident_title', $form['incident_title'], ' class="text long error"');
+          }
+          else {
+					  print form::input('incident_title', $form['incident_title'], ' class="text long"');
+          }?>
 				</div>
 				<div class="report_row">
 					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_description'); ?></h4>
-					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long" ') ?>
+          <?php
+            if(!empty($errors['incident_description'])) {
+              print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long error" ');
+            }
+            else {
+              print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long" ');
+            }
+          ?>
 				</div>
 				<div class="report_row" id="datetime_default">
 					<h4><a href="#" id="date_toggle" class="show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a><?php echo Kohana::lang('ui_main.date_time'); ?>: 
@@ -140,7 +153,14 @@
 
 				<div class="report_row">
 					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
-					<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
+          <?php
+            if(!empty($errors['location_name'])) {
+					    print form::input('location_name', $form['location_name'], ' class="text long error"');
+            }
+            else {
+					    print form::input('location_name', $form['location_name'], ' class="text long"');
+            }
+          ?>
 				</div>
 
 				<!-- News Fields -->
