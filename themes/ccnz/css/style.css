@@ -403,7 +403,7 @@ div.submit-incident a{
 }
 
 div.submit-incident a:hover{
-    background: url(/themes/ccnz/images/submit-incident.png) 10px -18px no-repeat;
+    background-position: -490px 1px; /* 490 = 500-10px offset */
 color:#111;
 }
 
