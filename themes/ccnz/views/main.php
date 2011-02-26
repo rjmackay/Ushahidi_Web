@@ -26,7 +26,11 @@
             <!-- / submit incident -->
         </div>
 
-        <div></div>
+        <div>
+            <h2>Request help</h2>
+            <p>Clicking on this button requests help from the Student Volunteer Army.</p>
+            <div class="submit-incident"><a href="<?php echo url::site() . 'volunteer-army'; ?>">Request help</a></div>
+        </div>
 
         <script type="text/javascript">
             function zoomMapToSearch() {
