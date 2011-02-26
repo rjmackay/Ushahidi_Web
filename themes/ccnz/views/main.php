@@ -26,7 +26,11 @@
             <!-- / submit incident -->
         </div>
 
-        <div></div>
+        <div>
+            <h2>Request help</h2>
+            <p>Clicking on this button requests help from the Student Volunteer Army.</p>
+            <div class="submit-incident"><a href="<?php echo url::site() . 'volunteer-army'; ?>">Request help</a></div>
+        </div>
 
         <script type="text/javascript">
             function zoomMapToSearch() {
@@ -62,13 +66,15 @@
             </div>
 
             <ul id="category_switch" class="category-filters">
-                <li><a class="active" id="cat_0" href="#"><span class="swatch" style="background-color:<?php echo "#".$default_map_all;?>"></span><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
+                <?php $normalized_all_categories = str_replace(' ', '-', strtolower(Kohana::lang('ui_main.all_categories')))?>
+                <li><a class="active" id="cat_0" href="#<?php echo $normalized_all_categories ?>" data-name="<?php echo $normalized_all_categories ?>"><span class="swatch" style="background-color:<?php echo "#".$default_map_all;?>"></span><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
                 <?php
                     foreach ($categories as $category => $category_info)
                     {
                         $category_title = $category_info[0];
                         $category_color = $category_info[1];
                         $category_image = '';
+                        $category_normalized_name = str_replace(' ', '-', strtolower($category_title));
                         $color_css = 'class="swatch" style="background-color:#'.$category_color.'"';
                         if($category_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$category_info[2])) {
                             $category_image = html::image(array(
@@ -77,7 +83,7 @@
                                 ));
                             $color_css = '';
                         }
-                        echo '<li><a href="#" id="cat_'. $category .'"><span '.$color_css.'>'.$category_image.'</span><span class="category-title">'.$category_title.'</span></a>';
+                        echo '<li><a href="#' . $category_normalized_name . '" id="cat_'. $category .'" data-name="' . $category_normalized_name . '"><span '.$color_css.'>'.$category_image.'</span><span class="category-title">'.$category_title.'</span></a>';
                         // Get Children
                         echo '<div class="hide" id="child_'. $category .'">';
                                                 if( sizeof($category_info[3]) != 0)
@@ -88,6 +94,7 @@
                                                             $child_title = $child_info[0];
                                                             $child_color = $child_info[1];
                                                             $child_image = '';
+                                                            $child_normalized_name = str_replace(' ', '-', strtolower($child_title));
                                                             $color_css = 'class="swatch" style="background-color:#'.$child_color.'"';
                                                             if($child_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$child_info[2])) {
                                                                     $child_image = html::image(array(
@@ -96,7 +103,7 @@
                                                                             ));
                                                                     $color_css = '';
                                                             }
-                                                            echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><span '.$color_css.'>'.$child_image.'</span><span class="category-title">'.$child_title.'</span></a></li>';
+                                                            echo '<li style="padding-left:20px;"><a href="#' . $child_normalized_name . '" id="cat_'. $child .'" data-name="' . $child_normalized_name . '"><span '.$color_css.'>'.$child_image.'</span><span class="category-title">'.$child_title.'</span></a></li>';
                                                     }
                                                     echo '</ul>';
                                                 }
@@ -321,8 +328,8 @@
                 <div class="social-buttons">
                     <h5>Follow developments on</h5>
                     <ul>
-                        <li><a href="#"><img src="/themes/eq/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
-                        <li><a href="#"><img src="/themes/eq/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
                     </ul>
 
                 </div>
