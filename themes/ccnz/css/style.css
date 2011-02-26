@@ -2267,14 +2267,13 @@ div.graph-holder, div.slider-holder {
     color: #111;
 }
 
-#threesteps form input:focus, #threesteps form input:hover{
+#threesteps form input:focus, #threesteps form input:hover {
     background: #fff;
     border: 1px solid #ee1d19;
     -webkit-box-shadow: 0 0 10px #ee1d19;
     -moz-box-shadow: 0 0 10px #ee1d19;
     box-shadow: 0 0 10px #ee1d19;
 }
-
 
 #threesteps form a{
     margin:0;
@@ -2289,4 +2288,7 @@ div.graph-holder, div.slider-holder {
 
 #threesteps form a:hover {
     background-color:#555;
+}
+.hidden {
+  display: none;
 }

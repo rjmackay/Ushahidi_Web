@@ -8,6 +8,8 @@
         </div>
     <?php } ?>
 
+    <!-- For 'share' on Facebook links -->
+    <p class="hidden">The community-driven situation map of the Christchurch Earthquake</p>
     <div id="threesteps">
         <div>
             <h2>Step 1: Where are you?</h2>
