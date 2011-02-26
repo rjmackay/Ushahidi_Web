@@ -321,8 +321,8 @@
                 <div class="social-buttons">
                     <h5>Follow developments on</h5>
                     <ul>
-                        <li><a href="#"><img src="/themes/eq/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
-                        <li><a href="#"><img src="/themes/eq/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
                     </ul>
 
                 </div>
