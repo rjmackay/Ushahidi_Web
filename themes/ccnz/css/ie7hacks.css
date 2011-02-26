@@ -5,11 +5,10 @@
  * Note: Preface hacks with #page to override style.css
 */
 
-/* shrink wrap buttons to text */
-
 	#page div.submit-incident a {
-		float: none;
-		display: block;
+		float: none; /* shrinkwrap text */
+		display: block; /* shrinkwrap text */
+		min-height: 17px; /* show all of icon */
 	}
 	
 /* (header) search form */
@@ -32,4 +31,13 @@
 		padding-bottom: 3px;
 		margin-bottom: 1px;
 		display: inline-block;
+	}
+	
+/* RH sidebar */
+
+	#page div.howto-report,
+	#page div.social-buttons {
+		float: none; /* resolve width issues */
+		overflow: auto; /* clear floated children */
+		padding-bottom: 0; /* redice vert whitespace */
 	}
