@@ -26,7 +26,11 @@
             <!-- / submit incident -->
         </div>
 
-        <div></div>
+        <div>
+						<h2>Ask for help</h2>
+						<p>Ask for assistance from the Student Volunteer Army. </p>
+						<div class="submit-incident"><a href="http://eq.org.nz/volunteer-army/">Ask for help</a></div>
+				</div>
 
         <script type="text/javascript">
             function zoomMapToSearch() {
@@ -321,8 +325,8 @@
                 <div class="social-buttons">
                     <h5>Follow developments on</h5>
                     <ul>
-                        <li><a href="#"><img src="/themes/eq/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
-                        <li><a href="#"><img src="/themes/eq/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/twitter.png" alt="Twitter logo"><br><a href="#">Twitter</a></li>
+                        <li><a href="#"><img src="/themes/ccnz/images/facebook.png" alt="Facebook logo"><br><a href="#">Facebook</a></li>
                     </ul>
 
                 </div>
