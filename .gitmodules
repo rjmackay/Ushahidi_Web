@@ -1,9 +1,6 @@
 [submodule "plugins/timespan"]
 	path = plugins/timespan
 	url = git://github.com/ccnz/ushahidi-plugins-timespan.git
-[submodule "ushahidi-plugins-smsautomate"]
-	path = plugins/smsautomate
-	url = git://github.com/ccnz/ushahidi-plugins-smsautomate.git
 [submodule "plugins/smsautomate"]
 	path = plugins/smsautomate
 	url = git://github.com/ccnz/ushahidi-plugins-smsautomate.git
