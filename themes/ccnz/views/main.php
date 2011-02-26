@@ -90,6 +90,7 @@
                                                             $child_title = $child_info[0];
                                                             $child_color = $child_info[1];
                                                             $child_image = '';
+                                                            $child_normalized_name = str_replace(' ', '-', strtolower($child_title));
                                                             $color_css = 'class="swatch" style="background-color:#'.$child_color.'"';
                                                             if($child_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$child_info[2])) {
                                                                     $child_image = html::image(array(
@@ -98,7 +99,7 @@
                                                                             ));
                                                                     $color_css = '';
                                                             }
-                                                            echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><span '.$color_css.'>'.$child_image.'</span><span class="category-title">'.$child_title.'</span></a></li>';
+                                                            echo '<li style="padding-left:20px;"><a href="#' . $child_normalized_name . '" id="cat_'. $child .'" data-name="' . $child_normalized_name . '"><span '.$color_css.'>'.$child_image.'</span><span class="category-title">'.$child_title.'</span></a></li>';
                                                     }
                                                     echo '</ul>';
                                                 }
