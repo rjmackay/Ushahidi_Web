@@ -25,8 +25,6 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <script src="js/libs/modernizr-1.6.min.js"></script>
-
 </head>
 
 <body id="page">
