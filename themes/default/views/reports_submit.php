@@ -30,11 +30,11 @@
 			</div>
 			<div class="report_left">
 				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_title'); ?></h4>
+					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_title'); ?></h4>
 					<?php print form::input('incident_title', $form['incident_title'], ' class="text long"'); ?>
 				</div>
 				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_description'); ?></h4>
+					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_description'); ?></h4>
 					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long" ') ?>
 				</div>
 				<div class="report_row" id="datetime_default">
@@ -82,7 +82,7 @@
 					<div style="clear:both; display:block;" id="incident_date_time"></div>
 				</div>
 				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?></h4>
+					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_categories'); ?></h4>
 					<div class="report_category" id="categories">
 						<?php
 						$selected_categories = array();
@@ -157,6 +157,9 @@
 					Event::run('ushahidi_action.report_form_optional');
 					?>
 				</div>
+				<div class="report_row">
+					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
+				</div>
 			</div>
 			<div class="report_right">
 				<?php if (!$multi_country)
@@ -180,7 +183,7 @@
 				</div>
 				
 				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
+					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
 					<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
 				</div>
 
@@ -298,9 +301,6 @@
 
 				</div>
 									
-				<div class="report_row">
-					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
-				</div>
 			</div>
 		</div>
 		<?php print form::close(); ?>
