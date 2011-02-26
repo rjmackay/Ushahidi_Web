@@ -599,7 +599,6 @@ ul.category-filters li a{
 
 ul.category-filters li a:hover, ul.category-filters li a.active {
     color: #fff;
-    font-weight: bold;
     background-color: #96b3cf;
 }
 
