@@ -282,6 +282,7 @@
 	'page_description' => 'Page Description.  For redirectors, enter "REDIRECT:url"',
 	'page_has_been' => 'The Page Has Been',
 	'page_tab_name' => 'Page Tab Name',
+	'page_navigation' => 'Page Navigation',
 	'page_title' => 'Page Title',
 	'parent_category' => 'Parent Category',
 	'password' => 'Password',
