@@ -138,50 +138,6 @@
 					?>
                             </div>
 
-				<div class="report_optional">
-					<h3><?php echo Kohana::lang('ui_main.reports_optional'); ?></h3>
-					<div class="report_row">
-							 <h4><?php echo Kohana::lang('ui_main.reports_first'); ?></h4>
-							 <?php print form::input('person_first', $form['person_first'], ' class="text long"'); ?>
-					</div>
-					<div class="report_row">
-						<h4><?php echo Kohana::lang('ui_main.reports_last'); ?></h4>
-						<?php print form::input('person_last', $form['person_last'], ' class="text long"'); ?>
-					</div>
-					<div class="report_row">
-						<h4><?php echo Kohana::lang('ui_main.reports_email'); ?></h4>
-						<?php print form::input('person_email', $form['person_email'], ' class="text long"'); ?>
-					</div>
-					<?php
-					// Action::report_form_optional - Runs in the optional information of the report form
-					Event::run('ushahidi_action.report_form_optional');
-					?>
-				</div>
-				<div class="report_row">
-					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
-				</div>
-			</div>
-			<div class="report_right">
-				<?php if (!$multi_country)
-							{
-				?>
-				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_find_location'); ?></h4>
-					<?php print form::dropdown('select_city',$cities,'', ' class="select" '); ?>
-				</div>
-				<?php
-					 }
-				?>
-				<div class="report_row">
-					<div id="divMap" class="report_map"></div>
-					<div class="report-find-location">
-						<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
-						<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>
-						<div id="find_loading" class="report-find-loading"></div>
-						<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
-					</div>
-				</div>
-				
 				<div class="report_row">
 					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
 					<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
@@ -299,6 +255,50 @@
 						print "<input type=\"hidden\" name=\"$this_startid\" value=\"$i\" id=\"$this_startid\">";
 					?>
 
+				</div>
+				<div class="report_row">
+					<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
+				</div>
+			</div>
+			<div class="report_right">
+				<?php if (!$multi_country)
+							{
+				?>
+				<div class="report_row">
+					<h4><?php echo '<span class="required">*</span> ' . Kohana::lang('ui_main.reports_find_location'); ?></h4>
+					<?php print form::dropdown('select_city',$cities,'', ' class="select" '); ?>
+				</div>
+				<?php
+					 }
+				?>
+				<div class="report_row">
+					<div id="divMap" class="report_map"></div>
+					<div class="report-find-location">
+						<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
+						<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>
+						<div id="find_loading" class="report-find-loading"></div>
+						<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
+					</div>
+				</div>
+				
+				<div class="report_optional">
+					<h3><?php echo Kohana::lang('ui_main.reports_optional'); ?></h3>
+					<div class="report_row">
+							 <h4><?php echo Kohana::lang('ui_main.reports_first'); ?></h4>
+							 <?php print form::input('person_first', $form['person_first'], ' class="text long"'); ?>
+					</div>
+					<div class="report_row">
+						<h4><?php echo Kohana::lang('ui_main.reports_last'); ?></h4>
+						<?php print form::input('person_last', $form['person_last'], ' class="text long"'); ?>
+					</div>
+					<div class="report_row">
+						<h4><?php echo Kohana::lang('ui_main.reports_email'); ?></h4>
+						<?php print form::input('person_email', $form['person_email'], ' class="text long"'); ?>
+					</div>
+					<?php
+					// Action::report_form_optional - Runs in the optional information of the report form
+					Event::run('ushahidi_action.report_form_optional');
+					?>
 				</div>
 									
 			</div>
