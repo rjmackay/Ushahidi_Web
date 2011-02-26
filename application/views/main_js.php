@@ -629,6 +629,21 @@
 			});
 		});
 		
+		function dynamicCategorySelector() {
+			var selector = 'a[data-name="' + window.location.hash.substring(1) + '"]';
+			$(selector).click();
+		}
+		function mapCategoriesAndHashes() {
+			$("a[id^='cat_']").click(function() {
+				window.location.hash = $(this).attr('data-name');
+			});
+		}
+
+		$(document).ready(dynamicCategorySelector);
+		$(document).ready(mapCategoriesAndHashes);
+		$(window).bind('hashchange', dynamicCategorySelector);
+
+
 		/*		
 		d = $('#startDate > optgroup > option').map(function()
 		{
