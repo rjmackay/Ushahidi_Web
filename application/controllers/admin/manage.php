@@ -464,7 +464,8 @@ class Manage_Controller extends Admin_Controller
 			'page_id'	   => '',
 			'page_title'	  => '',
 			'page_tab'		=> '',
-			'page_description'	  => ''
+			'page_description'	  => '',
+			'page_navigation'     => 'primary',
 		);
 		//	copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$errors = $form;
@@ -523,6 +524,7 @@ class Manage_Controller extends Admin_Controller
 					$page->page_title = $post->page_title;
 					$page->page_tab = $post->page_tab;
 					$page->page_description = $post->page_description;
+					$page->page_navigation = $post->page_navigation;
 					$page->save();
 					$form_saved = TRUE;
 					$form_action = strtoupper(Kohana::lang('ui_admin.added_edited'));

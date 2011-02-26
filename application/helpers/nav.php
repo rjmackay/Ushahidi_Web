@@ -13,7 +13,7 @@ class nav_Core {
 	 * Generate Main Tabs
      * @param string $this_page
      * @param array $dontshow
-	 * @return string $menu
+     * @return string $menu
      */
 	public static function main_tabs($this_page = FALSE, $dontshow = FALSE)
 	{
@@ -72,7 +72,7 @@ class nav_Core {
 		}
 		
 		// Custom Pages
-		$pages = ORM::factory('page')->where('page_active', '1')->find_all();
+		$pages = ORM::factory('page')->where('page_active', '1')->where('page_navigation', 'primary')->find_all();
 		foreach ($pages as $page)
 		{
 			$menu .= "<li><a href=\"".url::site()."page/index/".$page->id."\" ";
@@ -86,5 +86,24 @@ class nav_Core {
 		Event::run('ushahidi_action.nav_main_top', $this_page);
 	}
 	
+	
+	/**
+	 * Generate Navigation secondary tabs
+	 * @return string $menu
+     */
+     public static function secondary_tabs($this_page = FALSE) {
+	    $menu = '';
+	    
+		// Custom Pages
+		$pages = ORM::factory('page')->where('page_active', '1')->where('page_navigation', 'secondary')->find_all();
+		foreach ($pages as $page)
+		{
+			$menu .= "<li><a href=\"".url::site()."page/index/".$page->id."\" ";
+			$menu .= ($this_page == 'page_'.$page->id) ? " class=\"active\"" : "";
+		 	$menu .= ">".$page->page_tab."</a></li>";
+		}
+	
+        echo $menu;
+    }	
 	
 }

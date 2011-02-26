@@ -83,6 +83,7 @@
 										$page_id = $page->id;
 										$page_title = $page->page_title;
 										$page_tab = $page->page_tab;
+										$page_navigation = $page->page_navigation;
 										$page_description = htmlspecialchars_decode($page->page_description);
 										$page_description_short = text::limit_chars(strip_tags($page_description), "100", "...");
 										$page_active = $page->page_active;
@@ -138,6 +139,10 @@
 						<div class="tab_form_item2">
 							<strong><?php echo Kohana::lang('ui_main.page_tab_name');?>:</strong><br />
 							<?php print form::input('page_tab', $form['page_tab'], ' class="text long"'); ?>
+						</div>
+						<div class="tab_form_item2">
+							<strong><?php echo Kohana::lang('ui_main.page_navigation');?>:</strong><br />
+							<?php print form::dropdown('page_navigation', array('primary' => "Primary Navigation", 'secondary' => "Secondary Navigation"), $form['page_navigation'], ' class="text long"'); ?>
 						</div>
 						<div class="tab_form_item2">
 							<strong><?php echo Kohana::lang('ui_main.page_description');?>:</strong><br />
