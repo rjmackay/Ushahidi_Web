@@ -40,7 +40,10 @@ class register_themes {
 			
 		$css_url = (Kohana::config("cache.cdn_css")) ? 
 			Kohana::config("cache.cdn_css") : url::base();
-		$theme_css[] = $css_url."themes/default/css/style.css";
+        // HACK: don't include the default style.css if using the ccnz theme
+        if ( Kohana::config("settings.site_style") != "ccnz" ) {
+            $theme_css[] = $css_url."themes/default/css/style.css";
+        }
 		
 		// 2. Extend the default theme
 		if ( Kohana::config("settings.site_style") != "default" )
