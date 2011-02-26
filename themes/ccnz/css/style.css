@@ -260,6 +260,11 @@ div#underfooter{
 .clearingfix{
     display: block;
 }
+.clear {
+	display: block;
+	height: 0;
+	clear: both;
+}
 
 .floatbox{
     overflow: hidden;
@@ -379,6 +384,10 @@ div.submit-incident {
         rgb(139,38,27) 10%,
         rgb(238,29,25) 80%
     );
+}
+.thanks_msg div.submit-incident {
+	float: left;
+	margin: 10px 10px 10px 0;
 }
 
 div.submit-incident a{
@@ -1256,6 +1265,9 @@ form {
     color:#00789F;
     font-size:120%;
 }
+.textarea {
+    font-family: 'Droid Sans',Helvetica, Arial, sans-serif; /* TODO: fix font-size: 12px * 120% does not match */
+}
 .text:focus,
 .textarea:focus,
 .select:focus,
@@ -1306,9 +1318,15 @@ label.error {
     font-size:14px;
     cursor:pointer;
     border: 0;
+		font-family: 'Droid Sans',Helvetica,Arial,sans-serif; /* DS: else default font */
 }
 .btn_submit:hover {
     background-color:#245e00;
+}
+a.btn_submit:hover,
+a.btn_submit:visited {
+    color: white;
+    text-decoration: none;
 }
 .btn_find {
     margin:0;
@@ -2192,6 +2210,10 @@ div.green-box ul, div.red-box ul{
 }
 .alert_confirm .label{
     margin-bottom:10px;
+}
+.thanks_msg p {
+	float: left;
+	margin: 10px 0 10px 0;
 }
 
 /* Rounded Corners */
