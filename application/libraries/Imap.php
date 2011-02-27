@@ -198,6 +198,9 @@ class Imap_Core {
 	 */
 	public function close()
 	{
+		// Clear imap error buffer, otherwise the next request that uses the
+		// same apache/fastcgi child aborts before serving the request.
+		imap_errors();
 		@imap_close($this->imap_stream);
 	}
 
