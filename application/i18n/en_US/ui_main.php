@@ -494,6 +494,7 @@
 	'verified_reports' => 'Verified Reports',
 	'verify' => 'Verify',
 	'verify_this_report' => 'Verify this Report',
+	'unverifiable' => 'Unverifiable',
 	'version' => 'Version',
 	'via' => 'via',
 	'video' => 'Video',

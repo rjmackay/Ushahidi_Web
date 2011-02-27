@@ -35,6 +35,7 @@
 	'home' => 'Accueil',
 	'how_to_report' => 'COMMENT TEMOIGNER',
 	'incidents_listed' => 'Incidents <span>(sur la carte ci-dessus, énumérés chronologiquement)</span>',
+	'unverifiable' => 'invérifiable',
 	'location' => 'LIEU',
 	'media_filter' => 'FILTRE DES MÉDIAS',
 	'modify_date' => 'Changer Date',

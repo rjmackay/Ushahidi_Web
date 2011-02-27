@@ -501,6 +501,11 @@
 									{
 										echo " checked=\"checked\" ";
 									}?>> <?php echo Kohana::lang('ui_main.no');?>									
+									<input type="radio" name="incident_verified" value="2"
+									<?php if ($form['incident_verified'] == 2)
+									{
+										echo " checked=\"checked\" ";
+									}?>> <?php echo Kohana::lang('ui_main.unverifiable');?>
 								</div>
 								<div class="row">
 									<div class="f-col-bottom-1-col"><?php echo Kohana::lang('ui_main.report_edit_dropdown_1_title');?>:</div>
