@@ -915,8 +915,6 @@ table.table-list thead th.source{
 
 table.table-list thead th.date{
     width: 15%;
-}
-table.table-list tbody td.date{
 	white-space: nowrap;
 }
 
@@ -931,6 +929,50 @@ table.table-list tbody tr td a{
     color: #0099CC;
 }
 
+/* table summary list */
+table.table-summary-list{
+    width: 100%;
+}
+
+table.table-summary-list, table.table-summary-list td{
+    border-collapse: collapse;
+}
+
+table.table-summary-list thead th{
+    color: #666666;
+    padding: 5px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+table.table-summary-list thead th.title{
+    width: 50%;
+}
+
+table.table-summary-list thead th.location{
+    width: 35%;
+}
+
+table.table-summary-list thead th.source{
+    width: 35%;
+}
+
+table.table-summary-list thead th.date{
+    width: 15%;
+	white-space: nowrap;
+}
+
+table.table-summary-list tbody tr td{
+    padding: 5px;
+    font-size: 11px;
+    border-bottom: #EEEEEE 1px solid;
+    vertical-align: top;
+}
+
+table.table-summary-list tbody tr td a{
+    color: #0099CC;
+}
 
 div.location{
     float: right;
