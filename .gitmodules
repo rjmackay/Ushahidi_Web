@@ -1,0 +1,21 @@
+[submodule "plugins/timespan"]
+	path = plugins/timespan
+	url = git://github.com/ccnz/ushahidi-plugins-timespan.git
+[submodule "plugins/smsautomate"]
+	path = plugins/smsautomate
+	url = git://github.com/ccnz/ushahidi-plugins-smsautomate.git
+[submodule "plugins/kml"]
+	path = plugins/kml
+	url = git@github.com:ccnz/ushahidi-plugins-kml.git
+[submodule "plugins/fullscreenmap"]
+	path = plugins/fullscreenmap
+	url = git@github.com:ccnz/ushahidi-plugins-fullscreenmap.git
+[submodule "plugins/findlocation"]
+	path = plugins/findlocation
+	url = git@github.com:ccnz/ushahidi-plugins-findlocation.git
+[submodule "plugins/actionable"]
+	path = plugins/actionable
+	url = git@github.com:ccnz/ushahidi-plugins-actionable.git
+[submodule "plugins/mobile"]
+	path = plugins/mobile
+	url = git@github.com:ccnz/ushahidi-plugins-mobile.git
