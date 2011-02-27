@@ -9,8 +9,11 @@
 		float: none; /* shrinkwrap text */
 		display: block; /* shrinkwrap text */
 		min-height: 17px; /* show all of icon */
-		background-image: none; /* quick fix for incorrect filter setting (stretch not crop) */
+		background-image: url(/themes/ccnz/images/submit-incident.gif); /* png fallback */
 	}
+	#page div.submit-incident a:hover {
+		background-position: 10px 1px; /* disable hover state */
+	}	
 	
 /* (header) search form */
 
@@ -18,9 +21,11 @@
 		 margin-right: 10px; /* reduce space between text input and submit button */
 	}
 	#page div.search-form input.searchbtn {
+			position: relative; /* render outdents */
 			text-indent: 0; /* else hides button */    
 			font-size: 0; /* hide text */
 			line-height: 7px; /* hide text */
+			background-image: url(/themes/ccnz/images/search-button-797979.gif); /* png fallback */
 			margin-top: 1px; /* vert align with search field */
 	}		
 	
