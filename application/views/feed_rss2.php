@@ -14,9 +14,9 @@
 		foreach ($items as $item)
 		{?>
 		<item>
-			<title><?php echo $item['title']; ?></title>
+			<title><?php echo htmlspecialchars($item['title']); ?></title>
 			<link><?php echo $item['link']; ?></link>
-			<description><![CDATA[<?php echo $item['description']; ?>]]></description>
+			<description><![CDATA[<?php echo htmlspecialchars($item['description'], ENT_COMPAT, 'UTF-8'); ?>]]></description>
 			<pubDate><?php echo gmdate("D, d M Y H:i:s T", strtotime($item['date'])); ?></pubDate>
 			<guid><?php if(isset($item['guid'])) echo $item['guid']; else echo $item['link'] ?></guid>
 <?php if(isset($item['point'])) echo "\t\t\t<georss:point>".$item['point'][0]." ".$item['point'][1]."</georss:point>\n"; ?>
