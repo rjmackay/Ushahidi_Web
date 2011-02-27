@@ -9,7 +9,7 @@
     <?php } ?>
 
     <div id="threesteps">
-        <div>
+        <div class="step">
             <h2>Where are you?</h2>
             <p>Locating where you are on the map helps identify what reports are most relevant to you.</p>
             <form id="location_search" action="">
@@ -18,7 +18,7 @@
             </form>
         </div>
 
-        <div>
+        <div class="step">
             <h2>Submit a report</h2>
             <p>Submitting a report helps others identify hazards/solutions in your area.</p>
             <!-- submit incident -->
@@ -26,7 +26,7 @@
             <!-- / submit incident -->
         </div>
 
-        <div>
+        <div class="step">
 						<h2>Ask for help</h2>
 						<p>Ask for assistance from the Student Volunteer Army. </p>
 						<div class="submit-incident"><a href="http://eq.org.nz/volunteer-army/">Ask for help</a></div>
