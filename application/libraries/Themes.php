@@ -61,15 +61,47 @@ class Themes_Core {
 	 */
 	private function _header_css()
 	{
-		$core_css = "";
+		$core_css = "";	
+		
+		// CCNZ: this outputs all css files in the theme's 'css' folder (register_themes.php line 78)
+		// CCNZ: added conditional comments around MSIE stylesheets
+		// CCNZ: note that stylesheets are output in alphabetical order, so #page workaround is reqd in MSIE files		
+	
 		foreach (Kohana::config("settings.site_style_css") as $theme_css)
 		{
-			$core_css .= html::stylesheet($theme_css,"",true);
-		}
+			if (stripos($theme_css, 'ie6hacks') !== false) 
+			{
+				$core_css .= "<!--[if IE 6]>".html::stylesheet($theme_css,"",true)."<![endif]-->";
+  		}
+			else if (stripos($theme_css, 'ie7hacks') !== false) 
+			{
+				$core_css .= "<!--[if IE 7]>".html::stylesheet($theme_css,"",true)."<![endif]-->";
+  		}			
+			else if (stripos($theme_css, 'ie8hacks') !== false) 
+			{
+				$core_css .= "<!--[if IE 8]>".html::stylesheet($theme_css,"",true)."<![endif]-->";
+  		}			
+			else if (stripos($theme_css, 'ie9hacks') !== false) 
+			{
+				$core_css .= "<!--[if IE 9]>".html::stylesheet($theme_css,"",true)."<![endif]-->";
+  		}						
+			else
+			{
+				$core_css .= html::stylesheet($theme_css,"",true);
+			}
+		}				
+		
 		$core_css .= html::stylesheet($this->css_url."media/css/jquery-ui-themeroller", "", true);
+		
+		// CCNZ: note that these are generic hacks, any version specific hacks should go into one the IE stylesheets linked above
 		$core_css .= "<!--[if lte IE 7]>".html::stylesheet($this->css_url."media/css/iehacks","",true)."<![endif]-->";
-		$core_css .= "<!--[if IE 7]>".html::stylesheet($this->css_url."media/css/ie7hacks","",true)."<![endif]-->";
-		$core_css .= "<!--[if IE 6]>".html::stylesheet($this->css_url."media/css/ie6hacks","",true)."<![endif]-->";
+		
+		// CCNZ: don't include these default MSIE hacks if using the ccnz theme
+    if ( Kohana::config("settings.site_style") != "ccnz" ) 
+		{
+			$core_css .= "<!--[if IE 7]>".html::stylesheet($this->css_url."media/css/ie7hacks","",true)."<![endif]-->";
+			$core_css .= "<!--[if IE 6]>".html::stylesheet($this->css_url."media/css/ie6hacks","",true)."<![endif]-->";
+		}
 			
 		if ($this->map_enabled)
 		{
@@ -91,6 +123,7 @@ class Themes_Core {
 			$core_css .= html::stylesheet($this->css_url."media/css/videoslider","",true);
 		}
 		
+		// CCNZ: this conditional returns false, even though a site_style IS set ('ccnz'), so CSS is never output
 		if ($this->site_style AND $this->site_style != "default")
 		{
 			$core_css .= html::stylesheet($this->css_url."themes/".$site_style."/style.css");

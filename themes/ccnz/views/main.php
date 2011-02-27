@@ -11,7 +11,7 @@
     <!-- For 'share' on Facebook links -->
     <p class="hidden">The community-driven situation map of the Christchurch Earthquake</p>
     <div id="threesteps">
-        <div>
+        <div class="step">
             <h2>Where are you?</h2>
             <p>Locating where you are on the map helps identify what reports are most relevant to you.</p>
             <form id="location_search" action="">
@@ -20,7 +20,7 @@
             </form>
         </div>
 
-        <div>
+        <div class="step">
             <h2>Submit a report</h2>
             <p>Submitting a report helps others identify hazards/solutions in your area.</p>
             <!-- submit incident -->
@@ -28,11 +28,11 @@
             <!-- / submit incident -->
         </div>
 
-        <div>
-            <h2>Request help</h2>
-            <p>Clicking on this button requests help from the Student Volunteer Army.</p>
-            <div class="submit-incident"><a href="<?php echo url::site() . 'volunteer-army'; ?>">Request help</a></div>
-        </div>
+        <div class="step">
+						<h2>Ask for help</h2>
+						<p>Ask for assistance from the Student Volunteer Army. </p>
+						<div class="submit-incident"><a href="http://eq.org.nz/volunteer-army/">Ask for help</a></div>
+				</div>
 
         <script type="text/javascript">
             function zoomMapToSearch() {
