@@ -10,7 +10,7 @@
 
     <div id="threesteps">
         <div>
-            <h2>Step 1: Where are you?</h2>
+            <h2>Where are you?</h2>
             <p>Locating where you are on the map helps identify what reports are most relevant to you.</p>
             <form id="location_search" action="">
                 <input type="text" value="I am in..." onfocus="$(this).val() == 'I am in...' ? $(this).val('') : true;" onblur="$(this).val() == '' ? $(this).val('I am in...') : true;"/>
@@ -19,7 +19,7 @@
         </div>
 
         <div>
-            <h2>Step 2: Submit a report</h2>
+            <h2>Submit a report</h2>
             <p>Submitting a report helps others identify hazards/solutions in your area.</p>
             <!-- submit incident -->
             <div class="submit-incident"><a href="<?php echo url::site() . 'reports/submit/'; ?>">Submit a Report</a></div>

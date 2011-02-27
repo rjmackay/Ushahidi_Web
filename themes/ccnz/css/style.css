@@ -2209,7 +2209,8 @@ span.required {
 .left-cap		{ -webkit-border-top-left-radius: 0; -webkit-border-bottom-left-radius: 0; -moz-border-radius-topleft: 0; -moz-border-radius-bottomleft: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 
 #threesteps {
-    height:211px; margin-bottom:15px;
+    height:160px;
+    margin-bottom:15px;
 }
 
 #threesteps > div {
@@ -2217,7 +2218,7 @@ span.required {
     width: 248px;
     border: 1px solid #5f5f5f;
     margin-left: 8px;
-    height: 140px;
+    height: 120px;
     float: left;
     padding: 20px;
     color: #fff;
