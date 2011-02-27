@@ -590,7 +590,6 @@ ul.category-filters li a{
 
 ul.category-filters li a:hover, ul.category-filters li a.active {
     color: #fff;
-    font-weight: bold;
     background-color: #96b3cf;
 }
 
@@ -650,6 +649,7 @@ div.howto-report .submit-incident a{
 }
 
 div.social-buttons {
+    display: none; /* Temporary hack to hide social networking buttons */
     float:left;
     clear: left;
     padding: 15px;
@@ -2268,14 +2268,13 @@ div.graph-holder, div.slider-holder {
     color: #111;
 }
 
-#threesteps form input:focus, #threesteps form input:hover{
+#threesteps form input:focus, #threesteps form input:hover {
     background: #fff;
     border: 1px solid #ee1d19;
     -webkit-box-shadow: 0 0 10px #ee1d19;
     -moz-box-shadow: 0 0 10px #ee1d19;
     box-shadow: 0 0 10px #ee1d19;
 }
-
 
 #threesteps form a{
     margin:0;
@@ -2290,4 +2289,7 @@ div.graph-holder, div.slider-holder {
 
 #threesteps form a:hover {
     background-color:#555;
+}
+.hidden {
+  display: none;
 }
