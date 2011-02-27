@@ -649,6 +649,7 @@ div.howto-report .submit-incident a{
 }
 
 div.social-buttons {
+    display: none; /* Temporary hack to hide social networking buttons */
     float:left;
     clear: left;
     padding: 15px;
