@@ -329,6 +329,8 @@ class Json_Controller extends Template_Controller
 			$locations[$loc->id]['lon'] = $loc->longitude;
 		}
 
+		$cache_key = serialize($_GET) . ':::';
+
 		// Create markers by marrying the locations and incidents
 		$markers = array();
 		foreach ($incidents as $id => $incident)
@@ -341,7 +343,18 @@ class Json_Controller extends Template_Controller
 					'latitude' => $locations[$incident['location_id']]['lat'],
 					'longitude' => $locations[$incident['location_id']]['lon']
 					);
+				$cache_key .= $id . ',';
 			}
+		}
+
+		// Now that we know exactly what incidents are being shown, we can
+		// build a sane cache key.
+		$cache_key = md5($cache_key);
+		$cache_file = '/tmp/mapcache.' . $cache_key;
+		if (is_readable($cache_file)) {
+			header('Content-type: application/json; charset=utf-8');
+			$this->template->json = file_get_contents($cache_file);
+			return;
 		}
 
 		$clusters = array();	// Clustered
@@ -447,6 +460,7 @@ class Json_Controller extends Template_Controller
 		 header('Content-type: application/json; charset=utf-8');
 		$this->template->json = $json;
 
+		file_put_contents($cache_file, $json);
 	}
 
 	/**
