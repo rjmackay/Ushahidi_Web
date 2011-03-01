@@ -316,12 +316,11 @@ class Json_Controller extends Template_Controller
 
 		// Get locations
 
-		if (count($location_ids) > 0)
-		{
-			$locations_result = ORM::factory('location')->in('id',implode(',',$location_ids))->find_all();
-		}else{
-			$locations_result = ORM::factory('location')->find_all();
+		$sql = 'SELECT * FROM '.$this->table_prefix.'location';
+		if (count($location_ids)) {
+		    $sql .= ' WHERE id IN ('.implode(',', $location_ids).')';
 		}
+		$locations_result = $db->query($sql);
 
 		$locations = array();
 		foreach ($locations_result as $loc)
