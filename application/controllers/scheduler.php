@@ -24,6 +24,10 @@ class Scheduler_Controller extends Controller
     
     public function index()
     {
+        if (function_exists('newrelic_background_job')) {
+            newrelic_background_job(true);
+        }
+
         // Debug
         $debug = "";
         
