@@ -24,6 +24,13 @@
   <link href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" rel="stylesheet">	
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="cause"/>
+  <meta property="og:image" content="/themes/ccnz/images/redandblack400x400.png"/>
+  <meta property="og:site_name" content="Christchurch Recovery Map"/>
+  <meta property="fb:admins" content="197359766958104"/>
+  <meta property="og:locality" content="Christchurch"/>
+  <meta property="og:region" content="Canterbury"/>
+  <meta property="og:country-name" content="New Zealand"/>
 
 </head>
 
