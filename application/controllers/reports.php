@@ -200,8 +200,8 @@ class Reports_Controller extends Main_Controller {
 				->where('parent_id', '0')
 				->where('id !=', $_GET['c'])
 				->find_all();
-			// not sure if I need to escape $_GET[c]
-			// Build localize categories array? or do it in get category tree above
+			// not sure if I need to escape $_GET['c']
+
 			
 			$localized_categories = array();
 			foreach ($categories AS $category)
