@@ -57,9 +57,14 @@ class Reports_Controller extends Main_Controller {
 			$query = 'SELECT ic.incident_id AS incident_id FROM '.$this->table_prefix.'incident_category AS ic INNER JOIN '.$this->table_prefix.'category AS c ON (ic.category_id = c.id)  WHERE c.id='.$category_id.' OR c.parent_id='.$category_id.';';
 			$query = $db->query($query);
 
-			foreach ( $query as $items )
-			{
-				$allowed_ids[] = $items->incident_id;
+			if (count($query) != 0) {
+				foreach ( $query as $items )
+				{
+					$allowed_ids[] = $items->incident_id;
+				}
+			} else {
+				// Hack to return empty result set if category is empty.
+				$allowed_ids[] = 0;
 			}
 		}
 
@@ -188,6 +193,45 @@ class Reports_Controller extends Main_Controller {
 		else
 		{
 			$this->template->content->pagination_stats = '('.$pagination->total_items.' report'.$plural.')';
+			
+			// Get categories for category listing
+			$categories = ORM::factory('category')
+				->where('category_visible', '1')
+				->where('parent_id', '0')
+				->where('id !=', $_GET['c'])
+				->find_all();
+			// not sure if I need to escape $_GET[c]
+			// Build localize categories array? or do it in get category tree above
+			
+			$localized_categories = array();
+			foreach ($categories AS $category)
+			{
+				$ct = (string)$category->category_title;
+				if( ! isset($localized_categories[$ct]))
+				{
+					$translated_title = Category_Lang_Model::category_title($category->id,$l);
+					$localized_categories[$ct] = $category->category_title;
+					if($translated_title)
+					{
+						$localized_categories[$ct] = $translated_title;
+					}
+				}
+				foreach ($category->children as $child) {
+					$ct = (string)$child->category_title;
+					if( ! isset($localized_categories[$ct]))
+					{
+						$translated_title = Category_Lang_Model::category_title($child->id,$l);
+						$localized_categories[$ct] = $child->category_title;
+						if($translated_title)
+						{
+							$localized_categories[$ct] = $translated_title;
+						}
+					}
+				}
+			}
+			
+			$this->template->content->categories = $categories;
+			$this->template->content->localized_categories = $localized_categories;
 		}
 
 		// Category Title, if Category ID available

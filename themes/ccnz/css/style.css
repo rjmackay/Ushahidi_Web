@@ -897,6 +897,38 @@ div.report-media-box-content {
 div.report-media-box {
 }
 
+
+ul.report-category-index{
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+ul.report-category-index li{
+    padding: 0;
+    list-style-type:none;
+}
+
+ul.report-category-index li a{
+    display: block;
+    padding: 4px 0px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    line-height: 16px;
+    overflow: hidden;
+}
+
+ul.report-category-index li a:hover, ul.report-category-index li a.active {
+    text-decoration: underline;
+}
+
+ul.report-category-index img{
+    width: 16px;
+    height: 16px;
+}
+
+
 /* Map Toggles */
 ul.map-toggles { overflow:auto; }
 ul.map-toggles li { display:none; float:right; list-style-type: none; }
