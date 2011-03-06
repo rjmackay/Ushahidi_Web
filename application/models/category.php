@@ -16,7 +16,7 @@
 
 class Category_Model extends ORM_Tree
 {	
-	protected $has_many = array('incident' => 'incident_category', 'category_lang');
+	protected $has_many = array('incident' => 'incident_category', 'category_lang', 'layer' => 'layer_category');
 	
 	// Database table name
 	protected $table_name = 'category';

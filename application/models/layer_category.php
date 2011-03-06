@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Model for Layers
+* Model for Categories for each Incident
  *
  * PHP version 5
  * LICENSE: This source file is subject to LGPL license 
@@ -9,15 +9,15 @@
  * http://www.gnu.org/copyleft/lesser.html
  * @author     Ushahidi Team <team@ushahidi.com> 
  * @package    Ushahidi - http://source.ushahididev.com
- * @module     Layers Model  
+ * @module     Incident Category Model  
  * @copyright  Ushahidi - http://www.ushahidi.com
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 
-class Layer_Model extends ORM
+class Layer_Category_Model extends ORM
 {
-	protected $has_many = array('category' => 'layer_category');
-  
+	protected $belongs_to = array('layer', 'category');
+	
 	// Database table name
-	protected $table_name = 'layer';
+	protected $table_name = 'layer_category';
 }

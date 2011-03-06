@@ -38,3 +38,13 @@ function layerAction ( action, confirmAction, id )
 		$("#layerListing").submit();
 	}
 }
+
+$(document).ready(function() {
+	// Category treeview
+		$("#category-column-1,#category-column-2").treeview({
+		  persist: "location",
+		  collapsed: true,
+		  unique: false
+		});
+});
+

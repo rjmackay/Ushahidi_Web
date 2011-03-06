@@ -183,6 +183,22 @@
 						</div>
 						<div style="clear:both"></div>
 						<div class="tab_form_item">
+							<h4><?php echo Kohana::lang('ui_main.categories');?> 
+							<span><?php echo Kohana::lang('ui_main.select_multiple');?>.</span></h4>
+							<!--category_add form goes here-->
+								<div class="layer_category">
+										<?php
+										$selected_categories = array();
+										if (!empty($form['layer_category']) && is_array($form['layer_category'])) {
+											$selected_categories = $form['layer_category'];
+										}
+										$columns = 2;
+										echo category::tree($categories, $selected_categories, 'layer_category', $columns);
+										?>
+								</div>
+						</div>
+						<div style="clear:both"></div>
+						<div class="tab_form_item">
 							<strong><?php echo Kohana::lang('ui_main.kml_kmz_upload');?>:</strong><br />
 							<?php print form::upload('layer_file', '', ''); ?>
 						</div>

@@ -778,7 +778,8 @@ class Manage_Controller extends Admin_Controller
 			'layer_name'	  => '',
 			'layer_url'	   => '',
 			'layer_file'  => '',
-			'layer_color'  => ''
+			'layer_color'  => '',
+			'layer_category' => array(),
 		);
 
 		// copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -787,6 +788,10 @@ class Manage_Controller extends Admin_Controller
 		$form_saved = FALSE;
 		$form_action = "";
 		$parents_array = array();
+
+		// Create Categories
+		$this->template->content->categories = $this->_get_categories();
+		$this->template->content->new_categories_form = $this->_new_categories_form_arr();
 
 		// check, has the form been submitted, if so, setup validation
 		if ($_POST)
@@ -830,6 +835,11 @@ class Manage_Controller extends Admin_Controller
 					if ( ! empty($layer_file)
 					AND file_exists(Kohana::config('upload.directory', TRUE).$layer_file))
 						unlink(Kohana::config('upload.directory', TRUE) . $layer_file);
+
+					if ($layer->loaded==true)
+					{
+						ORM::factory('layer_category')->where('layer_id',$layer->id)->delete_all();
+					}
 
 					$layer->delete( $layer_id );
 					$form_saved = TRUE;
@@ -908,6 +918,18 @@ class Manage_Controller extends Admin_Controller
 						$layer->layer_file = $file_name.".".$file_ext;
 						$layer->save();
 					}
+					
+					
+				
+					// Save categories
+					ORM::factory('Layer_Category')->where('layer_id',$layer->id)->delete_all();		// Delete Previous Entries
+					foreach($post->layer_category as $item)
+					{
+						$layer_category = new Layer_Category_Model();
+						$layer_category->layer_id = $layer->id;
+						$layer_category->category_id = $item;
+						$layer_category->save();
+					}
 
 					$form_saved = TRUE;
 					$form_action = strtoupper(Kohana::lang('ui_admin.added_edited'));
@@ -948,6 +970,7 @@ class Manage_Controller extends Admin_Controller
 
 		// Javascript Header
 		$this->template->colorpicker_enabled = TRUE;
+		$this->template->treeview_enabled = TRUE;
 		$this->template->js = new View('admin/layers_js');
 	}
 
@@ -1194,6 +1217,28 @@ class Manage_Controller extends Admin_Controller
 				$feed->save();
 			}
 		}
+	}
+
+	private function _get_categories()
+	{
+		$categories = ORM::factory('category')
+			//->where('category_visible', '1')
+			->where('parent_id', '0')
+			->orderby('category_title', 'ASC')
+			->find_all();
+
+		return $categories;
+	}
+
+	// Dynamic categories form fields
+	private function _new_categories_form_arr()
+	{
+		return array
+		(
+			'category_name' => '',
+			'category_description' => '',
+			'category_color' => '',
+		);
 	}
 
 	/**
