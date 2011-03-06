@@ -27,7 +27,7 @@
   <meta property="og:type" content="cause"/>
   <meta property="og:image" content="http://eq.org.nz/themes/ccnz/images/redandblack400x400.png"/>
   <meta property="og:site_name" content="Christchurch Recovery Map"/>
-  <meta property="fb:admins" content="197359766958104"/>
+  <meta property="fb:page_id" content="197359766958104"/>
   <meta property="og:locality" content="Christchurch"/>
   <meta property="og:region" content="Canterbury"/>
   <meta property="og:country-name" content="New Zealand"/>
