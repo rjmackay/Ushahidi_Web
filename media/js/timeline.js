@@ -412,7 +412,7 @@
 				fillOpacity: "${opacity}",
 				strokeColor: "${strokeColor}",
 				strokeWidth: "${strokeWidth}",
-				strokeOpacity: "0.3",
+				strokeOpacity: "0.8",
 				label:"${clusterCount}",
 				//labelAlign: "${labelalign}", // IE doesn't like this for some reason
 				fontWeight: "${fontweight}",
