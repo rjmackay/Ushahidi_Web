@@ -6,4 +6,5 @@ application/logs/*
 application/cache/*
 media/uploads/*
 application/config/database.php
+application/config/config.php
 tests/phpunit/phpunit.xml
