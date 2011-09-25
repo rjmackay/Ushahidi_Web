@@ -57,12 +57,11 @@
 			links: <a href="http://www.washington.edu/computing/unix/permissions.html" target="_blank">
 			Unix/Linux</a>, <a href="http://support.microsoft.com/kb/308419\" target="_blank">Windows.</a></p>
             <ul>
-                <li>application/config/config.php</li>
                 <li>application/config</li>
                 <li>application/cache</li>
                 <li>application/logs</li>
                 <li>media/uploads</li>
-                <li>.htaccess</li>
+                <li>/ (ushahidi root)</li>
             </ul>
 
 		<p>Ushahidi will run in almost any environment with minimal configuration. The following PHP extensions are required.</p>

@@ -67,16 +67,18 @@ class Install
 		}
 		
 		// load .htaccess file and work with it.
-		if(!file_exists('../.htaccess')){
+		if(!file_exists('../.htaccess.template')){
 			$form->set_error("load_htaccess_file","<strong>Oops!</strong> I need a file called " .
-					"<code>.htaccess</code> to work
+					"<code>.htaccess.template</code> to work
 			with. Please make sure this file is in the root directory of your Ushahidi files.");
 		}
 		
-		if( !is_writable('../.htaccess')) {
+		if( !is_writable('../')) {
 			$form->set_error('htaccess_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to the <code>.htaccess</code> file. " .
-			"Please change the permissions of that file to allow write access (777).  " .
+			"<strong>Oops!</strong> Ushahidi is trying to create and/or edit a file called \"" .
+			".htaccess\" and is unable to do so at the moment. This is probably due to the fact " .
+			"that your permissions aren't set up properly for the <code>/ (ushahidi root)</code> folder. " .
+			"Please change the permissions of that folder to allow write access (777).	" .
 			"<p>Here are instructions for changing file permissions:</p>" .
 			"<ul>" .
 			"	<li><a href=\"http://www.washington.edu/computing/unix/permissions.html\">Unix/Linux</a></li>" .
@@ -95,25 +97,6 @@ class Install
 			"	<li><a href=\"http://www.washington.edu/computing/unix/permissions.html\">Unix/Linux</a></li>" .
 			"	<li><a href=\"http://support.microsoft.com/kb/308419\">Windows</a></li>" .
 			"</ul>");
-		}
-		
-		if( !is_writable('../application/config/config.php')) {
-			$form->set_error('config_perm',
-			"<strong>Oops!</strong> Ushahidi is trying to edit a file called \"" .
-			"config.php\" and is unable to do so at the moment. This is probably due to the fact " .
-			"that your permissions aren't set up properly for the <code>config.php</code> file. " .
-			"Please change the permissions of that folder to allow write access (777).	" .
-			"<p>Here are instructions for changing file permissions:</p>" .
-			"<ul>" .
-			"	<li><a href=\"http://www.washington.edu/computing/unix/permissions.html\">Unix/Linux</a></li>" .
-			"	<li><a href=\"http://support.microsoft.com/kb/308419\">Windows</a></li>" .
-			"</ul>"
-			/* CB: Commenting this out... I think it's better if we just have them change the permissions of the specific
-				files and folders rather than all the files
-			"Alternatively, you could make the webserver own all the ushahidi files. On unix usually, you" .
-			"issue this command <code>chown -R www-data:ww-data</code>");
-			*/
-			);
 		}
 
 		if(!$this->_make_connection($username, $password, $host)){
@@ -397,7 +380,7 @@ class Install
 	 */
 	private function _add_htaccess_entry($base_path) {
 		
-		$htaccess_file = @file('../.htaccess');
+		$htaccess_file = @file('../.htaccess.template');
 		$handle = @fopen('../.htaccess','w');
 
 		if( is_array( $htaccess_file ) ) {
@@ -627,22 +610,16 @@ class Install
 		global $form;
 		
 		
-		if( !is_writable('../.htaccess')) {
+		if( !is_writable('../')) {
 			$form->set_error('htaccess_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to your <code>.htaccess</code> file. " .
-			"Please change the permissions of that file to allow write access (777).  ");
+			"<strong>Oops!</strong> Ushahidi needs the <code>/ (ushahidi root)</code> folder to be writable. ".
+			"Please change the permissions of that folder to allow write access (777).	");
 		}
 
 		if( !is_writable('../application/config')) {
 			$form->set_error('config_folder_perm',
 			"<strong>Oops!</strong> Ushahidi needs the <code>application/config</code> folder to be writable. ".
 			"Please change the permissions of that folder to allow write access (777).	");
-		}
-		
-		if( !is_writable('../application/config/config.php')) {
-			$form->set_error('config_file_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to <code>application/config/config.php</code> file. " .
-			"Please change the permissions of that file to allow write access (777).  ");
 		}
 		
 		if( !is_writable('../application/cache')) {
