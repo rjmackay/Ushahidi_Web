@@ -59,11 +59,12 @@ class Json_Controller extends Template_Controller
 
 		$media_type = (isset($_GET['m']) AND intval($_GET['m']) > 0)? intval($_GET['m']) : 0;
 		
-		// Get the incident and category id
+		// Get the incident, category and multi-color id
 		$category_id = (isset($_GET['c']) AND intval($_GET['c']) > 0)? intval($_GET['c']) : 0;
 		$incident_id = (isset($_GET['i']) AND intval($_GET['i']) > 0)? intval($_GET['i']) : 0;
+		$multi_color = (isset($_GET['multi'])) ? intval($_GET['multi']) : 0;
 		
-		// Get the category colour
+        // Get the category colour
 		if (Category_Model::is_valid_category($category_id))
 		{
 			$color = ORM::factory('category', $category_id)->category_color;
@@ -95,6 +96,29 @@ class Json_Controller extends Template_Controller
 				}
 			}
 			
+		//Where the proper colors are found
+        //Check if All categories is selected
+        if ( $category_id == 0 && $multi_color == 1){
+        //Create new database
+           $db2 = new Database();
+           $sql_category = "SELECT category_id FROM ".$this->table_prefix."incident_category WHERE incident_id = $marker->incident_id";
+        //Retrieve the category_id list from the database
+           $category_query = $db2->query($sql_category);
+        //Hold the category_id as a string   
+            foreach ( $category_query as $item ){
+                $category_list = $item->category_id;
+                }
+
+            $sql_color = "SELECT category_color FROM ".$this->table_prefix."category WHERE id = $category_list";
+        //Retrieve the category_color
+            $color_query = $db2->query($sql_color);
+        //Hold the hex color as a string to be passed
+            foreach ( $color_query as $item2 ){
+                $color = $item2->category_color;
+                }
+                  
+        }	
+
 			$json_item = "{";
 			$json_item .= "\"type\":\"Feature\",";
 			$json_item .= "\"properties\": {";

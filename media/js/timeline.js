@@ -745,7 +745,7 @@
 			// Build the URL for fetching the data
 			fetchUrl = (thisLayer && thisLayerType == 'layers')
 				? protocolUrl
-				: protocolUrl + '?z=' + myZoom + '&' + this.markerUrlParams(startDate, endDate).join('&');
+				: protocolUrl + '?multi=' + multiColor + '&z=' + myZoom + '&' + this.markerUrlParams(startDate, endDate).join('&');
 			
 			// Create the reports layer
 			markers = new OpenLayers.Layer.Vector(thisLayer, {

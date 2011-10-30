@@ -50,7 +50,8 @@
 		var selectedFeature;
 		var allGraphData = "";
 		var dailyGraphData = "";
-		var gMediaType = 0
+		var gMediaType = 0;
+        var multiColor = 0;
 		var timeout = 1500;
 		
 		var activeZoom = null;
@@ -893,7 +894,9 @@
 				var startTime = new Date(startTimestamp * 1000);
 				var endTime = new Date(endTimestamp * 1000);
 				gMediaType = parseFloat(this.id.replace('media_', '')) || 0;
+                var flipColor = parseInt(this.id.replace('multicolor_', '')) || 0;
 				currentCat = $("#currentCat").val();
+                multiColor = multiColor ^ flipColor;
 				
 				// Get Current Zoom
 				currZoom = map.getZoom();
