@@ -16,6 +16,15 @@
  */
 
 class Admin_Category_Api_Object extends Api_Object_Core {
+  
+    /**
+     * @var  Array  allowed actions for this API task
+     */
+    private static $allowed_actions = array();
+    /**
+     * @var  Array  public (non authenticated) actions for this API task
+     */
+    private static $public_actions = array();
     
     public function __construct($api_service) 
     {

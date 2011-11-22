@@ -310,7 +310,8 @@ final class Api_Service {
 
 		$task_library_found = FALSE;
 
-		// Check if handler has been set
+		// Check if handler has been set   
+		// Move $task_handler check into _get_task_handler
 		if (isset($task_handler))
 		{
 			// Check if the handler is an array
@@ -565,6 +566,15 @@ final class Api_Service {
 				return FALSE;
 			}
 		}
+		
+		// Modify this to check
+		// 1. is this task public?
+		
+		
+		// 2. is this action public?
+		
+		
+		// -> if no is the user logged in?
 
 		// STEP 2: Check if the IP has been banned
 		$banned_count = ORM::factory('api_banned')
