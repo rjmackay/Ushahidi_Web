@@ -50,7 +50,8 @@ class Themes_Core {
 	 */
 	public function header_block()
 	{
-		return $this->_header_css().
+		return Kohana::config("globalcode.head").
+			$this->_header_css().
 			$this->_header_feeds().
 			$this->_header_js();
 	}
@@ -119,12 +120,13 @@ class Themes_Core {
 			$core_js .= html::script($this->js_url."media/js/OpenLayers", true);
 			$core_js .= "<script type=\"text/javascript\">OpenLayers.ImgPath = '".$this->js_url."media/img/openlayers/"."';</script>";
 		}
-		
+
 		$core_js .= html::script($this->js_url."media/js/jquery", true);
 		//$core_js .= html::script($this->js_url."media/js/jquery.ui.min", true);
 		$core_js .= html::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js", true);
 		$core_js .= html::script($this->js_url."media/js/jquery.pngFix.pack", true);
-		
+		$core_js .= html::script($this->js_url."media/js/jquery.timeago", true);
+
 		if ($this->map_enabled)
 		{
 			$core_js .= $this->api_url;
@@ -183,6 +185,9 @@ function runScheduler(img){img.onload = null;img.src = '".url::site().'scheduler
 			".'$(document).ready(function(){$(document).pngFix();});'.$this->js.
                         "//-->
                         </script>";
+		
+		// Filter::header_js - Modify Header Javascript
+		Event::run('ushahidi_filter.header_js', $inline_js);
 		
 		return $core_js.$plugin_js.$inline_js;
 	}

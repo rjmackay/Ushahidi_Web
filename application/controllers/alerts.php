@@ -15,9 +15,6 @@
 
 class Alerts_Controller extends Main_Controller {
 	
-	const MOBILE_ALERT = 1;
-	const EMAIL_ALERT = 2;    
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -71,7 +68,8 @@ class Alerts_Controller extends Main_Controller {
 			'alert_lat' => '',
 			'alert_lon' => '',
 			'alert_radius' => '',
-			'alert_country' => ''
+			'alert_country' => '',
+			'alert_confirmed' => ''
 		);
 		
 		if ($this->user)
@@ -94,6 +92,8 @@ class Alerts_Controller extends Main_Controller {
 		
 		// Initialize Default Value for Hidden Field Country Name, just incase Reverse Geo coding yields no result
 		$form['alert_country'] = $countries[$default_country];
+
+		//Initialize default value for Alert confirmed hidden value
 		
 		$this->template->content->countries = $countries;
 	
@@ -102,27 +102,27 @@ class Alerts_Controller extends Main_Controller {
 		$errors = $form;
 		$form_error = FALSE;
 		$form_saved = FALSE;
-        
+       
 		// If there is a post and $_POST is not empty
 		if ($post = $this->input->post())
 		{
-			if ($this->_valid($post))
+			$alert_orm = new Alert_Model();
+			if ($alert_orm->validate($post))
 			{
-                // Yes! everything is valid
-                // Save alert and send out confirmation code
+				// Yes! everything is valid
+				// Save alert and send out confirmation code
 
 				if ( ! empty($post->alert_mobile))
 				{
-					alert::_send_mobile_alert($post);
+					alert::_send_mobile_alert($post, $alert_orm);
+					$this->session->set('alert_mobile', $post->alert_mobile);
 				}
 
 				if ( ! empty($post->alert_email))
 				{
-					alert::_send_email_alert($post);
+					alert::_send_email_alert($post, $alert_orm);
+					$this->session->set('alert_email', $post->alert_email);
 				}
-
-				$this->session->set('alert_mobile', $post->alert_mobile);
-				$this->session->set('alert_email', $post->alert_email);
 
 				url::redirect('alerts/confirm');                    
             }
@@ -317,37 +317,4 @@ class Alerts_Controller extends Main_Controller {
 		return $city_select;
 	}
 
-
-
-	private function _valid(array & $post)
-	{
-		// Create a new alert
-		$alert = ORM::factory('alert');         
-            
-		// Test to see if things passed the rule checks
-		if ( ! $alert->validate($post))
-		{
-			return false;
-		}
-
-		// Instantiate Validation
-		$valid = Validation::factory($_POST);
-
-		// Add some filters
-		$valid->pre_filter('trim', TRUE);
-		$valid->add_rules('alert_category.*', 'numeric');
-
-		if ( ! isset($_POST['alert_category']))
-		{
-			// That's OK.
-			$valid->alert_category = "";
-		}
-
-		if ($valid->validate())
-		{
-			return true;
-		}
-
-		return false;
-	}
 }
