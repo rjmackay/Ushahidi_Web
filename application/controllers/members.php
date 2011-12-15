@@ -51,13 +51,9 @@ class Members_Controller extends Template_Controller
 		$this->session = Session::instance();
 		$this->auth->auto_login();
 		
-		// User not logged in send to members/login
-		if ( ! $this->auth->logged_in('login') )
+		if ( ! $this->auth->logged_in('login') OR ! $this->auth->logged_in('member'))
 		{
-			url::redirect('members/login');
-		// or not a member try sending to admin
-		} elseif ( ! $this->auth->logged_in('member') ) {
-			url::redirect('admin');
+			url::redirect('login');
 		}
 
 		// Set Table Prefix
@@ -101,14 +97,6 @@ class Members_Controller extends Template_Controller
 	public function index()
 	{
 		url::redirect('members/dashboard');
-	}
-
-	public function log_out()
-	{
-		$auth = new Auth;
-		$auth->logout(TRUE);
-
-		url::redirect('members/login');
 	}
 
 } // End Admin
