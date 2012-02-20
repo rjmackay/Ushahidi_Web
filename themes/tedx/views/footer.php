@@ -1,10 +1,4 @@
-			</div>
-		</div>
-		<!-- / middle -->
 
-	</div>
-	<!-- / wrapper -->
-	
 	<!-- footer -->
 	<div id="footer" class="clearingfix">
  

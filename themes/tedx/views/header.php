@@ -36,8 +36,6 @@
 
 <?php echo $header_nav; ?>
 
-	<!-- wrapper -->
-	<div class="rapidxwpr floatholder">
 
 		<!-- header -->
 		<div id="header">
@@ -77,9 +75,6 @@
             // Action::header_item - Additional items to be added by plugins
 	        Event::run('ushahidi_action.header_item');
         ?>
-		<!-- middle -->
-		<div id="middle">
-			<div class="background layoutleft">
 
 				<!-- mainmenu -->
 				<?php /*<div id="mainmenu" class="clearingfix">
