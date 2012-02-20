@@ -28,6 +28,10 @@ $(function(){
 
 	<!-- middle -->
 	<div id="middle">
+
+		<?php
+		echo $div_timeline;
+		?>
 		<div class="background layoutleft">
 	
 			<!-- content -->

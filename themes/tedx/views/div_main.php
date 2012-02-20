@@ -220,7 +220,6 @@
 			<?php
 			// Map and Timeline Blocks
 			echo $div_map;
-			echo $div_timeline;
 			?>
 
 		</div>

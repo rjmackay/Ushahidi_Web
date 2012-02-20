@@ -34,7 +34,7 @@
 
 <body id="page" class="<?php echo $body_class; ?>" />
 
-<?php echo $header_nav; ?>
+<?php //echo $header_nav; ?>
 
 
 		<!-- header -->
