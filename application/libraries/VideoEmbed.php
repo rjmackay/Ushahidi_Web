@@ -136,9 +136,8 @@ class VideoEmbed
 	 * Generates the HTML for video image thumbnail
 	 *
 	 * @param string $raw URL of the video to be embedded
-	 * @param string $auto Autoplays the video as soon as its loaded
 	 */
-	public function thumb($raw, $auto)
+	public function thumb($raw)
 	{
 		// To hold the name of the video service
 		$service_name = "";
