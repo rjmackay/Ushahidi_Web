@@ -36,6 +36,8 @@
 
 <?php //echo $header_nav; ?>
 
+	<!-- wrapper -->
+	<div class="rapidxwpr floatholder">
 
 		<!-- header -->
 		<div id="header">

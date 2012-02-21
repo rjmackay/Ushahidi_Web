@@ -103,7 +103,9 @@ div.search-form input.searchbtn {
 }
 
 /* header */
-div#header { margin: 0 0 0 -480px; padding: 16px 36px 36px 36px; background: #fff; position: absolute; top: 0px; left: 50%; z-index: 10; width: 888px /*960-(36*2)*/; height: auto; }
+div#header { margin: 0 0 16px 0; padding: 16px 36px 36px 36px; background: #fff; height: auto; box-shadow: 0px 5px 20px 0px rgba(78,78,78,0.6); }
+
+body.page-main div#header { margin: 0 0 0 -480px; padding: 16px 36px 36px 36px; background: #fff; position: absolute; top: 0px; left: 50%; z-index: 10; width: 888px /*960-(36*2)*/; height: auto; }
 
 /* logo box */
 div#logo {
@@ -208,8 +210,8 @@ div.map { width:auto; height: 584px; border: 0; position:relative; }
 /*#mapStatus { width:auto; float:none; overflow:auto; border:1px solid #fff; }*/
 #mapStatus { display:none; }
 
-.olControlPanZoomBar { margin-top: 95px; }
-div.olControlLayerSwitcher { margin-top: 80px; }
+body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
+body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
 
 /* home page timeline */
 div.slider-holder { }
