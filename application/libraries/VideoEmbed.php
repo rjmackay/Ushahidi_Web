@@ -33,7 +33,8 @@ class VideoEmbed
 			"metacafe" => "http://www.metacafe.com/watch/", 
 			"lieveleak" => "http://www.liveleak.com/view?i=",
 			"dotsub" => "http://dotsub.com/media/",
-			"vimeo" => "http://vimeo.com/"
+			"vimeo" => "http://vimeo.com/",
+			"ted" => "http://www.ted.com/talks/view/id/"
 		);
 		
 		// Get the video URL
@@ -120,6 +121,75 @@ class VideoEmbed
 		{
 			echo "<iframe src=\"http://player.vimeo.com/video/$code\" width=\"100%\" height=\"300\" frameborder=\"0\">"
 				. "</iframe>";
+		}
+		elseif ($service_name == "ted")
+		{
+			$embed = file_get_contents("http://www.ted.com/talks/embed/id/$code");
+			echo "$embed";
+		}
+		
+		// Free memory - though this is done implicitly by the PHP interpreter
+		unset($raw, $code, $service_name);
+	}
+	
+	/**
+	 * Generates the HTML for video image thumbnail
+	 *
+	 * @param string $raw URL of the video to be embedded
+	 * @param string $auto Autoplays the video as soon as its loaded
+	 */
+	public function thumb($raw, $auto)
+	{
+		// To hold the name of the video service
+		$service_name = "";
+		
+		// Trim whitespaces from the raw data
+		$raw = trim($raw);
+		
+		// Array of the supportted video services
+		$services = array(
+			"youtube" => "http://www.youtube.com/watch?v=", 
+			"google" => "http://video.google.com/videoplay?docid=-",
+			"revver" => "http://one.revver.com/watch/", 
+			"metacafe" => "http://www.metacafe.com/watch/", 
+			"lieveleak" => "http://www.liveleak.com/view?i=",
+			"dotsub" => "http://dotsub.com/media/",
+			"vimeo" => "http://vimeo.com/",
+			"ted" => "http://www.ted.com/talks/view/id/"
+		);
+		
+		// Get the video URL
+		$code = str_replace(array_values($services), "", $raw);
+		
+		// Determine the video service to use
+		foreach ($services as $key => $value)
+		{
+			// Extract the domain name of the service and check if it exists in the provided video URL
+			preg_match('#^((https|http)://)?([^/]+)#i', $value, $matches);
+			if (count($matches) > 0 AND strpos($raw, $matches[3], 1))
+			{
+				$service_name = $key;
+			}
+		}
+		
+		// Check for valid hostnames
+		if ( ! array_key_exists($service_name, $services))
+		{
+			echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
+			
+			// No point in proceeding past this point therefore return
+			return;
+		}
+		
+		// Print the HTML image code depending on the video service
+		if ($service_name == "ted")
+		{
+			$embed = file_get_contents("http://www.ted.com/talks/embed/id/$code");
+			preg_match('#&su=(http://images.ted.com/.*\.jpg)&#i', $embed, $matches);
+			if (count($matches) > 0)
+			{
+				echo "<img src='{$matches[1]}' />";
+			}
 		}
 		
 		// Free memory - though this is done implicitly by the PHP interpreter
