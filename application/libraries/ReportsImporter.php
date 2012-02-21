@@ -205,8 +205,36 @@ class ReportsImporter {
 					$incident_category->save();
 					$this->incident_categories_added[] = $incident_category->id;
 				} 
-			} 
-		} 
+			}
+		}
+		
+		// STEP 4: SAVE MEDIA
+		// a. News
+		if ( ! empty($row['NEWS']))
+		{
+			$news = new Media_Model();
+			$news->location_id = $incident->location_id;
+			$news->incident_id = $incident->id;
+			$news->media_type = 4;		// News
+			$news->media_link = $row['NEWS'];
+			$news->media_date = $incident->incident_date;
+			$news->save();
+			$this->media_added[] = $news->id;
+		}
+
+		// b. Video
+		if ( ! empty($row['VIDEO']))
+		{
+			$video = new Media_Model();
+			$video->location_id = $incident->location_id;
+			$video->incident_id = $incident->id;
+			$video->media_type = 2;		// Video
+			$video->media_link = $row['VIDEO'];
+			$video->media_date = $incident->incident_date;
+			$video->save();
+			$this->media_added[] = $video->id;
+		}
+		
 		return true;
 	}
 }
