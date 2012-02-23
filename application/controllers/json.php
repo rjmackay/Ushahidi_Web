@@ -211,7 +211,7 @@ class Json_Controller extends Template_Controller
 			$media = ORM::factory('media')->where('incident_id',$incident->incident_id)->where('media_type',2)->limit(1)->find();
 			if ($media->loaded)
 			{
-					$thumb = $this->video_embed->thumb($media->media_link);
+					$thumb = $media->media_thumb ? $media->media_thumb : $this->video_embed->thumb($media->media_link);
 			}
 			
 			$markers[] = array(
