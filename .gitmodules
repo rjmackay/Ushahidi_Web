@@ -1,0 +1,4 @@
+[submodule "timespan"]
+	path = plugins/timespan
+	url = git://github.com/jetherton/timespan.git
+
