@@ -177,8 +177,7 @@ class ReportsImporter {
 			// Add categories to incident
 			foreach ($categorynames as $categoryname)
 			{
-				// There seems to be an uppercase convention for categories... Don't know why
-				$categoryname = strtoupper(trim($categoryname)); 
+				$categoryname = trim($categoryname); 
 				// Empty categoryname not allowed
 				if ($categoryname != '')
 				{
