@@ -124,7 +124,23 @@ class VideoEmbed
 		}
 		elseif ($service_name == "ted")
 		{
-			$embed = file_get_contents("http://www.ted.com/talks/embed/id/$code");
+			$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
+			// if embed fails (ie. probably youtube video)
+			if($embed === FALSE) {
+				$page = @file_get_contents($raw);
+				// Try and find a youtube video
+				if ($page !== FALSE) {
+					preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
+					if(! empty($matches[1])) {
+						$this->embed("http://www.youtube.com/watch?v=".$matches[1], $auto);
+						return;
+					}
+					// If we didn't get a youtube match, just return the link
+					echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
+					return;
+				}
+			}
+			
 			echo "$embed";
 		}
 		
@@ -174,20 +190,42 @@ class VideoEmbed
 		// Check for valid hostnames
 		if ( ! array_key_exists($service_name, $services))
 		{
-			echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
-			
 			// No point in proceeding past this point therefore return
 			return;
 		}
 		
 		// Print the HTML image code depending on the video service
-		if ($service_name == "ted")
+		if ($service_name == "youtube")
 		{
-			$embed = file_get_contents("http://www.ted.com/talks/embed/id/$code");
-			preg_match('#&su=(http://images.ted.com/.*\.jpg)&#i', $embed, $matches);
-			if (count($matches) > 0)
+			$id = explode('&', $code);
+			$id = $id[0];
+			$json = @file_get_contents("http://gdata.youtube.com/feeds/api/videos/$id?v=2&alt=jsonc");
+			if ($json !== FALSE) {
+				$json = json_decode($json);
+				return $json->data->thumbnail->hqDefault;
+			}
+		}
+		elseif ($service_name == "ted")
+		{
+			$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
+			if($embed !== FALSE)
 			{
-				echo "<img src='{$matches[1]}' />";
+				preg_match('#&su=(http://images.ted.com/.*\.jpg)&#i', $embed, $matches);
+				if (count($matches) > 0)
+				{
+					return $matches[1];
+				}
+			}
+			else
+			{
+				$page = @file_get_contents($raw);
+				// Try and find a youtube video
+				if ($page !== FALSE) {unset($matches);
+					preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
+					if(! empty($matches[1])) {
+						return $this->thumb("http://www.youtube.com/watch?v=".$matches[1]);
+					}
+				}
 			}
 		}
 		
