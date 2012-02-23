@@ -21,8 +21,8 @@
 		<div class="report">
 			<a href="<?php echo url::site() . 'reports/view/' . $incident_id; ?>"> 
 			<div class="report-image"><img src="<?php echo $video_embed->thumb($incident_video); ?>" width="160" /></div>
-			<span  class="report-date"><?php echo $incident_date; ?></span>
-			<span  class="report-location"><?php echo $incident_location ?></span>
+			<div  class="report-date"><?php echo $incident_date; ?></div>
+			<div  class="report-location"><?php echo $incident_location ?></div>
 			<div class="report-title"><?php echo $incident_title ?></div>
 			</a>
 		</div>
