@@ -322,7 +322,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"category\":[0], ";
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
-			// $json_item .= "\"thumb\": \"".$single['thumb']."\", ";
+			$json_item .= "\"thumb\": \"".$single['thumb']."\", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . 1 . "\"";
 			$json_item .= "},";
