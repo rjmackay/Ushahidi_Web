@@ -9,7 +9,7 @@
  
 			<!-- footer credits -->
 			<div class="footer-credits">
-				<div class="ushahidi-credits">Powered by the &nbsp;<a href="http://www.ushahidi.com/"><img src="<?php echo url::file_loc('img'); ?>media/img/footer-logo.png" alt="Ushahidi" style="vertical-align:middle" /></a>&nbsp; Platform</div>
+				<div class="ushahidi-credits">Powered by the &nbsp;<a href="http://www.ushahidi.com/"><img src="<?php echo url::file_loc('img'); ?>themes/tedx/images/logo_ushahidi-primary_180x48.png" alt="Ushahidi" style="vertical-align:middle" /></a>&nbsp; Platform</div>
 			</div>
 			<!-- / footer credits -->
 		
@@ -30,12 +30,6 @@
       	<?php } ?>
 			</div>
 			<!-- / footer menu -->
-
-      
-			<h2 class="feedback_title" style="clear:both">
-				<a href="http://feedback.ushahidi.com/fillsurvey.php?sid=2"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
-			</h2>
-
  
 		</div>
 		<!-- / footer content -->

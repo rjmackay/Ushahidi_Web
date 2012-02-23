@@ -24,7 +24,7 @@
 		?></h1>
 
 		<p class="report-when-where">
-			<span class="r_date"><?php echo $incident_time.' '.$incident_date; ?> </span>
+			<span class="r_date"><?php echo $incident_date; ?> </span>
 			<span class="r_location"><?php echo $incident_location; ?></span>
 			<?php Event::run('ushahidi_action.report_meta_after_time', $incident_id); ?>
 		</p>
@@ -85,7 +85,7 @@
 	    // if there are videos, show those too
 	    if( count($incident_videos) > 0 )
 	    {
-	      echo '<div id="report-video"><ol>';
+	      echo '<div id="report-video"><ul>';
 
           // embed the video codes
           foreach( $incident_videos as $incident_video)
@@ -93,11 +93,8 @@
             echo '<li>';
             $videos_embed->embed($incident_video,'');
             echo '</li>';
-	    echo '<li>';
-            echo $videos_embed->thumb($incident_video);
-            echo '</li>';
           };
-  			echo '</ol></div>';
+  			echo '</ul></div>';
 
 	    }
 	    ?>
@@ -105,7 +102,6 @@
 
 		<!-- start report description -->
 		<div class="report-description-text">
-			<h5><?php echo Kohana::lang('ui_main.reports_description');?></h5>
 			<?php echo $incident_description; ?>
 			<br/>
 
@@ -156,17 +152,7 @@
 				}
 			}?>
 
-			<div class="credibility">
-				<table class="rating-table" cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td><?php echo Kohana::lang('ui_main.credibility');?>:</td>
-            <td><a href="javascript:rating('<?php echo $incident_id; ?>','add','original','oloader_<?php echo $incident_id; ?>')"><img id="oup_<?php echo $incident_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/up.png" alt="UP" title="UP" border="0" /></a></td>
-            <td><a href="javascript:rating('<?php echo $incident_id; ?>','subtract','original')"><img id="odown_<?php echo $incident_id; ?>" src="<?php echo url::file_loc('img'); ?>media/img/down.png" alt="DOWN" title="DOWN" border="0" /></a></td>
-            <td><a href="" class="rating_value" id="orating_<?php echo $incident_id; ?>"><?php echo $incident_rating; ?></a></td>
-            <td><a href="" id="oloader_<?php echo $incident_id; ?>" class="rating_loading" ></a></td>
-          </tr>
-        </table>
-			</div>
+			
 		</div>
 
 		<?php
@@ -208,7 +194,7 @@
 		?>
 
 		<div class="report-additional-reports">
-			<h4><?php echo Kohana::lang('ui_main.additional_reports');?></h4>
+			<h4>Nearest Talks</h4>
 			<?php foreach($incident_neighbors as $neighbor) { ?>
 			  <div class="rb_report">
   			  <h5><a href="<?php echo url::site(); ?>reports/view/<?php echo $neighbor->id; ?>"><?php echo $neighbor->incident_title; ?></a></h5>
