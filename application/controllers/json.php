@@ -263,6 +263,10 @@ class Json_Controller extends Template_Controller
 
 			// Number of Items in Cluster
 			$cluster_count = count($cluster);
+
+			// Get incident IDs
+			$cluster_incident_ids = array_map(create_function('$item','return $item["id"];'), $cluster);
+			$cluster_incident_ids = implode(',', $cluster_incident_ids);
 			
 			// Get the time filter
 			$time_filter = ( ! empty($start_date) AND ! empty($end_date))
@@ -281,7 +285,8 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"icon\": \"".$icon."\", ";
 			$json_item .= "\"thumb\": \"\", ";
 			$json_item .= "\"timestamp\": \"0\", ";
-			$json_item .= "\"count\": \"" . $cluster_count . "\"";
+			$json_item .= "\"count\": \"" . $cluster_count . "\", ";
+			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "], ";
 			$json_item .= "},";
 			$json_item .= "\"geometry\": {";
 			$json_item .= "\"type\":\"Point\", ";
