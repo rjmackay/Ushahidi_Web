@@ -11,6 +11,12 @@
  */
 class VideoEmbed 
 {
+	public function __construct()
+	{
+		// Load cache
+		$this->cache = new Cache;
+	}
+	
 	/**
 	 * Generates the HTML for embedding a video in a report
 	 *
@@ -124,24 +130,29 @@ class VideoEmbed
 		}
 		elseif ($service_name == "ted")
 		{
-			$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
-			// if embed fails (ie. probably youtube video)
-			if($embed === FALSE) {
-				$page = @file_get_contents($raw);
-				// Try and find a youtube video
-				if ($page !== FALSE) {
-					preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
-					if(! empty($matches[1])) {
-						$this->embed("http://www.youtube.com/watch?v=".$matches[1], $auto);
-						return;
-					}
-					// If we didn't get a youtube match, just return the link
-					echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
-					return;
-				}
-			}
+			$embed = $this->cache->get('VideoEmbed_embed_'.$raw);
 			
-			echo "$embed";
+			if ( ! $embed)
+			{
+				$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
+				// if embed fails (ie. probably youtube video)
+				if($embed === FALSE) {
+					$page = @file_get_contents($raw);
+					// Try and find a youtube video
+					if ($page !== FALSE) {
+						preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
+						if(! empty($matches[1])) {
+							$this->embed("http://www.youtube.com/watch?v=".$matches[1], $auto);
+							return;
+						}
+						// If we didn't get a youtube match, just return the link
+						$embed = '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
+					}
+				}
+				
+				$this->cache->set('VideoEmbed_embed_'.$raw,$embed,array('VideoEmbed'),3600);
+			}
+			echo $embed;
 		}
 		
 		// Free memory - though this is done implicitly by the PHP interpreter
@@ -197,36 +208,52 @@ class VideoEmbed
 		// Print the HTML image code depending on the video service
 		if ($service_name == "youtube")
 		{
-			$id = explode('&', $code);
-			$id = $id[0];
-			$json = @file_get_contents("http://gdata.youtube.com/feeds/api/videos/$id?v=2&alt=jsonc");
-			if ($json !== FALSE) {
-				$json = json_decode($json);
-				return $json->data->thumbnail->hqDefault;
+			$thumb = $this->cache->get('VideoEmbed_thumb_'.$raw);
+			
+			if ( ! $thumb)
+			{
+				$id = explode('&', $code);
+				$id = $id[0];
+				$json = @file_get_contents("http://gdata.youtube.com/feeds/api/videos/$id?v=2&alt=jsonc");
+				if ($json !== FALSE) {
+					$json = json_decode($json);
+					return $json->data->thumbnail->hqDefault;
+				}
+				$this->cache->set('VideoEmbed_thumb_'.$raw,$thumb,array('VideoEmbed'),3600);
 			}
+			
+			return $thumb;
 		}
 		elseif ($service_name == "ted")
 		{
-			$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
-			if($embed !== FALSE)
+			$thumb = $this->cache->get('VideoEmbed_thumb_'.$raw);
+
+			if ( ! $thumb)
 			{
-				preg_match('#&su=(http://images.ted.com/.*\.jpg)&#i', $embed, $matches);
-				if (count($matches) > 0)
+				$thumb = null;
+				$embed = @file_get_contents("http://www.ted.com/talks/embed/id/$code");
+				if($embed !== FALSE)
 				{
-					return $matches[1];
-				}
-			}
-			else
-			{
-				$page = @file_get_contents($raw);
-				// Try and find a youtube video
-				if ($page !== FALSE) {unset($matches);
-					preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
-					if(! empty($matches[1])) {
-						return $this->thumb("http://www.youtube.com/watch?v=".$matches[1]);
+					preg_match('#&su=(http://images.ted.com/.*\.jpg)&#i', $embed, $matches);
+					if (count($matches) > 0)
+					{
+						$thumb = $matches[1];
 					}
 				}
+				else
+				{
+					$page = @file_get_contents($raw);
+					// Try and find a youtube video
+					if ($page !== FALSE) {unset($matches);
+						preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
+						if(! empty($matches[1])) {
+							$thumb = $this->thumb("http://www.youtube.com/watch?v=".$matches[1]);
+						}
+					}
+				}
+				$this->cache->set('VideoEmbed_thumb_'.$raw,$thumb,array('VideoEmbed'),3600);
 			}
+			return $thumb;
 		}
 		
 		// Free memory - though this is done implicitly by the PHP interpreter
