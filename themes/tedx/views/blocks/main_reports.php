@@ -15,12 +15,16 @@
 			$incident_date = date('j M Y', strtotime($incident->incident_date));
 			$incident_location = $incident->location->location_name;
 			$incident_category = $incident->category->current()->category_title;
-			$incident_video = isset($incident_videos[$incident_id][0]) ? $incident_videos[$incident_id][0] : false;
+			$incident_video = false;
+			if (isset($incident_videos[$incident_id][0]))
+			{
+				$incident_video = $incident_videos[$incident_id][0]['thumb'] ? $incident_videos[$incident_id][0]['thumb'] : $video_embed->thumb($incident_videos[$incident_id][0]['link']);
+			}
 			if ($incident_video) {
 		?>
 		<div class="report">
 			<a href="<?php echo url::site() . 'reports/view/' . $incident_id; ?>"> 
-			<div class="report-image"><img src="<?php echo $video_embed->thumb($incident_video); ?>" width="160" /></div>
+			<div class="report-image"><img src="<?php echo $incident_video ?>" width="160" /></div>
 			<div  class="report-date"><?php echo $incident_date; ?></div>
 			<div  class="report-location"><?php echo $incident_location ?></div>
 			<div class="report-title"><?php echo $incident_title ?></div>

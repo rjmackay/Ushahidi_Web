@@ -39,7 +39,10 @@ class tedx_reports_block {
 				// We only care about videos and photos
 				if ($media->media_type == 2)
 				{
-					$incident_video[$incident->id][] = $media->media_link;
+					$incident_video[$incident->id][] = array(
+						'link' => $media->media_link,
+						'thumb' => $media->media_thumb
+					);
 				}
 				elseif ($media->media_type == 1)
 				{
