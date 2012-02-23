@@ -214,7 +214,12 @@ body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
 body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
 
 /* home page timeline */
-div.slider-holder { }
+div.slider-holder { width: auto; }
+div.slider-holder #label_handle_startDate,
+div.slider-holder #label_handle_endDate,
+div.slider-holder #startDate,
+div.slider-holder #endDate,
+div.slider-holder .play {display: none;}
 div.graph-holder { display:none; }
 
 
