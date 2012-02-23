@@ -46,6 +46,9 @@ class Json_Controller extends Template_Controller
 
 		// Cacheable JSON Controller
 		$this->is_cachable = TRUE;
+		
+		// Video Embed
+		$this->video_embed = new VideoEmbed();
 	}
 
 
@@ -203,12 +206,20 @@ class Json_Controller extends Template_Controller
 		$markers = array();
 		foreach ($incidents as $incident)
 		{
+			$thumb = "";
+			
+			$media = ORM::factory('media')->where('incident_id',$incident->incident_id)->where('media_type',2)->limit(1)->find();
+			if ($media->loaded)
+			{
+					$thumb = $this->video_embed->thumb($media->media_link);
+			}
+			
 			$markers[] = array(
 				'id' => $incident->incident_id,
 				'incident_title' => $incident->incident_title,
 				'latitude' => $incident->latitude,
 				'longitude' => $incident->longitude,
-				'thumb' => ''
+				'thumb' => $thumb
 				);
 		}
 
@@ -267,7 +278,10 @@ class Json_Controller extends Template_Controller
 			// Get incident IDs
 			$cluster_incident_ids = array_map(create_function('$item','return $item["id"];'), $cluster);
 			$cluster_incident_ids = implode(',', $cluster_incident_ids);
-			
+
+			// Get first thumbnail
+			$thumb = $cluster[0]['thumb'];
+
 			// Get the time filter
 			$time_filter = ( ! empty($start_date) AND ! empty($end_date))
 				? "&s=".$start_date."&e=".$end_date
@@ -283,7 +297,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"category\":[0], ";
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
-			$json_item .= "\"thumb\": \"\", ";
+			$json_item .= "\"thumb\": \"".$thumb."\", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . $cluster_count . "\", ";
 			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "], ";
