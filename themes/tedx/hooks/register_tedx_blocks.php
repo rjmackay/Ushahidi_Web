@@ -15,7 +15,7 @@ class tedx_reports_block {
 	
 	public function block()
 	{
-		$content = new View('blocks/main_reports');
+		$content = new View('blocks/tedx_recent_reports');
 		
 		// Get Reports
         // XXX: Might need to replace magic no. 8 with a constant
