@@ -35,8 +35,20 @@ $(function(){
 		<?php
 		echo $div_timeline;
 		?>
+		
+		<h2 id="tagline">Community powered map of TEDx Talks</h2>
+		
+		
 		<div class="background layoutleft">
-	
+		
+			<!-- mainmenu -->
+			<div id="mainmenu" class="clearingfix">
+				<ul>
+					<?php nav::main_tabs('Home'); ?>
+				</ul>
+			</div>
+			<!-- / mainmenu -->
+		
 			<!-- content -->
 			<div class="content-container">
 

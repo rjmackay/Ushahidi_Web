@@ -15,18 +15,18 @@ Author Email: caleb@ushahidi.com
   table.table-list tbody tr td a,
   .hover .r_details h3 a.r_title,
   div.footermenu ul li a,
-  div.search-form input.text  { color: #d24836; }
-  div.search-form input.text:focus { border-color: #d24836; }
+  div.search-form input.text  { color: #4e4e4e; }
+  div.search-form input.text:focus { border-color: #f6f6f6; }
   div.submit-incident a, .btn_submit,
   div.filters ul li a:hover, div.filters ul li a.active,
-  ul.category-filters li a:hover, ul.category-filters li a.active { background-color:#d24836; }
+  ul.category-filters li a:hover, ul.category-filters li a.active { background-color:#ff2b06; }
   
   /* Lighter Primary Color - for hover effects */
-  div#loggedin_user_action a, div#loggedin_user_action a:visited { color:#d25e4f; }
+  div#loggedin_user_action a, div#loggedin_user_action a:visited { color:#4e4e4e; }
   div.submit-incident a:hover, .btn_submit:hover,
   div.search-form input.searchbtn,
   div#mainmenu ul li a:hover,
-  div#mainmenu a.active { background-color:#d25e4f; }
+  div#mainmenu a.active { background-color:#fff; }
 
 
 
@@ -35,20 +35,28 @@ h1 {
   
 }
 h2 {
-  
+  color: #4e4e4e;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 h5, h4 {
   
 }
+a {
+  color: #ff2b06;
+}
+a:hover {
+  color: #ff2b06;
+}
 
 /* structural divs */
-body#page { background: #fff; }
+body#page { background: #f6f6f6; }
 
 /*div#middle { background:transparent url(../images/bg_top-cap.png) top no-repeat; }*/
-div#middle { margin-top: 584px; }
+div#middle { background: transparent; }
 
 .big-block {   }
-.page-main #main { padding:0px 10px; }
+.page-main #main { padding:0; height: 600px; background: #fff; border-bottom: 1px solid #e1e1e1; }
 
 /* top-bar */
 #top-bar {
@@ -80,26 +88,34 @@ div#loggedin_user_action a, div#loggedin_user_action a:visited {
   color:#5396ff;
 }
 div.search-form input.text {
-  border: 1px solid;
+  border: 1px solid #e1e1e1;
+  width: 300px;
+  border-radius: 2px 0 0 2px;
+  font-size: 13px;
+  padding: 3px 5px 4px 25px;
+  background: transparent url('../images/search-icon.png') 5px 50% no-repeat;
+  color: #4e4e4e;
 }
 div.search-form input.text:focus {
-  border: 1px solid;
+  border: 1px solid #e1e1e1;
 }
 div.search-form input.searchbtn {
   width: auto;
   height: auto;
-  border: 0;
+  border: 1px solid #e1e1e1;
+  border-radius: 0 2px 2px 0;
+  border-left: 0;
   text-indent: 0;
-  color: #FFFFFF;
+  color: #4e4e4e;
   display: block;
-  font-size: 12px;
-  background-image:none;
-  background-color:#3764AA;
-  margin-left: 10px;
-  line-height: 17px;
-  padding: 2px 5px 3px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 0 #424242;
+  font-size: 13px;
+  background-image: none;
+  background-color:#fff;
+  padding: 4px 5px;
+  font-weight: bold;
+  margin-left: 0;
+  line-height: 15px;
+  text-transform: none;
 }
 
 /* header */
@@ -115,7 +131,7 @@ div#logo {
   margin: 0;
 }
 div#logo h1 a {
-  color: #222222;
+  color: #ff2b06;
   font-size: 28px;
 }
 div#logo span {
@@ -146,11 +162,9 @@ div#mainmenu ul li a:hover, div#mainmenu a.active {
 }
 
 /* filter box */
-#report-map-filter-box { position:absolute; z-index:1000; }
+#report-map-filter-box { position:absolute; z-index:1000; display: none; }
 
-
-
-div#right { position:absolute; z-index:1000; }
+div#right { position:absolute; z-index:1000; display: none;}
 
 .map-menu-box {
   position:absolute;
@@ -227,13 +241,19 @@ div.graph-holder { display:none; }
 div.additional-content { display:none; }
 
 /* Home Page Twitter / Mainstream News blocks */
-div.content-container { background:transparent; padding:10px;}
+div.content-container { background:transparent; padding:0;}
 
-div.content-block { position:relative; margin:0 18px; background:#eeedea; }
-div.content-block h5 { float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5; }
+div.content-block { margin: 0; padding: 0 }
+div.content-block h5 { /*float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5;*/ }
 div.content-block h5 span { display:none; }
-div.content-block .table-list { margin-top:18px; }
 table.table-list thead th.date { width:20%; }
+div.content-block img { padding:0; margin:0; width: 160px; }
+/* Reports block */
+div.content-block .report { float: left; width: 160px; height: 160px; margin-right: 32px; }
+div.content-block .report .report-image {width: 160px; height: 90px; overflow: hidden; background: #000; }
+div.content-block .report .report-title { }
+div.content-block .report .report-location { font-weight: bold; color: #4e4e4e }
+div.content-block .report .report-date { color: #4e4e4e; font-size: 0.8em; }
 
 
 /* reports listing page */

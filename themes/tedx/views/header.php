@@ -57,7 +57,7 @@
 			<div id="searchbox">
 
 				<!-- languages -->
-				<?php echo $languages;?>
+				<?php //echo $languages;?>
 				<!-- / languages -->
 
 				<!-- searchform -->
@@ -77,12 +77,3 @@
             // Action::header_item - Additional items to be added by plugins
 	        Event::run('ushahidi_action.header_item');
         ?>
-
-				<!-- mainmenu -->
-				<?php /*<div id="mainmenu" class="clearingfix">
-					<ul>
-						<?php nav::main_tabs($this_page); ?>
-					</ul>
-
-				</div>*/?>
-				<!-- / mainmenu -->

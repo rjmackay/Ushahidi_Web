@@ -47,7 +47,7 @@
 	<?php echo $google_analytics; ?>
 	<?php echo $cdn_gradual_upgrade; ?>
 	
-	<!-- Task Scheduler --><script type="text/javascript">$(document).ready(function(){$('#schedulerholder').html('<img src="<?php echo url::base(); ?>scheduler" />');});</script><div id="schedulerholder"></div><!-- End Task Scheduler -->
+	<!-- Task Scheduler <script type="text/javascript">$(document).ready(function(){$('#schedulerholder').html('<img src="<?php echo url::base(); ?>scheduler" />');});</script><div id="schedulerholder"></div><!-- End Task Scheduler -->
  
 	<?php
 	// Action::main_footer - Add items before the </body> tag
