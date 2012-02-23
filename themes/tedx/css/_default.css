@@ -149,14 +149,19 @@ div.submit-incident a, .btn_submit {
 }
 
 /* primary nav */
-div#mainmenu { background:none; border:none; height:27px; }
+div#mainmenu { background:none; border:1px solid #e1e1e1; padding: 0; margin: 0; }
 div#mainmenu ul {
   
 }
 div#mainmenu ul li {
-  margin:0 8px 0 0;
+  margin:0;
+  padding: 8px;
+  border: 1px solid #e1e1e1;
+  border-top: none;
+  border-bottom: none;
+  font-weight: bold;
 }
-div#mainmenu ul li a { padding:3px 5px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+div#mainmenu ul li a { padding:3px 5px; -moz-border-radius: 3px; -webkit-border-radius: 3px; color: #4e4e4e; }
 div#mainmenu ul li a:hover, div#mainmenu a.active {
   
 }
@@ -228,7 +233,7 @@ body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
 body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
 
 /* home page timeline */
-div.slider-holder { width: auto; }
+div.slider-holder { width: auto; background: #fff; border: 1px solid #e1e1e1; padding: 16px; margin-bottom: 16px; }
 div.slider-holder #label_handle_startDate,
 div.slider-holder #label_handle_endDate,
 div.slider-holder #startDate,
@@ -241,15 +246,17 @@ div.graph-holder { display:none; }
 div.additional-content { display:none; }
 
 /* Home Page Twitter / Mainstream News blocks */
-div.content-container { background:transparent; padding:0;}
+div.content-container { background:transparent; padding:0; }
 
-div.content-block { margin: 0; padding: 0 }
+div.content-block { margin: 0; padding: 0; background: #fff; border: 1px solid #e1e1e1; }
 div.content-block h5 { /*float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5;*/ }
 div.content-block h5 span { display:none; }
 table.table-list thead th.date { width:20%; }
 div.content-block img { padding:0; margin:0; width: 160px; }
 /* Reports block */
-div.content-block .report { float: left; width: 160px; height: 160px; margin-right: 32px; }
+div.content-block .report { float: left; width: 160px; height: 160px; padding-right: 16px; padding-left: 16px;}
+div.content-block .report.col-0 { padding-left: 15px; }
+div.content-block .report.col-4 { padding-right: 15px; }
 div.content-block .report .report-image {width: 160px; height: 90px; overflow: hidden; background: #000; }
 div.content-block .report .report-title { }
 div.content-block .report .report-location { font-weight: bold; color: #4e4e4e }
@@ -349,3 +356,4 @@ span.btn-icon { display:block; position:absolute; height:16px; width:16px; overf
   /* active state */
   .active-toggle .ic-right { background:transparent url(../images/bg_category-filter-controls.png) -32px -55px no-repeat; }
   
+#tagline { margin-bottom: 16px; }

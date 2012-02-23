@@ -7,6 +7,7 @@
 			<div><?php echo Kohana::lang('ui_main.no_reports'); ?></div>
 			<?php
 		}
+		$i = 0;
 		foreach ($incidents as $incident)
 		{
 			$incident_id = $incident->id;
@@ -22,7 +23,7 @@
 			}
 			if ($incident_video) {
 		?>
-		<div class="report">
+		<div class="report <?php echo "col-".($i % 5); ?>">
 			<a href="<?php echo url::site() . 'reports/view/' . $incident_id; ?>"> 
 			<div class="report-image"><img src="<?php echo $incident_video ?>" width="160" /></div>
 			<div  class="report-date"><?php echo $incident_date; ?></div>
@@ -31,6 +32,7 @@
 			</a>
 		</div>
 		<?php
+			$i++;
 			}
 		}
 		?>
