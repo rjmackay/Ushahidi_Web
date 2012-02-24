@@ -44,7 +44,7 @@ $(function(){
 			<!-- mainmenu -->
 			<div id="mainmenu" class="clearingfix">
 				<ul>
-					<?php nav::main_tabs('Home'); ?>
+					<?php nav::main_tabs('home'); ?>
 				</ul>
 			</div>
 			<!-- / mainmenu -->
