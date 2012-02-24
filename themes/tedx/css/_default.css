@@ -247,8 +247,10 @@ div.additional-content { display:none; }
 
 /* Home Page Twitter / Mainstream News blocks */
 div.content-container { background:transparent; padding:0; }
+ul.content-column { margin:0; }
+ul.content-column li { margin:0; float: none; }
 
-div.content-block { margin: 0; padding: 0; background: #fff; border: 1px solid #e1e1e1; }
+div.content-block { margin: 0; padding: 0; background: #fff; border: 1px solid #e1e1e1; border-top: none;}
 div.content-block h5 { /*float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5;*/ }
 div.content-block h5 span { display:none; }
 table.table-list thead th.date { width:20%; }
