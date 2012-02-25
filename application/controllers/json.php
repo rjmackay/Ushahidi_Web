@@ -316,6 +316,8 @@ class Json_Controller extends Template_Controller
 
 		foreach ($singles as $single)
 		{
+			$video = json_encode($this->video_embed->embed($cluster[0]['media_link'],FALSE,FALSE));
+			
 			$json_item = "{";
 			$json_item .= "\"type\":\"Feature\",";
 			$json_item .= "\"properties\": {";
@@ -326,6 +328,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
 			$json_item .= "\"thumb\": \"".$single['thumb']."\", ";
+			$json_item .= "\"video\": ".$video.", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . 1 . "\"";
 			$json_item .= "},";
