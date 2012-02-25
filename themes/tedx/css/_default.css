@@ -229,8 +229,13 @@ div.map { width:auto; height: 584px; border: 0; position:relative; }
 /*#mapStatus { width:auto; float:none; overflow:auto; border:1px solid #fff; }*/
 #mapStatus { display:none; }
 
+.infowindow { background: #000; margin:0; padding: 0;}
+.infowindow .infowindow_image { float: none; margin: 0; }
+
 body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
 body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
+body.page-main div#chicken { box-shadow: 0px 5px 20px 0px rgba(78,78,78,0.6); }
+body.page-main div.olPopupContent { background: #000; overflow: hidden; };
 
 /* home page timeline */
 div.slider-holder { width: auto; background: #fff; border: 1px solid #e1e1e1; padding: 16px; margin-bottom: 16px; }
