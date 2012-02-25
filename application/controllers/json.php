@@ -182,7 +182,7 @@ class Json_Controller extends Template_Controller
 			(int) $_GET['z'] : 8;
 
 		//$distance = 60;
-		$distance = (10000000 >> $zoomLevel) / 100000;
+		$distance = (10000000 >> $zoomLevel) / 100000 / 5;
 		
 		// Fetch the incidents using the specified parameters
 		$incidents = reports::fetch_incidents();
