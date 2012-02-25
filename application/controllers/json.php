@@ -294,7 +294,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"type\":\"Feature\",";
 			$json_item .= "\"properties\": {";
 			$json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base()
-				 . "reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter.">". $cluster[0]['incident_title'] . " and " . ($cluster_count-1) . " more reports</a>")) . "\",";
+				 . "reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter.">". $cluster[0]['incident_title'] . "</a>")) . "\",";
 			$json_item .= "\"link\": \"".url::base()."reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter."\", ";
 			$json_item .= "\"category\":[0], ";
 			$json_item .= "\"color\": \"".$color."\", ";

@@ -150,13 +150,13 @@
 			lat = zoom_point.lat;
 			
 			var thumb = "";
-			if ( typeof(event.feature.attributes.video) != 'undefined' && 
+			/*if ( typeof(event.feature.attributes.video) != 'undefined' && 
 				event.feature.attributes.video != '')
 			{
 				thumb = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
 				thumb += event.feature.attributes.video+"</a></div>";
 			}
-			else if ( typeof(event.feature.attributes.thumb) != 'undefined' && 
+			else */if ( typeof(event.feature.attributes.thumb) != 'undefined' && 
 				event.feature.attributes.thumb != '')
 			{
 				thumb = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";

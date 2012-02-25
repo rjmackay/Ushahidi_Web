@@ -31,20 +31,17 @@
 	list-style-type: square;
 }
 .infowindow a, .infowindow a:visited{
-	color:#3764aa;
+	
 }
 .infowindow a:hover{
-	text-decoration:none;
 }
 .infowindow a:hover{
-	text-decoration:underline;
 }
 .infowindow .infowindow_meta{
 	font-size:90%;
 	clear:both;
 }
 .infowindow_meta a, .infowindow_meta a:visited{
-	color:#000;
 }
 
 div.olMap {
