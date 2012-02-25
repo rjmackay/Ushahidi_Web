@@ -211,7 +211,7 @@ class Json_Controller extends Template_Controller
 			$media = ORM::factory('media')->where('incident_id',$incident->incident_id)->where('media_type',2)->limit(1)->find();
 			if ($media->loaded)
 			{
-					$thumb = $media->media_thumb ? $media->media_thumb : $this->video_embed->thumb($media->media_link);
+				$thumb = $media->media_thumb ? $media->media_thumb : $this->video_embed->thumb($media->media_link);
 			}
 			
 			$markers[] = array(
@@ -219,8 +219,9 @@ class Json_Controller extends Template_Controller
 				'incident_title' => $incident->incident_title,
 				'latitude' => $incident->latitude,
 				'longitude' => $incident->longitude,
-				'thumb' => $thumb
-				);
+				'thumb' => $thumb,
+				'media_link' => $media->media_link
+			);
 		}
 
 		$clusters = array();	// Clustered
@@ -281,6 +282,7 @@ class Json_Controller extends Template_Controller
 
 			// Get first thumbnail
 			$thumb = $cluster[0]['thumb'];
+			$video = json_encode($this->video_embed->embed($cluster[0]['media_link'],FALSE,FALSE));
 
 			// Get the time filter
 			$time_filter = ( ! empty($start_date) AND ! empty($end_date))
@@ -292,12 +294,13 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"type\":\"Feature\",";
 			$json_item .= "\"properties\": {";
 			$json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base()
-				 . "reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter.">" . $cluster_count . " Reports</a>")) . "\",";
+				 . "reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter.">". $cluster[0]['incident_title'] . " and " . ($cluster_count-1) . " more reports</a>")) . "\",";
 			$json_item .= "\"link\": \"".url::base()."reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter."\", ";
 			$json_item .= "\"category\":[0], ";
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
 			$json_item .= "\"thumb\": \"".$thumb."\", ";
+			$json_item .= "\"video\": ".$video.", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . $cluster_count . "\", ";
 			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "], ";
