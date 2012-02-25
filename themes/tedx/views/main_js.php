@@ -184,9 +184,11 @@
 				content,
 				null, false, onPopupClose);
 			
+			popup.panMapIfOutOfView = true;
+			popup.autoSize = true;
+			
 			event.feature.popup = popup;
 			map.addPopup(popup);
-			popup.autoSize = true;
 			popup.updateSize();
 		}
 
