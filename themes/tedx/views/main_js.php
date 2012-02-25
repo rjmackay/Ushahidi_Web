@@ -382,7 +382,9 @@
 				});
 
 				$.getJSON("<?php echo url::site()."api/?task=checkin&action=get_ci&mapdata=1&sqllimit=1000&orderby=checkin.checkin_date&sort=ASC"?>", function(data) {
+					if (data["payload"]["users"] == undefined) return;
 					var user_colors = new Array();
+					
 					// Get colors
 					$.each(data["payload"]["users"], function(i, payl) {
 						user_colors[payl.id] = payl.color;
