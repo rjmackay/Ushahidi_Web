@@ -23,7 +23,7 @@ class VideoEmbed
 	 * @param string $raw URL of the video to be embedded
 	 * @param string $auto Autoplays the video as soon as its loaded
 	 */
-	public function embed($raw, $auto)
+	public function embed($raw, $auto, $echo = true)
 	{
 		// To hold the name of the video service
 		$service_name = "";
@@ -60,10 +60,11 @@ class VideoEmbed
 		// Check for valid hostnames
 		if ( ! array_key_exists($service_name, $services))
 		{
-			echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
+			$embed = '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
 			
 			// No point in proceeding past this point therefore return
-			return;
+			if ($echo) echo $embed;
+			return $embed;
 		}
 		
 		// Print the HTML embed code depending on the video service
@@ -72,7 +73,7 @@ class VideoEmbed
 			// Check for autoplay
 			$you_auto = ($auto == "play")? "&autoplay=1" : "";
 			
-			echo "<object width='320' height='265'>"
+			$embed = "<object width='320' height='265'>"
 				. "	<param name='movie' value='http://www.youtube.com/v/$code$you_auto'></param>"
 				. "	<param name='wmode' value='transparent'></param>"
 				. "	<embed src='http://www.youtube.com/v/$code$you_auto' type='application/x-shockwave-flash' "
@@ -85,7 +86,7 @@ class VideoEmbed
 			// Check for autoplay
 			$google_auto = ($auto == "play")? "&autoPlay=true" : "";
 
-			echo "<embed style='width:320px; height:265px;' id='VideoPlayback' type='application/x-shockwave-flash'"
+			$embed = "<embed style='width:320px; height:265px;' id='VideoPlayback' type='application/x-shockwave-flash'"
 				. "	src='http://video.google.com/googleplayer.swf?docId=-$code$google_auto&hl=en' flashvars=''>"
 				. "</embed>";
 		}
@@ -97,7 +98,7 @@ class VideoEmbed
 			// Check for autoplay
 			$rev_auto = ($auto == "play")? "&autoStart=true" : "";
 
-			echo "<script src='http://flash.revver.com/player/1.0/player.js?mediaId:$code;affiliateId:0;height:320;width:265;'"
+			$embed = "<script src='http://flash.revver.com/player/1.0/player.js?mediaId:$code;affiliateId:0;height:320;width:265;'"
 				. "	type='text/javascript'>"
 				. "</script>";
 		}
@@ -106,14 +107,14 @@ class VideoEmbed
 			// Sanitize input
 			$code = strrev(trim(strrev($code), "/"));
 			
-			echo "<embed src='http://www.metacafe.com/fplayer/$code.swf'"
+			$embed = "<embed src='http://www.metacafe.com/fplayer/$code.swf'"
 				. "	width='320' height='265' wmode='transparent' pluginspage='http://get.adobe.com/flashplayer/'"
 				. "	type='application/x-shockwave-flash'> "
 				. "</embed>";
 		}
 		elseif ($service_name == "liveleak")
 		{
-			echo "<object type='application/x-shockwave-flash' width='320' height='272'='transparent'"
+			$embed = "<object type='application/x-shockwave-flash' width='320' height='272'='transparent'"
 				. "	data='http://www.liveleak.com/e/$code'>"
 				. "	<param name='movie' value='http://www.liveleak.com/e/$code'>"
 				. "	<param name='wmode' value='transparent'><param name='quality' value='high'>"
@@ -121,11 +122,11 @@ class VideoEmbed
 		}
 		elseif ($service_name == "dotsub") 
 		{
-			echo "<iframe src='http://dotsub.com/media/$code' frameborder='0' width='320' height='500'></iframe>";
+			$embed = "<iframe src='http://dotsub.com/media/$code' frameborder='0' width='320' height='500'></iframe>";
 		}
 		elseif ($service_name == "vimeo") 
 		{
-			echo "<iframe src=\"http://player.vimeo.com/video/$code\" width=\"100%\" height=\"300\" frameborder=\"0\">"
+			$embed = "<iframe src=\"http://player.vimeo.com/video/$code\" width=\"100%\" height=\"300\" frameborder=\"0\">"
 				. "</iframe>";
 		}
 		elseif ($service_name == "ted")
@@ -142,21 +143,23 @@ class VideoEmbed
 					if ($page !== FALSE) {
 						preg_match('#<param name="movie" value="http://www\.youtube\.com/v/(.*)&.*"></param>#iU', $page, $matches);
 						if(! empty($matches[1])) {
-							$this->embed("http://www.youtube.com/watch?v=".$matches[1], $auto);
-							return;
+							$embed = $this->embed("http://www.youtube.com/watch?v=".$matches[1], $auto, $echo);
+						} else {
+							// If we didn't get a youtube match, just return the link
+							$embed = '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
 						}
-						// If we didn't get a youtube match, just return the link
-						$embed = '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
 					}
 				}
 				
 				$this->cache->set('VideoEmbed_embed_'.$raw,$embed,array('VideoEmbed'),3600);
 			}
-			echo $embed;
 		}
 		
 		// Free memory - though this is done implicitly by the PHP interpreter
 		unset($raw, $code, $service_name);
+		
+		if ($echo) echo $embed;
+		return $embed;
 	}
 	
 	/**
