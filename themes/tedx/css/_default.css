@@ -232,7 +232,7 @@ div.map { width:auto; height: 584px; border: 0; position:relative; }
 .infowindow { background: #000; margin:0; padding: 0; color: #fff; text-transform: uppercase; }
 .infowindow .infowindow_image { float: none; margin: 0; }
 .infowindow a, .infowindow a:visited { color: #fff; }
-.infowindow .infowindow_content { padding: 5px; }
+.infowindow .infowindow_content { padding: 5px; width: 230px; }
 
 body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
 body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
