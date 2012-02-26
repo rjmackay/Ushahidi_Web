@@ -150,13 +150,7 @@
 			lat = zoom_point.lat;
 			
 			var thumb = "";
-			/*if ( typeof(event.feature.attributes.video) != 'undefined' && 
-				event.feature.attributes.video != '')
-			{
-				thumb = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
-				thumb += event.feature.attributes.video+"</a></div>";
-			}
-			else */if ( typeof(event.feature.attributes.thumb) != 'undefined' && 
+			if ( typeof(event.feature.attributes.thumb) != 'undefined' && 
 				event.feature.attributes.thumb != '')
 			{
 				thumb = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
@@ -165,7 +159,12 @@
 
 			var content = "<div class=\"infowindow\">" + thumb;
 			content += "<div class=\"infowindow_content\"><div class=\"infowindow_list\">"+event.feature.attributes.name+"</div>";
-			content += "</div><div style=\"clear:both;\"></div></div>";		
+			if (event.feature.attributes.incident_ids) 
+			{
+				event.feature.current_id = 0;
+				content += "<a href='#' class='next'>N &gt;</a><a href='#' class='prev'>&lt; P</a>";
+			}
+			content += "</div><div style=\"clear:both;\"></div></div>";
 
 			if (content.search("<?php echo '<'; ?>script") != -1)
 			{
@@ -190,6 +189,64 @@
 			event.feature.popup = popup;
 			map.addPopup(popup);
 			popup.updateSize();
+			// Update after image loads
+			$('.infowindow img').load(function() {
+				selectedFeature.popup.updateSize();
+			});
+			
+			// Setup slideshow
+			$('.infowindow .prev').click(function (event) {
+				// Get previous index
+				if (selectedFeature.current_id == 0)
+				{
+					selectedFeature.current_id = selectedFeature.attributes.incident_ids.length -1;
+				} else {
+					selectedFeature.current_id--;
+				}
+				
+				$.getJSON(baseUrl+'json/single/'+selectedFeature.attributes.incident_ids[selectedFeature.current_id], function (data){
+					// Replacing popup content
+					featureid = data.features.length -1;
+					thumb = "<div class=\"infowindow_image\"><a href='"+data.features[0].properties.link+"'>";
+					thumb += "<img src=\""+data.features[featureid].properties.thumb+"\" width=\"240\" /></a></div>";
+					$('.infowindow .infowindow_image').replaceWith(thumb);
+					info = "<div class=\"infowindow_list\">"+data.features[featureid].properties.name+"</div>";
+					$('.infowindow .infowindow_list').replaceWith(info);
+					
+					// Update popups size
+					selectedFeature.popup.updateSize();					
+					$('.infowindow img').load(function() {
+						selectedFeature.popup.updateSize();
+					});
+				});
+				return false;
+			});
+			$('.infowindow .next').click(function (event) {
+				// Get next index
+				if (selectedFeature.current_id == selectedFeature.attributes.incident_ids.length -1)
+				{
+					selectedFeature.current_id = 0;
+				} else {
+					selectedFeature.current_id++;
+				}
+				
+				$.getJSON(baseUrl+'json/single/'+selectedFeature.attributes.incident_ids[selectedFeature.current_id], function (data){
+					// Replacing popup content
+					featureid = data.features.length -1;
+					thumb = "<div class=\"infowindow_image\"><a href='"+data.features[0].properties.link+"'>";
+					thumb += "<img src=\""+data.features[featureid].properties.thumb+"\" width=\"240\" /></a></div>";
+					$('.infowindow .infowindow_image').replaceWith(thumb);
+					info = "<div class=\"infowindow_list\">"+data.features[featureid].properties.name+"</div>";
+					$('.infowindow .infowindow_list').replaceWith(info);
+					
+					// Update popups size
+					selectedFeature.popup.updateSize();
+					$('.infowindow img').load(function() {
+						selectedFeature.popup.updateSize();
+					});
+				});
+				return false;
+			});
 		}
 
 		/**

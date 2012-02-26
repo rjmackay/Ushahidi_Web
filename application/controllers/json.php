@@ -294,7 +294,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"type\":\"Feature\",";
 			$json_item .= "\"properties\": {";
 			$json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base()
-				 . "reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter.">". $cluster[0]['incident_title'] . "</a>")) . "\",";
+					. "reports/view/" . $cluster[0]['id'] . "/>".str_replace('"','\"',$cluster[0]['incident_title'])."</a>")) . "\",";
 			$json_item .= "\"link\": \"".url::base()."reports/index/?c=".$category_id."&sw=".$southwest."&ne=".$northeast.$time_filter."\", ";
 			$json_item .= "\"category\":[0], ";
 			$json_item .= "\"color\": \"".$color."\", ";
@@ -375,6 +375,12 @@ class Json_Controller extends Template_Controller
 			// @todo Get this fixed
 			$marker = ORM::factory('incident', $incident_id);
 			
+			$media = ORM::factory('media')->where('incident_id',$incident_id)->where('media_type',2)->limit(1)->find();
+			if ($media->loaded)
+			{
+				$thumb = $media->media_thumb ? $media->media_thumb : $this->video_embed->thumb($media->media_link);
+			}
+			
 			// Get the incident/report date
 			$incident_date = date('Y-m', strtotime($marker->incident_date));
 
@@ -417,6 +423,7 @@ class Json_Controller extends Template_Controller
 					. "reports/view/" . $marker->id . "'>".$encoded_title."</a>")) . "\",";
 			$json_single .= "\"link\": \"".url::base()."reports/view/".$marker->id."\", ";
 			$json_single .= "\"category\":[0], ";
+			$json_single .= "\"thumb\": \"$thumb\", ";
 			$json_single .= "\"timestamp\": \"" . strtotime($marker->incident_date) . "\"";
 			
 			// Get Incident Geometries
@@ -436,6 +443,7 @@ class Json_Controller extends Template_Controller
 					. "reports/view/" . $marker->id . "'>".$encoded_title."</a>")) . "\",";
 				$json_item .= "\"link\": \"".url::base()."reports/view/".$marker->id."\", ";
 				$json_item .= "\"category\":[0], ";
+				$json_item .= "\"thumb\": \"$thumb\", ";
 				$json_item .= "\"timestamp\": \"" . strtotime($marker->incident_date) . "\"";
 				$json_item .= "},\"geometry\":";
 				$json_item .= "{\"type\":\"Point\", ";
