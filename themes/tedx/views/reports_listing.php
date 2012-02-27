@@ -52,22 +52,11 @@
 					// XXX: Perhaps delcare 150 as constant
 
 					$incident_description = text::limit_chars(strip_tags($incident_description), 140, "...", true);
-					$incident_date = date('H:i M d, Y', strtotime($incident->incident_date));
+					$incident_date = date('M d, Y', strtotime($incident->incident_date));
 					//$incident_time = date('H:i', strtotime($incident->incident_date));
 					$location_id = $incident->location_id;
 					$location_name = $incident->location->location_name;
 					$incident_verified = $incident->incident_verified;
-
-					if ($incident_verified)
-					{
-						$incident_verified = '<span class="r_verified">'.Kohana::lang('ui_main.verified').'</span>';
-						$incident_verified_class = "verified";
-					}
-					else
-					{
-						$incident_verified = '<span class="r_unverified">'.Kohana::lang('ui_main.unverified').'</span>';
-						$incident_verified_class = "unverified";
-					}
 
 					$comment_count = $incident->comment->count();
 
@@ -85,7 +74,7 @@
 						}
 					}
 				?>
-				<div id="<?php echo $incident_id ?>" class="rb_report <?php echo $incident_verified_class; ?>">
+				<div id="<?php echo $incident_id ?>" class="rb_report">
 					<div class="r_media">
 						<p class="r_photo" style="text-align:center;"> <a href="<?php echo url::site(); ?>reports/view/<?php echo $incident_id; ?>">
 							<img src="<?php echo $incident_thumb; ?>" style="max-width:89px;max-height:59px;" /> </a>
