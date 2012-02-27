@@ -237,8 +237,8 @@ div.map { width:auto; height: 584px; border: 0; position:relative; }
 .infowindow .prev {position: absolute; top: 50%; left: 5px; width: 25px; height: 40px;  margin-top: -40px; line-height: 40px; text-align: left;}
 
 
-body.page-main .olControlPanZoomBar { margin-top: 95px; display: none; }
-body.page-main div.olControlLayerSwitcher { margin-top: 80px; display: none; }
+body.page-main .olControlPanZoomBar { margin-top: 95px;  }
+body.page-main div.olControlLayerSwitcher { margin-top: 80px; }
 body.page-main div#chicken { box-shadow: 0px 5px 20px 0px rgba(78,78,78,0.6); }
 body.page-main div.olPopupContent { background: #000; overflow: hidden; };
 

@@ -740,7 +740,7 @@
 				}));    
 			map.addControl(new OpenLayers.Control.Scale('mapScale'));
 			map.addControl(new OpenLayers.Control.ScaleLine());
-			map.addControl(new OpenLayers.Control.LayerSwitcher());
+			//map.addControl(new OpenLayers.Control.LayerSwitcher());
 			
 			// display the map projection
 			document.getElementById('mapProjection').innerHTML = map.projection;
