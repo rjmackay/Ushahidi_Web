@@ -167,9 +167,9 @@ div#mainmenu ul li a:hover, div#mainmenu a.active {
 }
 
 /* filter box */
-#report-map-filter-box { position:absolute; z-index:1000; display: none; }
+#report-map-filter-box { position:absolute; z-index:1000; top: 90px;}
 
-div#right { position:absolute; z-index:1000; display: none;}
+div#right { position:absolute; z-index:1000; display: none; }
 
 .map-menu-box {
   position:absolute;
@@ -192,7 +192,7 @@ div#right { position:absolute; z-index:1000; display: none;}
   #filter-menu-toggle { position:absolute; top:20px; left:58px; width:120px; }
   
   /* home page category filter */
-  #report-category-filter { padding:5px; float:left; width:175px; }
+  #report-category-filter { padding:5px; float:left; width:200px; }
   ul.category-filters { background:none; border:0; padding:0; }
   ul.category-filters li { display:block; list-style-type:none; overflow:auto; }
     ul.category-filters li li { clear:left; }
