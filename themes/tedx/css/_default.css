@@ -574,6 +574,7 @@ a.filter-button {
 	background-color: #EDEDED;
 	color: #444444;
 	-moz-transition: background 0.5s ease-in-out 0s;
+	-webkit-transition: background 0.5s ease-in-out 0s;
 	border-radius: 8px;
 	float: right;
 	font-family: "Droid Serif";
