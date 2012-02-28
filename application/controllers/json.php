@@ -282,7 +282,7 @@ class Json_Controller extends Template_Controller
 
 			// Get first thumbnail
 			$thumb = $cluster[0]['thumb'];
-			$video = json_encode($this->video_embed->embed($cluster[0]['media_link'],FALSE,FALSE));
+			//$video = json_encode($this->video_embed->embed($cluster[0]['media_link'],FALSE,FALSE));
 
 			// Get the time filter
 			$time_filter = ( ! empty($start_date) AND ! empty($end_date))
@@ -300,7 +300,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
 			$json_item .= "\"thumb\": \"".$thumb."\", ";
-			$json_item .= "\"video\": ".$video.", ";
+			//$json_item .= "\"video\": ".$video.", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . $cluster_count . "\", ";
 			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "], ";
@@ -316,7 +316,7 @@ class Json_Controller extends Template_Controller
 
 		foreach ($singles as $single)
 		{
-			$video = json_encode($this->video_embed->embed($single['media_link'],FALSE,FALSE));
+			//$video = json_encode($this->video_embed->embed($single['media_link'],FALSE,FALSE));
 			
 			$json_item = "{";
 			$json_item .= "\"type\":\"Feature\",";
@@ -328,7 +328,7 @@ class Json_Controller extends Template_Controller
 			$json_item .= "\"color\": \"".$color."\", ";
 			$json_item .= "\"icon\": \"".$icon."\", ";
 			$json_item .= "\"thumb\": \"".$single['thumb']."\", ";
-			$json_item .= "\"video\": ".$video.", ";
+			//$json_item .= "\"video\": ".$video.", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . 1 . "\"";
 			$json_item .= "},";
