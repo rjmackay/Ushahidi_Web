@@ -15,7 +15,7 @@
 			$incident_date = $incident->incident_date;
 			$incident_date = date('j M Y', strtotime($incident->incident_date));
 			$incident_location = $incident->location->location_name;
-			$incident_category = $incident->category->current()->category_title;
+			$incident_category = $incident->category->current() ? $incident->category->current()->category_title : '';
 			$incident_video = false;
 			if (isset($incident_videos[$incident_id][0]))
 			{
