@@ -27,7 +27,7 @@
 			<a href="<?php echo url::site() . 'reports/view/' . $incident_id; ?>"> 
 			<div class="report-image"><img src="<?php echo $incident_video ?>" width="160" /></div>
 			<div  class="report-date"><?php echo $incident_date; ?></div>
-			<div  class="report-location"><?php echo $incident_location ?></div>
+			<div  class="report-location"><?php echo $incident_category ?></div>
 			<div class="report-title"><?php echo $incident_title ?></div>
 			</a>
 		</div>

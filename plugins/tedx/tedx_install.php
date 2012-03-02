@@ -25,7 +25,7 @@ class Tedx_Install {
 		// Create the database tables
 		// Include the table_prefix
 		$this->db->query("
-			INSERT INTO `scheduler` (`scheduler_name`, `scheduler_last`, `scheduler_weekday`, `scheduler_day`, `scheduler_hour`, `scheduler_minute`, `scheduler_controller`, `scheduler_active`) VALUES
+			INSERT INTO `".Kohana::config('database.default.table_prefix')."scheduler` (`scheduler_name`, `scheduler_last`, `scheduler_weekday`, `scheduler_day`, `scheduler_hour`, `scheduler_minute`, `scheduler_controller`, `scheduler_active`) VALUES
 			('TED', 1330503400, -1, -1, -1, -1, 's_ted', 1);
 			");
 	}
