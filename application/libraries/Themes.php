@@ -99,7 +99,7 @@ class Themes_Core {
 			$core_css .= html::stylesheet($this->css_url."media/css/colorpicker","",true);
 		}
 
-		if ($this->site_style AND $this->site_style != "default")
+		if ($this->site_style AND $this->site_style != "base")
 		{
 			$core_css .= html::stylesheet($this->css_url."themes/".$site_style."/style.css");
 		}

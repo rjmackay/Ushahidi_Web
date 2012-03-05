@@ -36,7 +36,7 @@ class register_themes {
 		// Array to hold all the Javascript files
 		$theme_js = array();
 		
-		// 1. Load the default theme
+		// 1. Load the base theme
 		Kohana::config_set('core.modules', array_merge(array(THEMEPATH."base"), Kohana::config("core.modules")));
 			
 		$css_url = (Kohana::config("cdn.cdn_css")) ? 
@@ -45,13 +45,13 @@ class register_themes {
 		
 		// 2. Extend the default theme
 		$theme = THEMEPATH.Kohana::config("settings.site_style");
-		if ( Kohana::config("settings.site_style") != "default" )
+		if ( Kohana::config("settings.site_style") != "base" )
 		{
+			// This line would be where you add theme parent
 			Kohana::config_set('core.modules', array_merge(array($theme),
 				Kohana::config("core.modules")));
-				
 			if ( is_dir($theme.'/css') )
-			{				
+			{
 				$css = dir($theme.'/css'); // Load all the themes css files
 				while (($css_file = $css->read()) !== FALSE)
 					if (preg_match('/\.css/i', $css_file))
@@ -61,7 +61,7 @@ class register_themes {
 			}
 			
 			if ( is_dir($theme.'/js') )
-			{				
+			{
 				$js = dir($theme.'/js'); // Load all the themes js files
 				while (($js_file = $js->read()) !== FALSE)
 					if (preg_match('/\.js/i', $js_file))
