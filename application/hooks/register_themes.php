@@ -37,12 +37,11 @@ class register_themes {
 		$theme_js = array();
 		
 		// 1. Load the default theme
-		Kohana::config_set('core.modules', array_merge(array(THEMEPATH."default"), 
-			Kohana::config("core.modules")));
+		Kohana::config_set('core.modules', array_merge(array(THEMEPATH."base"), Kohana::config("core.modules")));
 			
 		$css_url = (Kohana::config("cdn.cdn_css")) ? 
 			Kohana::config("cdn.cdn_css") : url::base();
-		$theme_css[] = $css_url."themes/default/css/style.css";
+		$theme_css[] = $css_url."themes/base/css/style.css";
 		
 		// 2. Extend the default theme
 		$theme = THEMEPATH.Kohana::config("settings.site_style");
