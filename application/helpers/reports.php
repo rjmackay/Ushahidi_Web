@@ -47,6 +47,13 @@ class reports_Core {
 		$post = Validation::factory($post)
 				->pre_filter('trim', TRUE);
 		
+		// CSRF validation before proceeding with the rest of the validation
+		if ( ! isset($post['form_auth_token']) ||  ! csrf::valid($post['form_auth_token']))
+		{
+			$post->add_error('incident_title','csrf');
+			return FALSE;
+		}
+		
 		$post->add_rules('incident_title','required', 'length[3,200]');
 		$post->add_rules('incident_description','required');
 		$post->add_rules('incident_date','required','date_mmddyyyy');
