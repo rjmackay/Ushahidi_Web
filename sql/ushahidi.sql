@@ -1399,7 +1399,8 @@ VALUES
   (61,'allow_alerts','1'),
   (62,'require_email_confirmation','0'),
   (63,'manually_approve_users','0'),
-  (64,'enable_timeline','0');
+  (64,'enable_timeline','0'),
+  (65,'map_point_reports,'0');
 -- --------------------------------------------------------
 
 /**
@@ -1490,5 +1491,5 @@ CREATE TABLE IF NOT EXISTS `verified` (
  * Version information for table `settings`
  *
  */
-UPDATE `settings` SET `value` = '98' WHERE `key` = 'db_version';
+UPDATE `settings` SET `value` = '99' WHERE `key` = 'db_version';
 UPDATE `settings` SET `value` = '2.5' WHERE `key`= 'ushahidi_version';
