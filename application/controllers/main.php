@@ -53,9 +53,13 @@ class Main_Controller extends Template_Controller {
 	 * @var Themes
 	 */
 	protected $themes;
+	
+	public static $access = 'login';
 
-	// User Object
-	protected $user;
+	public static $allowed_actions = array(
+		'index' => TRUE,
+		'registered' => TRUE,
+	);
 
 	public function __construct()
 	{

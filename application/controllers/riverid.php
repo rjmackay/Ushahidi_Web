@@ -25,6 +25,13 @@ class Riverid_Controller extends Template_Controller {
 	// Main template
 	public $template = 'riverid';
 	
+	protected $access = TRUE;
+
+	protected $allowed_actions = array(
+		'index' => TRUE,
+		'registered' => TRUE,
+	);
+	
 	// RiverID Library Object
 	public $riverid;
 	

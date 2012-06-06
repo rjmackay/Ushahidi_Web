@@ -24,7 +24,16 @@ class Login_Controller extends Template_Controller {
 
 	// Main template
 	public $template = 'login/main';
+	
+	public static $access = TRUE;
 
+	public static $allowed_actions = array(
+		'index' => TRUE,
+		'verify' => TRUE,
+		'facebook' => TRUE,
+		'username_exists_chk' => TRUE,
+		'email_exists_chk' => TRUE,
+	);
 
 	public function __construct()
 	{

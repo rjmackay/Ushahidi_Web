@@ -156,6 +156,7 @@ $config['modules'] = array
 (
 	MODPATH.'auth',      // Authentication
 	MODPATH.'csrf',      // CSRF Handling
+	MODPATH.'acl',      // Access Control
 	// MODPATH.'forge',     // Form generation
 	// MODPATH.'formation',     // Form generation
 	// MODPATH.'kodoc',     // Self-generating documentation

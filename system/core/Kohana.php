@@ -209,7 +209,7 @@ final class Kohana {
 			}
 
 			// Include the Controller file
-			require Router::$controller_path;
+			require_once Router::$controller_path;
 
 			try
 			{

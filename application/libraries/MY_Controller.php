@@ -16,6 +16,37 @@
  */
 
 abstract class Controller extends Controller_Core {
+	
+	/**
+	 * Level of permissions required to use this controller
+	 * 
+	 * Possible values:
+	 * - TRUE : always accessible (Only ever use this for the login screen)
+	 * - FALSE : never accessible
+	 * - permission : the permission/role required to access the controller
+	 * @var mixed
+	 **/
+	public static $access = FALSE;
+	
+	/**
+	 * Array of methods that can be called on this controller
+	 * 
+	 * Example:
+	 *   array(
+	 *     'index' => TRUE
+	 *     'customaction' => 'CustomActionAccess'
+	 *   )
+	 * @var array
+	 */
+	
+	public static $allowed_methods = array();
+
+	// User Object
+	protected $user;
+
+	// Auth Object
+	protected $auth;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -29,19 +60,16 @@ abstract class Controller extends Controller_Core {
 		if (! $this->auth->logged_in()) {
 			$this->auth->auto_login();
 		}
-		
-		// Chceck private deployment access
-		$controller_whitelist = array(
-			'login',
-			'riverid'
-		);
 
-		if (Kohana::config('settings.private_deployment'))
-		{
-			if (!$this->auth->logged_in('login') AND ! in_array(Router::$controller, $controller_whitelist))
+		// Check access for this controller
+		/*if (! self::can_access() ) {
+			if (! $this->auth->logged_in() )
 			{
 				url::redirect('login');
 			}
-		}
+			url::redirect('/');
+		}*/
 	}
+	
+
 }
