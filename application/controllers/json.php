@@ -314,7 +314,7 @@ class Json_Controller extends Template_Controller
 			//$json_item .= "\"video\": ".$video.", ";
 			$json_item .= "\"timestamp\": \"0\", ";
 			$json_item .= "\"count\": \"" . $cluster_count . "\", ";
-			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "], ";
+			$json_item .= "\"incident_ids\": [" . $cluster_incident_ids . "] ";
 			$json_item .= "},";
 			$json_item .= "\"geometry\": {";
 			$json_item .= "\"type\":\"Point\", ";
