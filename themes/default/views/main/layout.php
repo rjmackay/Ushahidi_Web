@@ -43,19 +43,17 @@
 					</a>
 				</li>
 				<?php
-					foreach ($categories as $category => $category_info)
+					foreach ($categories as $category_id => $category)
 					{
-						$category_title = $category_info[0];
-						$category_color = $category_info[1];
-						$category_image = ($category_info[2] != NULL)
-						    ? url::convert_uploaded_to_abs($category_info[2])
-						    : NULL;
+						$category_title = $category['category_title'];
+						$category_color = $category['category_color'];
 
 						$color_css = 'class="swatch" style="background-color:#'.$category_color.'"';
-						if ($category_info[2] != NULL)
+						$category_image = NULL;
+						if ($category['category_image_thumb'] != NULL)
 						{
 							$category_image = html::image(array(
-								'src'=>$category_image,
+								'src'=>url::convert_uploaded_to_abs($category['category_image']),
 								'style'=>'float:left;padding-right:5px;'
 								));
 							$color_css = '';
@@ -69,25 +67,22 @@
 
 						// Get Children
 						echo '<div class="hide" id="child_'. $category .'">';
-						if (sizeof($category_info[3]) != 0)
+						if (count($category['children']) > 0)
 						{
 							echo '<ul>';
-							foreach ($category_info[3] as $child => $child_info)
+							foreach ($category['children'] as $child_id => $child)
 							{
-								$child_title = $child_info[0];
-								$child_color = $child_info[1];
-								$child_image = ($child_info[2] != NULL)
-								    ? url::convert_uploaded_to_abs($child_info[2])
-								    : NULL;
+								$child_title = $child['category_title'];
+								$child_color = $child['category_color'];
 								
 								$color_css = 'class="swatch" style="background-color:#'.$child_color.'"';
-								if ($child_info[2] != NULL)
+								$child_image = NULL;
+								if ($child['category_image'] != NULL)
 								{
 									$child_image = html::image(array(
-										'src' => $child_image,
-										'style' => 'float:left;padding-right:5px;'
-									));
-
+										'src'=>url::convert_uploaded_to_abs($child['category_image']),
+										'style'=>'float:left;padding-right:5px;'
+										));
 									$color_css = '';
 								}
 
