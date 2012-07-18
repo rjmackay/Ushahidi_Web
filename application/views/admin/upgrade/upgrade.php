@@ -15,11 +15,19 @@
 ?>
 <div class="bg">
 	<h2><?php echo $title; ?></h2>
-	<?php if( $release_version == Kohana::config('settings.ushahidi_version') ) { ?>
-	<div class="settings_holder">
-		<h4><?php print Kohana::lang('upgrade.upgrade_status_info'); ?></h4>
-		<p><?php print"You do not need to upgrade."?></p>
-	</div>
+	<?php if ( $release_version <= Kohana::config('settings.ushahidi_version') ) { ?>
+		<?php if ( Kohana::config('version.ushahidi_db_version') == Kohana::config('settings.db_version') ) : ?>
+			<div class="settings_holder">
+				<h4><?php print Kohana::lang('upgrade.upgrade_status_info'); ?></h4>
+				<p><?php print Kohana::lang('upgrade.upgrade_status_info_2'); ?></p>
+			</div>
+		<?php else : ?>
+			<div class="settings_holder">
+				<h4><?php print Kohana::lang('upgrade.upgrade_db_title'); ?></h4>
+				<p><?php print Kohana::lang('upgrade.upgrade_db_info'); ?></p>
+				<p><?php print Kohana::lang('upgrade.upgrade_title_text', array($current_version, $current_db_version, $environment)); ?></p>
+			</div>
+		<?php endif; ?>
 	<?php } ?>
 	<?php if( $release_version > Kohana::config('settings.ushahidi_version') ) { ?>
 	<div class="head">
