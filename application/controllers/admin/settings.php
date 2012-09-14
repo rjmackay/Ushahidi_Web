@@ -529,7 +529,7 @@ class Settings_Controller extends Admin_Controller {
 				'default_lon' => $settings['default_lon'],
 				'default_zoom' => $settings['default_zoom'],
 				'allow_clustering' => $settings['allow_clustering'],
-				'map_point_reports' => $settings['map_point_reports'],
+				'map_point_reports' => isset($settings['map_point_reports']) ? $settings['map_point_reports'] : 0,
 				'default_map_all' => $settings['default_map_all'],
 				'default_map_all_icon_id' => $settings['default_map_all_icon_id'],
 				'enable_timeline' => $settings['enable_timeline'],
