@@ -187,7 +187,7 @@ class Login_Controller extends Template_Controller {
 					$error_message = $e->getMessage();
 
 					// We use a "custom" message because of RiverID.
-					$post->add_error('password', $error_message);
+					$post->add_error('password', 'riverid', array($error_message));
 				}
 
 				// repopulate the form fields
