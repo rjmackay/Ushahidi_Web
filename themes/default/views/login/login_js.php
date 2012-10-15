@@ -46,7 +46,7 @@ $(document).ready(function() {
 				$('.new_password').attr('disabled', true);
 				$('.new_password_again').attr('disabled', true);
 				$('.new_submit').attr('disabled', true);
-				$('.riverid_email_already_set_copy').html('<small>You already have an account managed by CrowdmapID! Try using your CrowdmapID email and password to login.</small>');
+				$('.riverid_email_already_set_copy').html('<small><?php echo Kohana::lang('ui_main.riverid_exists_login'); ?></small>');
 				$(".riverid_email_already_set").show(0);
 			}else{
 				$("#username").val('');
