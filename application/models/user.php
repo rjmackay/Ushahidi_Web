@@ -142,7 +142,7 @@ class User_Model extends Auth_User_Model {
 
 		$post->add_rules('username','required','length[3,100]', 'alpha_numeric');
 		$post->add_rules('name','required','length[3,100]');
-        $post->add_rules('email','required','email','length[4,64]');
+		$post->add_rules('email','required','email','length[4,64]');
 
 		// If user id is not specified, check if the username already exists
 		if (empty($post->user_id))

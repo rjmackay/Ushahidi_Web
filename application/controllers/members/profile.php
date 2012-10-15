@@ -13,8 +13,7 @@
  * @license	   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 
-class Profile_Controller extends Members_Controller
-{
+class Profile_Controller extends Members_Controller {
 	protected $user_id;
 
 	function __construct()
@@ -33,18 +32,7 @@ class Profile_Controller extends Members_Controller
 		$this->template->content = new View('members/profile');
 
 		// setup and initialize form field names
-		$form = array
-		(
-			'current_password' => '',
-			'username' => '',
-			'new_password' => '',
-			'password_again' => '',
-			'name' => '',
-			'email' => '',
-			'notify' => '',
-			'public_profile' => '',
-			'color' => ''
-		);
+		$form = array('current_password' => '', 'username' => '', 'new_password' => '', 'password_again' => '', 'name' => '', 'email' => '', 'notify' => '', 'public_profile' => '', 'color' => '');
 
 		//	Copy the form as errors, so the errors will be stored with keys
 		//	corresponding to the form field names
@@ -57,22 +45,22 @@ class Profile_Controller extends Members_Controller
 		{
 			$post = Validation::factory($_POST);
 
-			 //	 Add some filters
+			//	 Add some filters
 			$post->pre_filter('trim', TRUE);
 
-			$post->add_rules('username','required','alpha_numeric');
-			$post->add_rules('name','required','length[3,100]');
-			$post->add_rules('email','required','email','length[4,64]');
-			$post->add_rules('current_password','required');
+			$post->add_rules('username', 'required', 'alpha_numeric');
+			$post->add_rules('name', 'required', 'length[3,100]');
+			$post->add_rules('email', 'required', 'email', 'length[4,64]');
+			$post->add_rules('current_password', 'required');
 
-			$post->add_callbacks('email',array($this,'email_exists_chk'));
-			$post->add_callbacks('username',array($this,'username_exists_chk'));
-			$post->add_callbacks('current_password',array($this,'current_pw_valid_chk'));
+			$post->add_callbacks('email', array($this, 'email_exists_chk'));
+			$post->add_callbacks('username', array($this, 'username_exists_chk'));
+			$post->add_callbacks('current_password', array($this, 'current_pw_valid_chk'));
 
 			// If Password field is not blank
-			if ( ! empty($post->new_password))
+			if (!empty($post->new_password))
 			{
-				$post->add_rules('new_password','required','length['.kohana::config('auth.password_length').']' ,'alpha_dash','matches[password_again]');	
+				$post->add_rules('new_password', 'required', 'length[' . kohana::config('auth.password_length') . ']', 'alpha_dash', 'matches[password_again]');
 			}
 			//for plugins that want to know what the user had to say about things
 			Event::run('ushahidi_action.profile_post_member', $post);
@@ -83,7 +71,7 @@ class Profile_Controller extends Members_Controller
 				//   Set to 0 if the user is filling out the form, it means
 				//   they have had an opportunity to provide extra details.
 				$needinfo = 0;
-				if ( ! empty($post->needinfo))
+				if (!empty($post->needinfo))
 				{
 					$needinfo = $post->needinfo;
 				}
@@ -94,7 +82,7 @@ class Profile_Controller extends Members_Controller
 					$username = $post->username;
 				}
 
-				$user = ORM::factory('user',$this->user_id);
+				$user = ORM::factory('user', $this->user_id);
 				if ($user->loaded)
 				{
 					$user->username = $username;
@@ -107,16 +95,14 @@ class Profile_Controller extends Members_Controller
 					if ($post->new_password != '')
 					{
 						$user->password = $post->new_password;
-					}					
+					}
 					$user->save();
 					//for plugins that want to know how the user now stands
 					Event::run('ushahidi_action.profile_edit_member', $user);
 
 					// We also need to update the RiverID server with the new password if
-	                //    we are using RiverID and a password is being passed
-	                if (kohana::config('riverid.enable') == TRUE
-	                	AND ! empty($user->riverid)
-	                	AND $post->new_password != '')
+					//    we are using RiverID and a password is being passed
+					if (kohana::config('riverid.enable') == TRUE AND !empty($user->riverid) AND $post->new_password != '')
 					{
 						$riverid = new RiverID;
 						$riverid->email = $user->email;
@@ -148,7 +134,7 @@ class Profile_Controller extends Members_Controller
 		}
 		else
 		{
-			$user = ORM::factory('user',$this->user_id);
+			$user = ORM::factory('user', $this->user_id);
 			$form['username'] = $user->username;
 			$form['name'] = $user->name;
 			$form['email'] = $user->email;
@@ -158,16 +144,18 @@ class Profile_Controller extends Members_Controller
 		}
 
 		// If $user was never set above, we need to grab it now.
-		if ( ! isset($user))
+		if (!isset($user))
 		{
-			$user = ORM::factory('user',$this->user_id);
+			$user = ORM::factory('user', $this->user_id);
 		}
 
-		if($user->public_profile == 1)
+		if ($user->public_profile == 1)
 		{
 			$this->template->content->profile_public = TRUE;
 			$this->template->content->profile_private = FALSE;
-		}else{
+		}
+		else
+		{
 			$this->template->content->profile_public = FALSE;
 			$this->template->content->profile_private = TRUE;
 		}
@@ -176,7 +164,7 @@ class Profile_Controller extends Members_Controller
 		$this->template->content->errors = $errors;
 		$this->template->content->form_error = $form_error;
 		$this->template->content->form_saved = $form_saved;
-		$this->template->content->yesno_array = array('1'=>utf8::strtoupper(Kohana::lang('ui_main.yes')),'0'=>utf8::strtoupper(Kohana::lang('ui_main.no')));
+		$this->template->content->yesno_array = array('1' => utf8::strtoupper(Kohana::lang('ui_main.yes')), '0' => utf8::strtoupper(Kohana::lang('ui_main.no')));
 
 		// Javascript Header
 		$this->template->colorpicker_enabled = TRUE;
@@ -186,48 +174,47 @@ class Profile_Controller extends Members_Controller
 	 * Checks if email address is associated with an account.
 	 * @param Validation $post $_POST variable with validation rules
 	 */
-	public function email_exists_chk( Validation $post )
+	public function email_exists_chk(Validation $post)
 	{
-		if (array_key_exists('email',$post->errors()))
+		if (array_key_exists('email', $post->errors()))
 			return;
 
-		$users = ORM::factory('user')
-			->where('id <> '.$this->user_id);
+		$users = ORM::factory('user')->where('id <> ' . $this->user_id);
 
-		if ($users->email_exists( $post->email ) )
-			$post->add_error('email','exists');
+		if ($users->email_exists($post->email))
+			$post->add_error('email', 'exists');
 	}
 
 	/**
 	 * Checks if username is associated with an account.
 	 * @param Validation $post $_POST variable with validation rules
 	 */
-	public function username_exists_chk( Validation $post )
+	public function username_exists_chk(Validation $post)
 	{
-		if (array_key_exists('username',$post->errors()))
+		if (array_key_exists('username', $post->errors()))
 			return;
 
-		$users = ORM::factory('user')
-			->where('id <> '.$this->user_id);
+		$users = ORM::factory('user')->where('id <> ' . $this->user_id);
 
-		if ($users->username_exists( $post->username ) )
-			$post->add_error('username','exists');
+		if ($users->username_exists($post->username))
+			$post->add_error('username', 'exists');
 	}
 
 	/**
 	 * Checks if current password being passed is correct
 	 * @param Validation $post $_POST variable with validation rules
 	 */
-	public function current_pw_valid_chk( Validation $post )
+	public function current_pw_valid_chk(Validation $post)
 	{
-		if (array_key_exists('current_password',$post->errors()))
+		if (array_key_exists('current_password', $post->errors()))
 			return;
 
 		$user = User_Model::get_user_by_id($this->user_id);
 
-		if ( ! User_Model::check_password($user->email,$post->current_password) )
+		if (!User_Model::check_password($user->email, $post->current_password))
 		{
-			$post->add_error('current_password','incorrect');
+			$post->add_error('current_password', 'incorrect');
 		}
 	}
+
 }
