@@ -199,8 +199,14 @@ class Auth_ORM_Driver extends Auth_Driver {
 			$user = ORM::factory('user', $user);
 		}
 
-		if (isset($user->id) AND in_array($user->id,kohana::config('riverid.exempt')))
+		if (isset($user->id) AND in_array($user->id, Kohana::config('riverid.exempt')))
 		{
+			// Get the salt from the stored password
+			$salt = Auth::instance()->find_salt($user->password);
+
+			// Create a hashed password using the salt from the stored password
+			$password = Auth::instance()->hash_password($password, $salt);
+			
 			// Looks like this is an exempted account
 			return $this->login_standard($user, $password, $remember);
 		}
