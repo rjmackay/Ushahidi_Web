@@ -85,6 +85,7 @@ class Users_Controller extends Admin_Controller {
 	public function edit($user_id = FALSE, $saved = FALSE)
 	{
 		$this->template->content = new View('admin/users/edit');
+		$this->template->js = new View('admin/users/edit_js');
 
 		if ($user_id)
 		{
@@ -95,7 +96,7 @@ class Users_Controller extends Admin_Controller {
 				url::redirect(url::site() . 'admin/users/');
 			}
 		}
-
+		
 		// Setup and initialize form field names
 		$form = array('username' => '', 'name' => '', 'email' => '', 'password' => '', 'notify' => '', 'role' => '');
 
@@ -129,23 +130,31 @@ class Users_Controller extends Admin_Controller {
 			{
 				$user = ORM::factory('user', $user_id);
 				$user->name = $post->name;
-				$user->email = $post->email;
 				$user->notify = $post->notify;
-				if ($user_id == NULL)
+				
+				$riverid = FALSE;
+				
+				if (Kohana::config('riverid.enable') == TRUE)
 				{
-					$user->password = $post->password;
-				}
-
-				// We can only set a new password if we are using the standard ORM method,
-				//    otherwise it won't actually change the password used for authentication
-				if (isset($post->new_password) AND Kohana::config('riverid.enable') == FALSE AND strlen($post->new_password) > 0)
-				{
-					$user->password = $post->new_password;
+					$riverid = new RiverID();
+					$riverid->email = $post->email;
+					isset($post->password) ? $riverid->password = $post->password : '';
 				}
 
 				// Existing User??
 				if ($user->loaded)
 				{
+					// We can only set new password or email if we're using standard ORM method
+					if (! $riverid)
+					{
+						$user->email = $post->email;
+
+						if (isset($post->new_password) AND strlen($post->new_password) > 0)
+						{
+							$user->password = $post->new_password;
+						}
+					}
+					
 					// Prevent modification of the main admin account username or role
 					if ($user->id != 1)
 					{
@@ -169,6 +178,27 @@ class Users_Controller extends Admin_Controller {
 				else
 				{
 					$user->username = $post->username;
+					$user->email = $post->email;
+					
+					// Not using river id: set password as normal
+					if (! $riverid)
+					{
+						$user->password = $post->password;
+					}
+					// If River ID enabled but user doesn't have a river ID
+					// Register them with River ID
+					elseif (! $riverid->is_registered())
+					{
+						$riverid->register();
+
+						// If something went wrong with registration, catch it here
+						if ($riverid->error)
+						{
+							throw new Exception($riverid->error[0]);
+						}
+
+						$user->riverid = $riverid->user_id;
+					}
 
 					// Add New Roles
 					if ($post->role != 'none')
@@ -226,6 +256,8 @@ class Users_Controller extends Admin_Controller {
 
 		// Add one additional role for users with no role
 		$role_array['none'] = utf8::strtoupper(Kohana::lang('ui_main.none'));
+
+		$this->template->js->user_id = $user_id;
 
 		$this->template->content->id = $user_id;
 		$this->template->content->display_roles = $this->display_roles;

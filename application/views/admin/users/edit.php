@@ -13,6 +13,7 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 ?>
+
 			<div class="bg">
 				<h2>
 					<?php admin::user_subtabs("users_edit", $display_roles); ?>
@@ -52,14 +53,24 @@
 					<!-- column -->
 					<div class="sms_holder">
 
-						<div class="row">
+						<div class="row row-name">
 							<h4><?php echo Kohana::lang('ui_main.full_name');?> <span class="required"><?php echo Kohana::lang('ui_main.required'); ?></span></h4>
 							<?php print form::input('name', $form['name'], ' class="text long2"'); ?>
 						</div>
 
 						<div class="row">
 							<h4><?php echo Kohana::lang('ui_main.email');?> <span class="required"><?php echo Kohana::lang('ui_main.required'); ?></span></h4>
-							<?php print form::input('email', $form['email'], ' class="text long2"'); ?>
+							<?php if ($user_id AND Kohana::config('riverid.enable') == TRUE)
+							{
+								print $form['email'];
+								print form::hidden('email', $form['email']); 
+							}
+							else
+							{
+								print form::input('email', $form['email'], ' class="text long2"'); 
+							}
+							?>
+							<div class="riverid_email_already_set"><small><?php echo Kohana::lang('ui_admin.riverid_exists_admin'); ?></small></div>
 						</div>
 
 						<div class="row">
@@ -89,17 +100,17 @@
 
 						<?php if ($user_id == FALSE) { ?>
 
-						<div class="row">
+						<div class="row row-password">
 							<h4><a href="#" class="tooltip" title="<?php echo Kohana::lang("tooltips.profile_new_users_password"); ?>"><?php echo Kohana::lang('ui_main.password'); ?></a> <span class="required"><?php echo Kohana::lang('ui_main.required'); ?></span></h4>
 							<?php print form::password('password', '', ' class="text"'); ?>
 						</div>
 
-						<div class="row">
+						<div class="row row-password_again">
 							<h4><?php echo Kohana::lang('ui_main.password_again');?></h4>
 							<?php print form::password('password_again', $form['password_again'], ' class="text"'); ?>
 						</div>
 
-						<?php }elseif(kohana::config('riverid.enable') == FALSE){ ?>
+						<?php } elseif (kohana::config('riverid.enable') == FALSE) { ?>
 
 						<div class="row">
 							<h4><?php echo Kohana::lang('ui_admin.new_password');?></h4>

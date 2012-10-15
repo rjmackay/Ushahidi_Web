@@ -2563,3 +2563,9 @@ div.dp-popup td.disabled {
 	.sort-DESC {
 		background: url(../../img/admin/drag.gif) 0 -8px no-repeat;
 	}
+
+/* River ID fields in user admin */
+.riverid_email_already_set {
+	display: none;
+	clear: left;
+}
