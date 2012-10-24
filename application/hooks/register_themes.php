@@ -20,7 +20,7 @@ class register_themes {
 	public function __construct()
 	{
 		// Hook into routing
-		if (Kohana::config('config.installer_check') == FALSE OR file_exists(DOCROOT."application/config/database.php"))
+		if (Kohana::config('config.installer_check') == FALSE OR file_exists(APPPATH."config/database.php"))
 		{
 			Event::add('system.ready', array($this, 'register'));
 		}
