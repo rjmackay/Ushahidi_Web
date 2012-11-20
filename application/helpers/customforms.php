@@ -171,7 +171,10 @@ class customforms_Core {
 	public static function validate_custom_form_fields(&$post)
 	{
 		$custom_fields = array();
-
+		
+		$incident_id = isset($post->incident_id) ? $post->incident_id : FALSE;
+		$fields = self::get_custom_form_fields($incident_id, $post->form_id);
+		
 		if (!isset($post->custom_field))
 			return;
 
