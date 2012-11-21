@@ -69,6 +69,7 @@ Kohana::config_set('settings.ushahidi_version', $settings->ushahidi_version);
 Kohana::config_set('settings.private_deployment', $settings->private_deployment);
 Kohana::config_set('settings.manually_approve_users', $settings->manually_approve_users);
 Kohana::config_set('settings.require_email_confirmation', $settings->require_email_confirmation);
+Kohana::config_set('settings.forgot_password_secret', $settings->forgot_password_secret);
 
 // Set Site Timezone
 if (function_exists('date_default_timezone_set'))
@@ -105,3 +106,12 @@ Kohana::config_set('settings.api_url_all',
 // Additional Mime Types (KMZ/KML)
 Kohana::config_set('mimes.kml', array('text/xml'));
 Kohana::config_set('mimes.kmz', array('text/xml'));
+
+// Set 'settings.forgot_password_key' if not set already
+if ( ! Kohana::config('settings.forgot_password_secret') OR Kohana::config('settings.forgot_password_secret') == "")
+{
+	$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+[]{};:,.?`~';
+	$key = text::random($pool, 64);
+	$settings->forgot_password_secret = $key;
+	$settings->save();
+}

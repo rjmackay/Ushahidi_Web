@@ -56,7 +56,7 @@ class Login_Controller extends Template_Controller {
 				if($auth->logged_in('member'))
 				{
 					url::redirect('members/dashboard');
-				}
+			}
 
 				// Admins go to the admin panel
 				// Temporary fix - any non member role gets admin access
@@ -65,10 +65,10 @@ class Login_Controller extends Template_Controller {
 					url::redirect('admin');
 				}
 
-				$insufficient_role = TRUE;
-				$message_class = 'login_error';
-				$message = Kohana::lang('ui_main.insufficient_role');
-			}
+			$insufficient_role = TRUE;
+			$message_class = 'login_error';
+			$message = Kohana::lang('ui_main.insufficient_role');
+		}
 		}
 
 		// setup and initialize form field names
@@ -147,10 +147,10 @@ class Login_Controller extends Template_Controller {
 				// Load the user
 				$user = ORM::factory('user', $postdata_array['username']);
 
-				$remember = (isset($post->remember))? TRUE : FALSE;
+				$remember = (isset($post->remember)) ? TRUE : FALSE;
 
 				// Allow a login with username or email address, but we need to figure out which is
-				//   which so we can pass the appropriate variable on login. Mostly used for RiverID
+				// which so we can pass the appropriate variable on login. Mostly used for RiverID
 
 				$email = $postdata_array['username'];
 				if (valid::email($email) == false)
@@ -172,7 +172,7 @@ class Login_Controller extends Template_Controller {
 					$login = $auth->login($user, $postdata_array['password'], $remember, $email);
 
 					// Attempt a login
-					if ( $login AND $valid_login )
+					if ($login AND $valid_login )
 					{
 						// Action::user_login - User Logged In
 						Event::run('ushahidi_action.user_login',$user);
@@ -245,7 +245,7 @@ class Login_Controller extends Template_Controller {
 			$post->add_callbacks('email', array($this,'email_exists_chk'));
 
 			// If Password field is not blank
-			if (!empty($post->password))
+			if ( ! empty($post->password))
 			{
 				$post->add_rules('password','required','length['.kohana::config('auth.password_length').']'
 					,'alpha_numeric','matches[password_again]');
@@ -317,7 +317,7 @@ class Login_Controller extends Template_Controller {
 				{
 
 					// Determine which reset method to use. The options are to use the RiverID server
-					//   or to use the normal method which just resets the password locally.
+					//  or to use the normal method which just resets the password locally.
 					if (kohana::config('riverid.enable') == TRUE AND ! empty($user->riverid))
 					{
 						// Reset on RiverID Server
@@ -332,13 +332,9 @@ class Login_Controller extends Template_Controller {
 					else
 					{
 						// Reset locally
-
-						// Secret consists of email and the last_login field.
-						// So as soon as the user logs in again,
-						// the reset link expires automatically.
-						$secret = $auth->hash_password($user->email.$user->last_login);
-						$secret_link = url::site('login/index/'.$user->id.'/'.$secret.'?reset');
-						$this->_email_resetlink($post->resetemail,$user->name,$secret_link);
+						$secret = $user->forgot_password_token();
+						$secret_link = url::site('login/index/'.$user->id.'/'.urlencode($secret).'?reset');
+						$email_sent = $this->_email_resetlink($post->resetemail, $user->name, $secret_link);
 					}
 
 					// Send Confirmation email
@@ -486,7 +482,7 @@ class Login_Controller extends Template_Controller {
 						header("Location: " . $openid->authUrl());
 					}
 				}
-				elseif($openid->mode == "cancel")
+				elseif ($openid->mode == "cancel")
 				{
 					$openid_error = TRUE;
 					$message_class = 'login_error';
@@ -580,7 +576,7 @@ class Login_Controller extends Template_Controller {
 					}
 				}
 			}
-			catch(ErrorException $e)
+			catch (ErrorException $e)
 			{
 				$openid_error = TRUE;
 				$message_class = 'login_error';
@@ -887,8 +883,7 @@ class Login_Controller extends Template_Controller {
 			else
 			{
 				// Use Standard
-
-				if($auth->hash_password($user->email.$user->last_login, $auth->find_salt($token)) == $token)
+				if($user->check_forgot_password_token($token))
 				{
 					$user->password = $password;
 					$user->save();
