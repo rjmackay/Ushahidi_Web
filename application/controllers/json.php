@@ -348,6 +348,7 @@ class Json_Controller extends Template_Controller {
 			foreach ($markers as $key => $target)
 			{
 				// Handle both reports::fetch_incidents() response and actual ORM objects
+				$target->id = isset($target->incident_id) ? $target->incident_id : $target->id;
 				if (isset($target->latitude) AND isset($target->longitude))
 				{
 					$target_latitude = $target->latitude;
@@ -433,6 +434,7 @@ class Json_Controller extends Template_Controller {
 				'thumb' => '',
 				'timestamp' => 0,
 				'count' => $cluster_count,
+				'incident_ids' => array_map(create_function('$v', 'return $v->id;'), $cluster)
 			);
 			$json_item['geometry'] = array(
 				'type' => 'Point',
