@@ -343,7 +343,7 @@ jQuery(function() {
 		var jsonStr = jsonFormat.write(json2GeoJSON(data));
 		var format = new OpenLayers.Format.GeoJSON();
 		layerFeatures = format.read(jsonStr);
-		if (layerFeatures.length > 0) {
+		if (layerFeatures != undefined && layerFeatures.length > 0) {
 			// Add the checkins layer
 			map.addLayer(Ushahidi.GEOJSON, {
 				url: checkinsURL,
@@ -364,6 +364,8 @@ jQuery(function() {
 			type: "FeatureCollection",
 			features: []
 		};
+		
+		if (json["payload"]["checkins"] == undefined) return;
 
 		$.each(json["payload"]["checkins"], function(index, checkin){
 			var checkinImage = (checkin.media !== undefined) ? checkin.media[0].medium : "";
