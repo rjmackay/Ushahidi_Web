@@ -197,17 +197,21 @@ class Json_Controller extends Template_Controller {
 			}
 			
 			// Get thumbnail
-			$thumb = "";
+			$thumb = $image = "";
 			$media = ORM::factory('incident', $marker->id)->media;
 			if ($media->count())
 			{
 				foreach ($media as $photo)
 				{
-					if ($photo->media_thumb)
+					if ($thumb == "" AND $photo->media_thumb)
 					{
 						// Get the first thumb
 						$thumb = url::convert_uploaded_to_abs($photo->media_thumb);
-						break;
+					}
+					if ($image == "" AND $photo->media_medium)
+					{
+						// Get the first thumb
+						$image = url::convert_uploaded_to_abs($photo->media_medium);
 					}
 				}
 			}
@@ -237,6 +241,7 @@ class Json_Controller extends Template_Controller {
 				'color' => $color,
 				'icon' => $icon,
 				'thumb' => $thumb,
+				'image' => $image,
 				'timestamp' => strtotime($marker->incident_date),
 				'count' => 1,
 				'class' => get_class($marker)
