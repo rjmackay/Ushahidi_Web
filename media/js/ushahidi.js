@@ -70,7 +70,7 @@
 	 	 GeoJSONStyle: function() {
 	 	 	var style = new OpenLayers.Style({
 	 	 		'externalGraphic': "${icon}",
-	 	 		'graphicTitle': "${cluster_count}",
+	 	 		'graphicTitle': "${graphicTitle}",
 				pointRadius: "${radius}",
 				fillColor: "${color}",
 				fillOpacity: "${opacity}",
@@ -93,6 +93,20 @@
 						} else {
 							return (Math.min(feature.attributes.count, 7) + 1) *
 							(Ushahidi.markerRadius * 0.6);
+						}
+					},
+					graphicTitle: function(feature) {
+						if (feature.attributes.count > 1)
+						{
+							return feature.attributes.count;
+						}
+						else if (feature.attributes.name !== undefined && feature.attributes.name != "")
+						{
+							return $(feature.attributes.name).text();
+						}
+						else
+						{
+							return "";
 						}
 					},
 					fontsize: function(feature) {
