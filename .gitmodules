@@ -1,9 +1,9 @@
 [submodule "application/i18n"]
 	path = application/i18n
 	url = git://github.com/ushahidi/Ushahidi-Localizations.git
-[submodule "timespan"]
+[submodule "plugins/timespan"]
 	path = plugins/timespan
-	url = git://github.com/jetherton/timespan.git
+	url = git://github.com/rjmackay/timespan.git
 [submodule "plugins/tedx"]
 	path = plugins/tedx
 	url = git://github.com/rjmackay/Ushahidi-tedx-plugin.git
