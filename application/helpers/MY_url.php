@@ -49,9 +49,8 @@ class url extends url_Core {
 	 */
 	public static function convert_uploaded_to_abs($file)
 	{
-		if(valid::url($file) == true){
-			return $file;
-		}
+		if(empty($file)) return FALSE;
+		if(valid::url($file)) return $file;
 
 		return url::base().Kohana::config('upload.relative_directory').'/'.$file;
 	}
