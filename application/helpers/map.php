@@ -53,11 +53,9 @@ class map_Core {
 					if ($layer->openlayers == "Bing")
 					{
 						// Options for the Bing layer constructor
-						$bing_options = "{\n"
-						    . "\t name: \"".$layer->data['name']."\",\n"
-						    . "\t type: \"".$layer->data['type']."\",\n"
-						    . "\t key: \"".$layer->data['key']."\"\n"
-						    . "}";
+						$params = $layer->data;
+						if (isset($params['baselayer'])) unset($params['baselayer']);
+						$bing_options = json_encode($params);
 						
 						$js .= "var ".$layer->name." = new OpenLayers.Layer.".$layer->openlayers."($bing_options);\n\n";
 					}
