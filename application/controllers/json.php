@@ -300,7 +300,8 @@ class Json_Controller extends Template_Controller {
 		$end_date = (isset($_GET['e']) AND intval($_GET['e']) > 0) ? intval($_GET['e']) : NULL;
 		
 		// Get Zoom Level
-		$zoomLevel = (isset($_GET['z']) AND !empty($_GET['z'])) ? (int) $_GET['z'] : 8;
+		// Note: We check != '' rather than empty() since 0 is a valid zoom level
+		$zoomLevel = (isset($_GET['z']) AND $_GET['z'] != '') ? (int) $_GET['z'] : 8;
 		$distance = (10000000 >> $zoomLevel) / 100000;
 		
 		// Get markers array
