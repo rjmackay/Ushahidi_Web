@@ -113,7 +113,10 @@ class Themes_Core {
 		{
 			Requirements::js("media/js/OpenLayers.js");
 			Requirements::js("media/js/ushahidi.js");
-			Requirements::js($this->api_url);
+			if (! empty($this->api_url))
+			{
+				Requirements::js($this->api_url);
+			}
 			Requirements::customJS("OpenLayers.ImgPath = '".url::file_loc('js')."media/img/openlayers/"."';",'openlayers-imgpath');
 			
 			Requirements::css("media/css/openlayers.css");
