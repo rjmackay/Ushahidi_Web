@@ -439,6 +439,10 @@
 		// Set the map center
 		this._olMap.setCenter(point, config.zoom);
 
+	 	// Update zoom from OpenLayers
+	 	// We have to do this since OL2.12 may adjust zoom on us
+	 	this._reportFilters.z = this.currentZoom = this._olMap.getZoom();
+
 		// Display the map projection
 		if (config.displayProjection != undefined && config.displayProjection) {
 			document.getElementById('mapProjection').innerHTML = this._olMap.projection;
