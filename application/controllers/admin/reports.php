@@ -94,7 +94,7 @@ class Reports_Controller extends Admin_Controller {
 		{
 			$keyword_raw = "";
 		}
-
+		
 		// Check, has the form been submitted?
 		$form_error = FALSE;
 		$errors = array();
@@ -286,7 +286,7 @@ class Reports_Controller extends Admin_Controller {
 
 		// Status Tab
 		$this->template->content->status = $status;
-
+		
 		// Javascript Header
 		$this->template->js = new View('admin/reports/reports_js');
 	}
@@ -1156,9 +1156,9 @@ class Reports_Controller extends Admin_Controller {
 			$notices = array();
 
 			if (!$_FILES['csvfile']['error'])
-			{
+					{
 				if (file_exists($_FILES['csvfile']['tmp_name']))
-				{
+						{
 					if($filehandle = fopen($_FILES['csvfile']['tmp_name'], 'r'))
 					{
 						$importer = new ReportsImporter;
@@ -1584,20 +1584,20 @@ class Reports_Controller extends Admin_Controller {
 		Event::$data = $params;
 	}
 	
-
+		
 	/**
 	* Delete Photo
 	* @param int $id The unique id of the photo to be deleted
 	*/
 	public function deletePhoto ($id)
-	{
+		{
 		$this->auto_render = FALSE;
 		$this->template = "";
-
+		
 		if ($id)
 		{
 			Media_Model::delete_photo($id);
 		}
-	}
+		}
 
-}
+		}

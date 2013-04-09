@@ -36,7 +36,7 @@ class Share_Controller extends Json_Controller {
 
 			if( ! $sharing->loaded)
 				throw new Kohana_404_Exception();
-			
+
 			$sharing_url = $sharing->sharing_url;
 			$sharing_color = $sharing->sharing_color;
 			

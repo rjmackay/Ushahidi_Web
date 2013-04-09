@@ -15,7 +15,7 @@ class category_Core {
 	public static function display_category_checkbox($category, $selected_categories, $form_field, $enable_parents = FALSE)
 	{
 		$html = '';
-
+		
 		$cid = $category->id;
 
 		// Get locale
@@ -28,7 +28,7 @@ class category_Core {
 
 		// Category is selected.
 		$category_checked = in_array($cid, $selected_categories);
-		
+
 		// Visible Child Count
 		$vis_child_count = 0;
 		foreach ($category->children as $child)
@@ -75,8 +75,8 @@ class category_Core {
 		$this_col = 1;
 
 		// Maximum number of elements per column
-		$maxper_col = round($categories_total/$columns);
-
+		$maxper_col = round($categories_total / $columns);
+		
 		$i = 1;  // Element Count
 		foreach ($categories as $category)
 		{
@@ -122,8 +122,8 @@ class category_Core {
 						if ($child_visible)
 						{
 							$html .= '<li>';
-							$html .= category::display_category_checkbox($child, $selected_categories, $form_field, $enable_parents);
-						}
+					$html .= category::display_category_checkbox($child, $selected_categories, $form_field, $enable_parents);
+				}
 					}
 					else
 					{
@@ -133,7 +133,7 @@ class category_Core {
 				}
 				$html .= '</ul>';
 			}
-
+			
 			// If this is the last element of a column, close the UL
 			if ($i > $maxper_col OR $i == $categories_total)
 			{
@@ -142,11 +142,11 @@ class category_Core {
 				$this_col++;
 			}
 			else
-			{
+				{
 				$i++;
+				}
 			}
-		}
-
+			
 		return $html;
 	}
 	
@@ -167,15 +167,15 @@ class category_Core {
 		$db = new Database();
 		
 		// Fetch the other categories
-		$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image_thumb, COUNT(i.id) report_count "
-			. "FROM ".$table_prefix."category c "
-			. "LEFT JOIN ".$table_prefix."category c_parent ON (c.parent_id = c_parent.id) "
-			. "LEFT JOIN ".$table_prefix."incident_category ic ON (ic.category_id = c.id) "
-			. "LEFT JOIN ".$table_prefix."incident i ON (ic.incident_id = i.id AND i.incident_active = 1 ) "
+			$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image_thumb, COUNT(i.id) report_count "
+				. "FROM ".$table_prefix."category c "
+				. "LEFT JOIN ".$table_prefix."category c_parent ON (c.parent_id = c_parent.id) "
+				. "LEFT JOIN ".$table_prefix."incident_category ic ON (ic.category_id = c.id) "
+				. "LEFT JOIN ".$table_prefix."incident i ON (ic.incident_id = i.id AND i.incident_active = 1 ) "
 			. "WHERE c.category_visible = 1 "
 			. "AND (c_parent.category_visible = 1 OR c.parent_id = 0)" // Parent must be visible, or must be top level
 			. "AND c.category_title != \"NONE\" "
-			. "GROUP BY c.id "
+				. "GROUP BY c.id "
 			. "ORDER BY c.category_title ASC";
 		
 		// Create nested array - all in one pass
@@ -189,7 +189,7 @@ class category_Core {
 				$report_count = isset($category_data[$category->id]['report_count']) ? $category_data[$category->id]['report_count'] : 0;
 				
 				$category_data[$category->id] = array(
-					'category_title' => Category_Lang_Model::category_title($category->id, Kohana::config('locale.language.0')),
+					'category_title' => html::escape(Category_Lang_Model::category_title($category->id, Kohana::config('locale.language.0'))),
 					'parent_id' => $category->parent_id,
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
@@ -209,7 +209,7 @@ class category_Core {
 				
 				// Add children
 				$category_data[$category->parent_id]['children'][$category->id] = array(
-					'category_title' => Category_Lang_Model::category_title($category->id, Kohana::config('locale.language.0')),
+					'category_title' => html::escape(Category_Lang_Model::category_title($category->id, Kohana::config('locale.language.0'))),
 					'parent_id' => $category->parent_id,
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
@@ -221,7 +221,7 @@ class category_Core {
 				$category_data[$category->parent_id]['report_count'] += $category->report_count;
 			}
 		}
-		
+
 		// Generate and return the HTML
 		return self::_generate_treeview_html($category_data);
 	}
@@ -247,7 +247,7 @@ class category_Core {
 			$tree_html .= "<li".$category_class.">"
 							. "<a href=\"#\" class=\"cat_selected\" id=\"filter_link_cat_".$id."\">"
 							. "<span class=\"item-swatch\" style=\"background-color: #".$category['category_color']."\">$category_image</span>"
-							. "<span class=\"item-title\">".strip_tags($category['category_title'])."</span>"
+							. "<span class=\"item-title\">".html::strip_tags($category['category_title'])."</span>"
 							. "<span class=\"item-count\">".$category['report_count']."</span>"
 							. "</a></li>";
 							

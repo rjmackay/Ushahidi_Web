@@ -112,7 +112,7 @@ class actioner {
 				// Not the right location
 				continue;
 			}
-
+			
 			// --- Check Keywords
 			//     against subject and body. If both fail, then this action doesn't qualify
 
@@ -686,7 +686,7 @@ class actioner {
 		{
 			return false;
 		}
-
+		
 		// Save Incident
 		$incident = new Incident_Model();
 		$incident->location_id = $location_id;
@@ -700,7 +700,7 @@ class actioner {
 
 		// Conflicted.. do I run report add here? Potential to create a mess with action triggers?
 		//Event::run('ushahidi_action.report_add', $incident);
-
+		
 		$incident_id = $incident->id;
 
 		foreach($categories as $category_id)

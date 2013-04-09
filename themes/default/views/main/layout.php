@@ -10,7 +10,7 @@
 
 		<!-- right column -->
 		<div id="right" class="clearingfix">
-
+			
 			<!-- category filters -->
 			<div class="cat-filters clearingfix">
 				<strong>
@@ -45,7 +45,7 @@
 				<?php
 					foreach ($categories as $category => $category_info)
 					{
-						$category_title = $category_info[0];
+						$category_title = html::escape($category_info[0]);
 						$category_color = $category_info[1];
 						$category_image = ($category_info[2] != NULL)
 						    ? url::convert_uploaded_to_abs($category_info[2])
@@ -74,7 +74,7 @@
 							echo '<ul>';
 							foreach ($category_info[3] as $child => $child_info)
 							{
-								$child_title = $child_info[0];
+								$child_title = html::escape($child_info[0]);
 								$child_color = $child_info[1];
 								$child_image = ($child_info[2] != NULL)
 								    ? url::convert_uploaded_to_abs($child_info[2])
@@ -141,7 +141,7 @@
 				</ul>
 				<!-- /Layers -->
 			<?php endif; ?>
-
+			
 			<br />
 
 			<!-- additional content -->

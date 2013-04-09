@@ -842,10 +842,4 @@ class Reports_Controller extends Members_Controller {
 			return "1=1";
 		}
 	}
-
-	private function _csv_text($text)
-	{
-		$text = stripslashes(htmlspecialchars($text));
-		return $text;
-	}
 }
