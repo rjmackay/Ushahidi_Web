@@ -123,7 +123,7 @@ $(document).ready(function() {
 		$('#action_form_between_times').slideUp();
 		$('#action_form_days_of_the_week').slideUp();
 		$('#action_form_specific_days').slideUp();
-	}
+		}
 	hide_advanced_options();
 
 	// ----- RESPONSES
@@ -150,7 +150,7 @@ $(document).ready(function() {
 		$('#action_form_verify').slideUp();
 		$('#action_form_approve').slideUp();
 		$('#action_form_badge').slideUp();
-	}
+		}
 	hide_response_advanced_options();
 
 	function hide_response(){
@@ -201,10 +201,10 @@ $(document).ready(function() {
 			function(e, selectedDate, $td, state)
 			{
 				//console.log('You ' + (state ? '' : 'un') + 'selected ' + selectedDate);
-				if(state){
+				if (state){
 					// selected
 					selected_specific_days.push(String(selectedDate));
-				}else{
+				} else {
 					// unselected, remove from array
 					selected_specific_days = jQuery.grep(selected_specific_days, function (a) { return a != String(selectedDate); });
 				}
@@ -346,25 +346,25 @@ $(document).ready(function() {
 											if($qkey == 'location' && $qval == 'specific') {
 												// TODO: Find some more intuitive way to illustrate where this is.
 												//$qval = print_r($qualifiers['geometry'],true);
-
+												
 												$geometry = str_ireplace('{"geometry":"POLYGON((','',$qualifiers['geometry']);
 												$geometry = str_ireplace('))"}','',$geometry);
 												$polygon = explode(',',$geometry[0]);
-
+												
 												$qval = 'Geofenced<br/>';
 												$qval .= '<img src ="https://maps.googleapis.com/maps/api/staticmap?size=275x200&path=color:0xff0000ff|weight:2|fillcolor:0xFFFF0033';
 												foreach($polygon as $pk => $pv)
-												{
+													{
 													$point = str_ireplace(' ',',',$pv);
 													$point = explode(',',$point);
 													$qval .= '|'.$point[1].','.$point[0];
-												}
-
+													}
+												
 												$qval .= '&sensor=false" />';
-											}else{
+											} else {
 
 												// If it's not a location, break the array into a string
-												if(is_array($qval))
+												if (is_array($qval))
 												{
 													$qval = implode(', ',$qval);
 												}
@@ -489,23 +489,23 @@ $(document).ready(function() {
 							<div class="tab_form_item" id="trigger_first_qualifiers"><?php echo Kohana::lang('ui_admin.select_trigger_before_qualifiers'); ?></div>
 
 							<div class="tab_form_item" id="action_form_user" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.user")); ?>"><?php echo Kohana::lang('ui_admin.user'); ?>:</a></h4>
-								<?php echo form::dropdown('action_user', $user_options, 'standard'); ?>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.user")); ?>"><?php echo Kohana::lang('ui_admin.user'); ?>:</a></h4>
+								<?php echo form::dropdown('action_user', $user_options, 0); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_location" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.location")); ?>"><?php echo Kohana::lang('ui_main.location'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.location")); ?>"><?php echo Kohana::lang('ui_main.location'); ?>:</a></h4>
 								<?php echo form::radio('action_location', 'anywhere', TRUE, ' class="action_location"').' '.Kohana::lang('ui_admin.anywhere'); ?><br/>
 								<?php echo form::radio('action_location', 'specific', FALSE, ' class="action_location"').' '.Kohana::lang('ui_admin.specific_area'); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_keyword" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.keywords")); ?>"><?php echo Kohana::lang('ui_admin.keywords'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.keywords")); ?>"><?php echo Kohana::lang('ui_admin.keywords'); ?>:</a></h4>
 								<?php echo form::input('action_keyword',''); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_category" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.category")); ?>"><?php echo Kohana::lang('ui_main.category'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.category")); ?>"><?php echo Kohana::lang('ui_main.category'); ?>:</a></h4>
 								<?php
 									// categories, selected_categories, form field name, number of columns
 									echo category::form_tree('action_category', array(), 2, FALSE, TRUE);
@@ -513,7 +513,7 @@ $(document).ready(function() {
 							</div>
 
 							<div class="tab_form_item" id="action_form_on_specific_count" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.on_specific_count")); ?>"><?php echo Kohana::lang('ui_admin.on_specific_count');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.on_specific_count")); ?>"><?php echo Kohana::lang('ui_admin.on_specific_count');?>:</a></h4>
 								<?php echo Kohana::lang('ui_admin.count').' '.form::input('action_on_specific_count','',' style="width:25px;"'); ?><br/>
 								<?php echo form::radio('action_on_specific_count_collective', '0', TRUE).' '.Kohana::lang('ui_admin.triggering_user'); ?><br/>
 								<?php echo form::radio('action_on_specific_count_collective', '1', FALSE).' '.Kohana::lang('ui_admin.entire_collective'); ?>
@@ -521,14 +521,14 @@ $(document).ready(function() {
 							</div>
 
 							<div class="tab_form_item" id="action_form_days_of_the_week" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.days_of_the_week")); ?>"><?php echo Kohana::lang('ui_admin.days_of_the_week');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.days_of_the_week")); ?>"><?php echo Kohana::lang('ui_admin.days_of_the_week');?>:</a></h4>
 								<?php
 									echo form::dropdown(array('name' => 'action_days_of_the_week[]', 'multiple' => 'multiple', 'size' => 7), $days, array('standard', 'basic'));
 								?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_between_times" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.between_times")); ?>"><?php echo Kohana::lang('ui_admin.between_times');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.between_times")); ?>"><?php echo Kohana::lang('ui_admin.between_times');?>:</a></h4>
 								<?php
 									$hours = range(0,24);
 									foreach($hours as $hour_key => $hour){
@@ -546,8 +546,8 @@ $(document).ready(function() {
 							</div>
 
 							<div class="tab_form_item" id="action_form_specific_days" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.specific_days")); ?>"><?php echo Kohana::lang('ui_admin.specific_days');?>:</a></h4>
-								<div id="action_specific_days_calendar" class="action_specific_days_calendar" name="action_specific_days_calendar"></div>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.specific_days")); ?>"><?php echo Kohana::lang('ui_admin.specific_days');?>:</a></h4>
+								<div id="action_specific_days_calendar" class="action_specific_days_calendar"></div>
 								<input type="hidden" name="action_specific_days" id="action_specific_days" value=""  />
 							</div>
 
@@ -562,7 +562,7 @@ $(document).ready(function() {
 							<div class="tab_form_item" id="trigger_first_response"><?php echo Kohana::lang('ui_admin.select_trigger_before_response'); ?></div>
 
 							<div class="tab_form_item" id="action_form_response" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.response")); ?>"><?php echo Kohana::lang('ui_admin.response'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.response")); ?>"><?php echo Kohana::lang('ui_admin.response'); ?>:</a></h4>
 								<?php
 									// This dropdown is special since it will write all options and then be
 									//   changed as soon as an action trigger is selected. It does this
@@ -572,24 +572,24 @@ $(document).ready(function() {
 							</div>
 
 							<div class="tab_form_item" id="action_form_email_send_address" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.send_to")); ?>"><?php echo Kohana::lang('ui_admin.send_to');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.send_to")); ?>"><?php echo Kohana::lang('ui_admin.send_to');?>:</a></h4>
 								<?php echo form::radio('action_email_send_address', '0', TRUE).' '.Kohana::lang('ui_admin.triggering_user'); ?><br/>
 								<?php echo form::radio('action_email_send_address', '1', FALSE); ?>
 								<?php echo form::input('action_email_send_address_specific',''); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_email_subject" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.email_subject")); ?>"><?php echo Kohana::lang('ui_admin.subject');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.email_subject")); ?>"><?php echo Kohana::lang('ui_admin.subject');?>:</a></h4>
 								<?php echo form::input('action_email_subject',''); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_email_body" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.email_body")); ?>"><?php echo Kohana::lang('ui_admin.body');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.email_body")); ?>"><?php echo Kohana::lang('ui_admin.body');?>:</a></h4>
 								<?php echo form::textarea('action_email_body',''); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_add_category" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.add_to_category")); ?>"><?php echo Kohana::lang('ui_admin.add_to_category'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.add_to_category")); ?>"><?php echo Kohana::lang('ui_admin.add_to_category'); ?>:</a></h4>
 								<?php
 									// categories, selected_categories, form field name, number of columns
 									echo category::form_tree('action_add_category', array(), 2, FALSE, TRUE);
@@ -597,24 +597,24 @@ $(document).ready(function() {
 							</div>
 
 							<div class="tab_form_item" id="action_form_report_title" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.report_title")); ?>"><?php echo Kohana::lang('ui_admin.report_title');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.report_title")); ?>"><?php echo Kohana::lang('ui_admin.report_title');?>:</a></h4>
 								<?php echo form::input('action_report_title',''); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_verify" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.verify")); ?>"><?php echo Kohana::lang('ui_admin.mark_as');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.verify")); ?>"><?php echo Kohana::lang('ui_admin.mark_as');?>:</a></h4>
 								<?php echo form::radio('action_verify', '0', TRUE).' '.Kohana::lang('ui_main.unverified'); ?><br/>
 								<?php echo form::radio('action_verify', '1', FALSE).' '.Kohana::lang('ui_main.verified'); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_approve" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.approve")); ?>"><?php echo Kohana::lang('ui_admin.mark_as');?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.approve")); ?>"><?php echo Kohana::lang('ui_admin.mark_as');?>:</a></h4>
 								<?php echo form::radio('action_approve', '0', TRUE).' '.Kohana::lang('ui_main.disapprove'); ?><br/>
 								<?php echo form::radio('action_approve', '1', FALSE).' '.Kohana::lang('ui_main.approve'); ?>
 							</div>
 
 							<div class="tab_form_item" id="action_form_badge" style="margin-right:75px;">
-								<h4><a href="#" class="tooltip" title="<?php echo htmlspecialchars(Kohana::lang("tooltips.actions.assign_badge")); ?>"><?php echo Kohana::lang('ui_admin.assign_badge'); ?>:</a></h4>
+								<h4><a href="#" class="tooltip" title="<?php echo html::escape(Kohana::lang("tooltips.actions.assign_badge")); ?>"><?php echo Kohana::lang('ui_admin.assign_badge'); ?>:</a></h4>
 								<?php
 									echo form::dropdown('action_badge', $badges, 'standard');
 								?>

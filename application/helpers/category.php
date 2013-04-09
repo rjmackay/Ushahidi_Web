@@ -73,7 +73,7 @@ class category_Core {
 
 		// Maximum number of elements per column
 		$maxper_col = round($categories_total / $columns);
-
+		
 		$i = 1;  // Element Count
 		foreach ($category_data as $category)
 		{
@@ -99,7 +99,7 @@ class category_Core {
 				}
 				$html .= '</ul>';
 			}
-
+			
 			// If this is the last element of a column, close the UL
 			if ($i > $maxper_col OR $i == $categories_total)
 			{
@@ -108,11 +108,11 @@ class category_Core {
 				$this_col++;
 			}
 			else
-			{
+				{
 				$i++;
+				}
 			}
-		}
-
+			
 		return $html;
 	}
 	
@@ -190,8 +190,8 @@ class category_Core {
 				
 				$category_data[$category->id] = array(
 					'category_id' => $category->id,
-					'category_title' => Category_Lang_Model::category_title($category->id),
-					'category_description' => Category_Lang_Model::category_description($category->id),
+					'category_title' => html::escape(Category_Lang_Model::category_title($category->id)),
+					'category_description' => html::escape(Category_Lang_Model::category_description($category->id)),
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
 					'children' => $children,
@@ -222,8 +222,8 @@ class category_Core {
 				// Add children
 				$category_data[$category->parent_id]['children'][$category->id] = array(
 					'category_id' => $category->id,
-					'category_title' => Category_Lang_Model::category_title($category->id, Kohana::config('locale.language.0')),
-					'category_description' => Category_Lang_Model::category_description($category->id, Kohana::config('locale.language.0')),
+					'category_title' => html::escape(Category_Lang_Model::category_title($category->id)),
+					'category_description' => html::escape(Category_Lang_Model::category_description($category->id)),
 					'parent_id' => $category->parent_id,
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
@@ -260,7 +260,7 @@ class category_Core {
 			$tree_html .= "<li".$category_class.">"
 							. "<a href=\"#\" class=\"cat_selected\" id=\"filter_link_cat_".$id."\">"
 							. "<span class=\"item-swatch\" style=\"background-color: #".$category['category_color']."\">$category_image</span>"
-							. "<span class=\"item-title\">".strip_tags($category['category_title'])."</span>"
+							. "<span class=\"item-title\">".html::strip_tags($category['category_title'])."</span>"
 							. "<span class=\"item-count\">".$category['report_count']."</span>"
 							. "</a></li>";
 							

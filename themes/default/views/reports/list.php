@@ -45,13 +45,13 @@
 				{
 					$incident = ORM::factory('incident')->with('location')->find($incident->incident_id);
 					$incident_id = $incident->id;
-					$incident_title = strip_tags($incident->incident_title);
-					$incident_description = strip_tags($incident->incident_description);
+					$incident_title = html::strip_tags($incident->incident_title);
+					$incident_description = html::strip_tags($incident->incident_description);
 					//$incident_category = $incident->incident_category;
 					// Trim to 150 characters without cutting words
 					// XXX: Perhaps delcare 150 as constant
 
-					$incident_description = text::limit_chars(strip_tags($incident_description), 140, "...", true);
+					$incident_description = text::limit_chars(html::strip_tags($incident_description), 140, "...", true);
 					$incident_date = date('H:i M d, Y', strtotime($incident->incident_date));
 					//$incident_time = date('H:i', strtotime($incident->incident_date));
 					$location_id = $incident->location_id;
@@ -124,7 +124,7 @@
 
 					<div class="r_details">
 						<h3><a class="r_title" href="<?php echo url::site(); ?>reports/view/<?php echo $incident_id; ?>">
-								<?php echo html::specialchars($incident_title); ?>
+								<?php echo html::escape($incident_title); ?>
 							</a>
 							<a href="<?php echo url::site(); ?>reports/view/<?php echo $incident_id; ?>#discussion" class="r_comments">
 								<?php echo $comment_count; ?></a> 
