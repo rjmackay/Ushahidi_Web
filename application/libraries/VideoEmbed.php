@@ -13,7 +13,7 @@ class VideoEmbed
 {
 	/**
 	 * Generates the HTML for embedding a video in a report
-	 *
+	 * 
 	 * @param string $raw URL of the video to be embedded
 	 * @param string $auto Autoplays the video as soon as its loaded
 	 */
@@ -54,17 +54,17 @@ class VideoEmbed
 		if ( ! array_key_exists($service_name, $services))
 		{
 			echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a>';
-			
+		
 			// No point in proceeding past this point therefore return
 			return;
-		}
-		
+	}
+	
 		// Print the HTML embed code depending on the video service
 		if ($service_name == "youtube")
-		{
+	{
 			// Check for autoplay
 			$you_auto = ($auto == "play")? "&autoplay=1" : "";
-			
+		
 			echo "<object width='320' height='265'>"
 				. "	<param name='movie' value='http://www.youtube.com/v/$code$you_auto'></param>"
 				. "	<param name='wmode' value='transparent'></param>"
@@ -75,9 +75,9 @@ class VideoEmbed
 		}
 		elseif ($service_name == "google")
 		{
-			// Check for autoplay
+				// Check for autoplay
 			$google_auto = ($auto == "play")? "&autoPlay=true" : "";
-
+				
 			echo "<embed style='width:320px; height:265px;' id='VideoPlayback' type='application/x-shockwave-flash'"
 				. "	src='http://video.google.com/googleplayer.swf?docId=-$code$google_auto&hl=en' flashvars=''>"
 				. "</embed>";
@@ -86,23 +86,23 @@ class VideoEmbed
 		{
 			// Sanitization
 			$code = str_replace("/flv", "", $code);
-
-			// Check for autoplay
+			
+				// Check for autoplay
 			$rev_auto = ($auto == "play")? "&autoStart=true" : "";
-
+				
 			echo "<script src='http://flash.revver.com/player/1.0/player.js?mediaId:$code;affiliateId:0;height:320;width:265;'"
 				. "	type='text/javascript'>"
 				. "</script>";
 		}
 		elseif ($service_name == "metacafe")
 		{
-			// Sanitize input
-			$code = strrev(trim(strrev($code), "/"));
-			
+				// Sanitize input
+				$code = strrev(trim(strrev($code), "/"));
+				
 			echo "<embed src='http://www.metacafe.com/fplayer/$code.swf'"
-				. "	width='320' height='265' wmode='transparent' pluginspage='http://get.adobe.com/flashplayer/'"
-				. "	type='application/x-shockwave-flash'> "
-				. "</embed>";
+					. "	width='320' height='265' wmode='transparent' pluginspage='http://get.adobe.com/flashplayer/'"
+					. "	type='application/x-shockwave-flash'> "
+					. "</embed>";
 		}
 		elseif ($service_name == "liveleak")
 		{
@@ -115,13 +115,13 @@ class VideoEmbed
 		elseif ($service_name == "dotsub") 
 		{
 			echo "<iframe src='http://dotsub.com/media/$code' frameborder='0' width='320' height='500'></iframe>";
-		}
+	}
 		elseif ($service_name == "vimeo") 
-		{
+	{
 			echo "<iframe src=\"http://player.vimeo.com/video/$code\" width=\"100%\" height=\"300\" frameborder=\"0\">"
 				. "</iframe>";
-		}
-		
+			}
+
 		// Free memory - though this is done implicitly by the PHP interpreter
 		unset($raw, $code, $service_name);
 	}
