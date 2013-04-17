@@ -45,8 +45,8 @@
 				{
 					$incident = ORM::factory('incident')->with('location')->find($incident->incident_id);
 					$incident_id = $incident->id;
-					$incident_title = html::strip_tags($incident->incident_title);
-					$incident_description = html::strip_tags($incident->incident_description);
+					$incident_title = $incident->incident_title;
+					$incident_description = $incident->incident_description;
 					//$incident_category = $incident->incident_category;
 					// Trim to 150 characters without cutting words
 					// XXX: Perhaps delcare 150 as constant
